@@ -1,0 +1,7 @@
+and([
+  or([x1]),
+  always(or([x2])),
+  always(or([not x1 , sometime(p)])),
+  always(or([not p , next(p)])),
+  always(or([not x2 , sometime(not p)]))
+]).

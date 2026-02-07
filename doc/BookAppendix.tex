@@ -1,0 +1,520 @@
+\documentclass[11pt]{article}
+\usepackage{fullpage}
+\usepackage{latexsym}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{wasysym}
+\usepackage{latexsym}
+\usepackage{amstext}
+\usepackage{theorem}
+  \theorembodyfont{\upshape}
+%\usepackage{proof}
+\usepackage[dvips]{graphicx}
+\usepackage{epsfig}
+\usepackage{psfrag}
+\usepackage{xspace}
+\usepackage{dcolumn}
+%\usepackage{algorithmic}
+\usepackage{pst-tree}
+\usepackage{programs}
+%\input{tempdef}
+%\input{tempdefMF}  
+
+%\setlength{\evensidemargin}{-1in}
+%\addtolength{\evensidemargin}{2.5cm}
+%\setlength{\oddsidemargin}{-1in}
+%\addtolength{\oddsidemargin}{2.5cm}
+%\addtolength{\textwidth}{3.8cm}
+%\setlength{\headheight}{1cm}
+%\setlength{\headsep}{0cm}
+%\addtolength{\textheight}{4.6cm}
+%\setlength{\footskip}{0.8cm}
+\setlength\textfloatsep{4mm}
+\renewcommand{\bottomfraction}{0.8}
+\renewcommand{\topfraction}{0.8}
+
+\pagestyle{plain}
+\sloppy
+\newcommand{\set}[1]{\{#1\}}
+\newcommand{\predset}[2]{\{#1\;|\;#2\}}
+\newcommand{\NR}{\multicolumn{1}{c|}{--}}
+\newcommand{\MC}{\multicolumn{1}{@{}p{5.0em}|@{}}{\hfil{median}\hfil}}
+\newcommand{\TTC}{\multicolumn{1}{@{}p{5.0em}|@{}}{\hfil{total}\hfil}}
+\newenvironment{contlist}{\def\item[##1]{##1\edef\@currentlabel{##1}}\ignorespaces}{}
+\newcommand{\pltl}{\ml{PLTL}\xspace}
+\def\ltrue{\ensuremath{\top}\xspace}
+\def\lfalse{\ensuremath{\bot}\xspace}
+\newcommand{\Negate}[0]{{\neg}}
+\newcommand{\limpl}{\mathrel{\rightarrow}}
+\newcommand{\lequiv}{\mathrel{\leftrightarrow}}
+\newcommand{\Next}[0]{\mathop{\ocircle}}
+\newcommand{\Always}[0]{\mathop{\Box}}
+\newcommand{\Sometimes}[0]{\mathop{\Diamond}}
+\def\Sometime{\mathop{\Diamond}}
+\def\until{\mathrel{\mathcal{U}}}
+\newcommand{\Until}[0]{\until}
+\def\unless{\mathrel{\mathcal{W}}}
+\newcommand{\WUntil}[0]{\unless}
+\newcommand{\TModel}{\mathcal{I}\xspace}
+\newcommand{\Val}[0]{\iota}
+\newcommand{\Worlds}{\mathcal{W}}
+\newcommand{\States}{\mathcal{S}}
+\newcommand{\Points}{\mathcal{P}}
+\newcommand{\ml}[1]{\ensuremath{\mathsf{#1}}}
+\newcommand{\classOne}{\ensuremath{\mathcal{C}^1_{\mathit{ran}}}\xspace}
+\newcommand{\classTwo}{\ensuremath{\mathcal{C}^2_{\mathit{ran}}}\xspace}
+\renewcommand{\implies}{\Rightarrow}
+\renewcommand{\implies}{\Rightarrow}
+\newcommand{\TRPpp}{\textbf{TRP\protect\raisebox{0.4ex}{\scriptsize{+}{+}}}\xspace}
+\newcommand{\step}{\textsl{STeP}\xspace}
+\newcommand{\trp}{\textbf{TRP}\xspace}
+\newcommand{\initial}{\textsf{initial}}
+\newcommand{\globalnow}{\textsf{global\_now}}
+\newcommand{\globalnext}{\textsf{global\_next}}
+\bibliographystyle{plain}
+
+\begin{document}
+
+
+\section{Inference System}
+For implementation reasons, TRPpp operates SNF clauses in a slightly different
+form than described in Section~\ref{sec:??} (implications are represented as
+disjunctions): 
+\begin{align}
+ & \textstyle\bigvee_{i=1}^n L_i
+\tag{initial clause}\\
+&\textstyle\Always(\bigvee_{j=1}^m K_j \lor
+\textstyle\bigvee_{i=1}^n \Next L_i)\tag{global clause}\\
+&\textstyle\Always(\bigvee_{j=1}^m K_j \lor \Sometimes L)
+\tag{eventuality clause}%\\
+\end{align}
+Here, $K_j$, $L_i$, and $L$ (with $1\leq j\leq m$, $0\leq m$, and
+$1\leq i\leq n$, $0\leq n$) denote propositional literals.
+%If $L$ is a propositional literal, then a formula of the form
+%$\Sometimes L$ is called an \emph{eventuality literal}. 
+
+SNF clauses are represented as sets of (temporal) literals. 
+In the following, for a temporal clause $C=L_1\lor\ldots\lor L_n$ we use $\Next
+C$ to denote $\Next{L_1}\lor\ldots\lor\Next{L_n}$.  
+
+Then, the inference rules of temporal resolution can be reformulated as
+shown in Fig.~\ref{trc}.
+To simplify the presentation, we have represented the conclusion of the
+eventuality resolution rule as a \pltl-formula (which would have to be
+transformed into a set of SNF clauses). In our implementation, we
+directly produce the corresponding SNF clauses without reverting to
+the transformation procedure. 
+\begin{figure*}[htb]
+\textbf{Initial resolution rules}:
+$$
+\begin{array}[t]{@{}c@{\qquad}c@{}}
+\begin{array}[t]{@{}c@{}}
+C_1\lor L\qquad \Negate{L}\lor C_2\\
+\hline
+C_1\lor C_2
+\end{array}
+\hphantom{\Box()\Box()\Next\:}
+&
+\begin{array}[t]{@{}c@{}}
+C_1\lor L\qquad \Always(\Negate{L}\lor D_2)\\
+\hline
+C_1\lor D_2
+\end{array}\\[-2ex]
+\end{array}
+$$
+where $C_1\lor L$ and $\Negate{L}\lor C_2$ are initial
+clauses, $\Always(\Negate{L}\lor C_2)$ is a global clause 
+and $\Negate{L}\lor D_2$ is a propositional clause.\vspace*{1.5ex}
+
+\textbf{Step resolution rules}:
+$$
+\begin{array}[t]{@{}c@{\qquad}c@{\qquad}c@{}}
+\begin{array}[t]{@{}c@{}}
+\Always(C_1\lor L)\qquad\hphantom{\Next}\Always(\Negate{L}\lor C_2)\\
+\hline
+\Always(C_1\lor C_2)
+\end{array}
+&
+\begin{array}[t]{@{}c@{}}
+\Always(C_1\lor L)\qquad\Always(\Next{\Negate{L}}\lor D_2)\\
+\hline
+\Always(\Next C_1\lor D_2)
+\end{array}
+\\[4ex]
+\begin{array}[t]{@{}c@{}}
+\Always(D_1\lor\Next{L})\qquad\Always(\Next{\Negate{L}}\lor D_2)\\
+\hline
+\Always(D_1\lor D_2)
+\end{array}
+\end{array}
+$$
+where $\Always(C_1\lor L)$ and 
+$\Always(\Negate{L}\lor C_2)$ are global clauses
+and $C_1\lor L$ and $\Negate{L}\lor C_2$ are propositional
+clauses, and
+$\Always(\Next\Negate{L}\lor D_2)$ and
+$\Always(D_1\lor\Next L)$ are global clauses. (The side conditions
+ensure that no clauses with nested occurrences of the $\Next$-operator
+can be derived.)\vspace*{1.5ex}
+
+\textbf{Eventuality resolution rule}:
+$$
+\begin{array}[t]{@{}c@{}}
+\begin{array}[b]{@{}l@{}}
+\Always(C^1_1    \lor\bigvee_{l=1}^{k^1_1}{\Next D^1_{1,l}})\\[-1ex]
+\ \vdots\\
+\Always(C^1_{m_1}\lor\bigvee_{l=1}^{k^1_{m_1}}{\Next D^1_{m_1,l}})
+\end{array}
+\ \cdots\ 
+\begin{array}[b]{@{}l@{}}
+\Always(C^n_{1}  \lor\bigvee_{l=1}^{k^n_1}\Next D^n_{1,l})\\[-1ex]
+\ \vdots\\
+\Always(C^n_{m_n}\lor\bigvee_{l=1}^{k^n_{m_n}}\Next D^n_{m_n,l})
+\end{array}
+\quad
+\Always(C\lor\Sometimes{L})\\[0.5ex]
+\hline
+\rule[0pt]{0pt}{2.6ex}\Always(C\lor 
+(\Negate{(\bigvee_{i=1}^n \bigwedge_{j=1}^{m_i} C^i_j)}\WUntil L))
+\end{array}
+$$
+where for all $i$, $1\leq i\leq n$,
+$(\bigwedge_{j=1}^{m_i}\bigvee_{l=1}^{k^i_j} D^i_{j,l})\rightarrow \Negate L$ and
+$(\bigwedge_{j=1}^{m_i}\bigvee_{l=1}^{k^i_j} D^i_{j,l})\rightarrow
+(\bigvee_{i=1}^n\bigwedge_{j=1}^{m_i} C^i_j)$
+are provable.
+\caption{The temporal resolution calculus\label{trc}}
+\end{figure*}
+
+\section{Algorithm Overview}
+Figure~\ref{prog_main} shows the main procedure of our implementation
+of the temporal resolution calculus of Section~\ref{sec:tempres} which
+consists of a loop where at each
+iteration (i) the set of SNF clauses is saturated under application of the
+initial and step resolution rules using function \emph{Saturate} shown
+in Figure~\ref{prog_sat}, and (ii) then for every eventuality clause
+in the SNF clause set, an attempt is made to find a set of premises for an
+application of the eventuality resolution rule using function
+\emph{BFS} shown in Figure~\ref{prog_bfs}
+which implements
+Dixon's search algorithm~\cite{Dixon97:ICTL}.
+\begin{figure}[htb]
+\InBodyLeftNumberLine
+\begin{program}\UnnumLine
+procedure $\mathit{main}$($N$)\UnnumLine
+begin\UnnumLine
+  $New$ := $N$;\UnnumLine
+  while ($\bot\not\in{N}$ and $New\neq\emptyset$) do\UnnumLine
+    $N$ := $\mathit{Saturate}$($N$);\UnnumLine
+    if ($\bot\not\in{N}$) then\UnnumLine
+      $New$ := $\emptyset$;\UnnumLine
+      $N_0$ := $\mathit{select\_global}(N)$;\UnnumLine
+      foreach $\Always(\bigvee_{j=1}^m{K_j}\lor{\Sometimes{L}})\in{N}$ do\UnnumLine
+        $G$ := $\mathit{BFS}(N_0,0,true,L)$\UnnumLine
+        if ($G\neq\emptyset$) then\UnnumLine
+          $New$ := $New\cup\mathit{e\text{-}res\,}(\Always(\bigvee_{j=1}^m{K_j}\lor{\Sometimes{L}}), G)$;\UnnumLine
+        endif\UnnumLine
+      end\UnnumLine
+      $New := simp(New,N)$;\UnnumLine
+      $N$ := $N\cup{New}$;\UnnumLine
+    endif\UnnumLine
+  end\UnnumLine
+end
+\end{program}
+where
+$\mathit{select\_global}(N)$ is the set of all global clauses selected from
+$N$,
+$\mathit{e\text{-}res\,}(\Always(\bigvee_{j=1}^m{K_j}\lor{\Sometimes{L}}), G)$
+is the set of conclusions of the eventuality resolution rule 
+applied to the eventuality clause
+$\Always(\bigvee_{j=1}^m{K_j}\lor{\Sometimes{L}})$ and the global
+clauses in $G$, and
+$\mathit{simp}(\mathit{New},N)$ is the
+result of simplification (e.g. by subsumption) of clauses from $\mathit{New}$
+by clauses from $N$.
+\caption{Main procedure of \TRPpp{}\label{prog_main}}
+\end{figure}
+If we find
+such a set, the set of SNF clauses representing the conclusion of the
+application is added to the current set of SNF clauses. 
+The main loop terminates if the empty clause is derived, indicating
+that the initial set of SNF clauses and the \pltl-formula it is stemming from
+are unsatisfiable, or if no new clauses have been derived during
+the last iteration of the main loop, which in the absence of the empty
+clause indicates that the initial set
+of SNF clauses and the \pltl-formula it is stemming from are
+satisfiable. Since the number of SNF clauses which can be formed 
+over the finite set of propositional variables contained in the initial
+set of SNF clauses is itself finite, we can guarantee termination of
+the main procedure.
+%\begin{figure}[htb]
+%\begin{algorithmic}[1]
+%\STATE Transform a given problem into \SNF
+%\LOOP
+%\STATE Saturate the set of clauses by the initial and step resolution rules
+%\FORALL{eventuality clause}
+%\STATE Try applying the eventuality resolution rule to the eventuality clause
+%\ENDFOR
+%\IF{$\perp$ has been derived}
+%\STATE exit with success
+%\ENDIF
+%\IF{no new clauses have been derived}
+%\STATE exit with failure
+%\ENDIF
+%\ENDLOOP
+%\end{algorithmic}
+%\caption{Main procedure of \TRPpp{}\label{prog_main}}
+%\end{figure}
+\begin{figure}[htb]
+\InBodyLeftNumberLine
+\begin{program}\UnnumLine
+function $\mathit{Saturate}$($N$)\UnnumLine
+begin\UnnumLine
+  repeat\UnnumLine
+    $\mathit{New}$ := $\mathit{res}$($N$);\UnnumLine
+    $\mathit{New}$ := $\mathit{simp}$($\mathit{New}$,$N$);\UnnumLine
+    $N$ := $N\cup\mathit{New}$;\UnnumLine
+  until ($\mathit{New}$ = $\emptyset$ or $\bot\in N$);\UnnumLine
+  return $N$;\UnnumLine
+end
+\end{program}
+where $\mathit{res}(N)$ is the set of conclusions of inference steps
+by the initial and step resolution rules using the clauses in $N$ as
+premises.
+%, and $\mathit{sub}(\mathit{New},N)$ is the set of all clauses
+%from $\mathit{New}$ that are not subsumed by clauses from $N$.
+\caption{A simple saturation procedure\label{prog_sat}}
+\end{figure}
+
+\begin{figure}[htb]
+\begin{program}\UnnumLine
+\InBodyLeftNumberLine
+function $\mathit{BFS}$($N_0$,$i$,$G_i$,$L$)\UnnumLine
+begin\UnnumLine
+  $N_1$ := $\mathit{Saturate}$($N_0\cup\predset{\Next{L}\lor\bigvee_{j=1}^n\Next{L_j}}{\bigvee_{j=1}^n{L_j}\in G_i}$);\UnnumLine
+  if ($\bot\in{N_1}$) then\UnnumLine
+     return $\{\emptyset\}$\UnnumLine
+  else\UnnumLine
+     $G_{i+1}$ := $\predset{\bigvee_{i=1}^m{K_i}}{\Always(\bigvee_{i=1}^m{K_i})\in({N_1}\setminus{N_0})}$\UnnumLine
+     if ($G_{i+1}=\emptyset$) then\UnnumLine
+        return $\emptyset$\UnnumLine
+     elsif ($G_{i+1}\equiv{G_i}$) then\UnnumLine
+        return $G_{i+1}$\UnnumLine
+     else\UnnumLine
+        return $\mathit{BFS}$($N_0$,$i+1$,$G_{i+1}$,$L$)\UnnumLine
+     endif\UnnumLine
+  endif\UnnumLine
+end
+\end{program}
+where the return value $\emptyset$ indicates that no set of global
+clauses has been found such that eventuality resolution can be applied
+with literal $L$, and return value $\{\emptyset\}$ indicates that
+eventuality resolution can be applied to the empty set of global
+clauses for literal~$L$.
+\caption{A breadth-first search algorithm for the eventuality
+  resolution rule\label{prog_bfs}}
+\end{figure}
+
+\paragraph{Data representation.}
+We represent SNF clauses as propositional clauses and supply each literal
+with an ``attribute''---one of \initial{}, \globalnow{}, and \globalnext{}
+with obvious meaning (eventuality clauses are kept and processed
+separately). In addition, we define a total ordering $<$ on attributed
+literals which satisfies the constraint that for every \initial{}
+literal $K$, \globalnow{} literal $L$, and \globalnext{} 
+literal $M$  we have $K<L<N$. 
+
+The ordering is then used to restrict resolution inference steps to
+the maximal literals in a clause. This ensures, for example, that
+in a clause $C\lor L$ where $L$ is a \globalnow{} literal but $C$
+contains some \globalnext{} literals, a resolution step on $L$ is
+impossible. (Note that this behaviour is in accordance with the
+inference rules of the temporal resolution calculus.) 
+
+\paragraph{Saturation by step resolution.}
+We implement an OTTER-like saturation method where the set of all clauses is
+split into an \emph{active} and a \emph{passive} clause set, and all inferences
+are performed between a clause, \emph{selected} from the passive clause set,
+and the active clause set (for a detailed description see e.g. \cite{RV01}).
+Generated clauses are simplified by subsumption and forward subsumption
+resolution. As on a typical run of the saturation method, the given set of
+clauses is satisfiable (since the set of clauses are originating from the
+search algorithm needed for the eventuality resolution rule), we do not employ
+any special clause selection and clause preference technique. Instead, passive
+clauses are grouped according to their maximal literal.
+
+\paragraph{Indexing.}
+In order to speed-up resolution, we group active clauses according to their 
+maximal literal. For (multi-literal) subsumption, we employ a trie-like 
+data structure of the same kind that is used for string matching with
+wild-card characters~\cite{BS97}. For the current implementation, the
+subsumption algorithm does not distinguish literals with different
+attributes, thus providing us only with an imperfect filter whose
+result is re-checked afterwards. Global clauses are split into the 
+\emph{now} and \emph{next} parts that are inserted into the index separately.
+
+We give some more details on the subsumption indexing. Every
+propositional clause is represented as an \emph{ordered} string of
+literals; no literal occurs more than once into the string. A set of
+strings (clauses) is kept in a 
+\emph{digital search trie}~\cite{Knuth73}. 
+This representation has the advantage that  
+every path in the trie is ordered and labels of outgoing edges of every node
+are ordered as well. A trie representation of the following set of clauses
+$$
+1.~(a \lor c) \quad
+2.~(a \lor b \lor c) \quad
+3.~(a \lor c \lor d) \quad
+4.~(b \lor d),
+$$
+where $a>b>c>d$, 
+\begin{figure}[hbt]
+\begin{center}
+\psset{levelsep=1.4cm}
+\pstree{\Tcircle{1}}
+{
+  \pstree{\Tcircle{2}\tlput{$a$}}
+  {
+    \pstree{\Tcircle{4}\tlput{$b$}}
+       {\Tcircle{7}~[tnpos=r]{\{2\}}\trput{$c$}}
+    \pstree{\Tcircle{5}~[tnpos=r]{\{1\}}\trput{$c$}}
+       {\Tcircle{8}~[tnpos=r]{\{3\}}\trput{$d$}}
+  }
+  \pstree{\Tcircle{3}\trput{$b$}}
+  {
+     \Tcircle{6}~[tnpos=r]{\{4\}}\trput{$d$}
+  }
+}
+\end{center}
+\caption{Trie-based subsumption index for the clauses
+$
+1.~(a \lor c),
+2.~(a \lor b \lor c),
+3.~(a \lor c \lor d),
+4.~(b \lor d)
+$ with the atom ordering $a>b>c>d$.
+\label{fig:trie}}
+\end{figure}
+is given in Fig.~\ref{fig:trie}. We use this data structure for both 
+\emph{forward} and \emph{backward} subsumption (to test if a given 
+query clause is subsumed by an indexed clause and to find all indexed clauses
+subsumed by a given query clause, respectively). 
+In a subsumption test, a query string is read from left to right
+and the index trie is traversed. The difference between forward and backward
+subsumption is in how we traverse the trie. 
+
+In forward subsumption, for every outgoing branch of the current node, if the
+label of the branch coincides with the current character of a query string,
+the branch is recursively visited; alternatively we move to the next
+character of
+the query string (this is slightly improved by use of ordering which is 
+omitted here for simplicity). If the test enters a node labelled with
+an indexed clause, this indexed clause subsumes the query clause. 
+For example, a forward subsumption test for
+the clause $(a\lor b\lor d)$ would start at the state $(1, ``abd\text{''})$ 
+(by a state we mean a pair of a node and a string) then visit the states $(2,
+``bd\text{''})$,
+$(4, ``d\text{''})$, then backtrack to $(1,``abd\text{''})$, go to 
+$(3, ``d\text{''})$, and, finally,
+to $(6, \text{``''})$. Node $6$ is labelled with $(b \lor d)$ which
+subsumes the query clause.
+
+In backward subsumption, we have to visit all branches whose labels
+are greater than or equal to the current character of a query string; however,
+we only move to the next character of the query string if the label of 
+a branch coincides with the current character. If the query string
+has been read to the end, all clauses kept below the current node are 
+subsumed.
+For example, a backward subsumption test for the clause $(a\lor c)$ would start
+at the state $(1, ``ac\text{''})$ move to $(2, ``c\text{''})$, then to 
+$(4, ``c\text{''})$ and
+$(7, \text{``''})$; the clause $(a \lor b \lor c)$ is subsumed. After
+that, the  
+test backtracks to $(2, ``c\text{''})$ and moves to $(5, \text{``''})$; clauses
+$(a \lor c)$ and $(a \lor c \lor d)$ are also subsumed.
+
+\section{\TRPpp Input Syntax}
+TRP++ gets input problems in SNF. We also provide a translator from
+PLTP-formulae to SNF accepted by \TRPpp.
+
+\paragraph{Input syntax}
+\begin{verbatim}
+FORMULA             ::= and(LIST_OF_SNFCLAUSES).
+LIST_OF_SNFCLAUSES  ::= [] | [SNFCLAUSE,...,SNFCLAUSE]
+SNFCLAUSE           ::= always(TEMPORALCLAUSE) | PROPOSITIONALCLAUSE
+TEMPORALCLAUSE      ::= PROPOSITIONALCLAUSE | GLOBALCLAUSE | SOMETIMECLAUSE
+PROPOSITIONALCLAUSE ::= or([LITERAL,...,LITERAL])
+GLOBALCLAUSE        ::= or([LITERAL,...,LITERAL,next(LITERAL),...,next(LITERAL)])
+SOMETIMECLAUSE      ::= or([LITERAL,...,LITERAL,sometime(LITERAL)])
+LITERAL             ::= not(IDENTIFIER) | IDENTIFIER
+IDENTIFIER          ::= [a-z0-0]+
+\end{verbatim}
+
+For example, a temporal problem
+$$
+(P_0\lor\lnot P_1)\land\Always(P_1\lor\lnot P_0) \land \Always(\lnot P_0\lor
+\Next(\lnot P_4\lor P_1)) \land \Always(\lnot P_1\lor\Sometime P_2)
+$$
+is represented as
+\begin{verbatim}
+  and([or([p0,not(p1)]),
+     always(or([p1,not(p0)])),
+     always(or([not(p0), next(not p4), next(p1)])),
+     always(or([not(p1), sometime(p2)]))
+  ]).
+\end{verbatim}
+\section{\TRPpp Options}
+From a (UNIX) shell, \TRPpp is called 
+\begin{center}
+\texttt{
+trp++ [options] <input-file>
+}
+\end{center}
+where \texttt{options} influence the behaviour of the prover. The current
+version of \TRPpp supports the following options:
+
+\begin{tabular}{llp{0.6\textwidth}}
+   -h       &  --help              & Print help and exit\\
+   -V       &  --version           & Print version and exit\\
+   -i       &  --show-input        & Prints the given set of clauses \mbox{(default=off)}\\
+   -r       &  --show-result       & Prints the resulting set of clauses
+                                    (default=off)\\
+   -q       &  --quiet             & Suppresses all the output but
+                                    Satisfiable/Unsatisfiable \mbox{(default=off)}\\
+   -sSTRING &  --select-by=STRING  & Controls the way how the next eventuality
+                                    rule to apply the eventuality resolution
+                                    is selected:\\
+                                    & & \ DFS -- depth first search (default)\\
+                                    & & \ BFS -- breadth first search\\
+            &  --FSR               & Use simplifications by Forward
+                                    Subsumption Resolution (default=off)\\
+   -oSTRING &  --order=STRING      & Name of the file with literal ordering
+\end{tabular}
+
+\medskip
+
+We describe briefly the trp++ options whose meaning might be unclear.
+
+\medskip
+
+\begin{tabular}{lp{0.85\textwidth}}
+\texttt{-s} & Controls which eventuality clause is selected
+  next, and can be best explained on an example. Suppose a given problem
+  contains three eventuality clauses  $C_1$, $C_2$, and $C_3$. Both strategies
+  try applying the eventuality resolution rule to $C_1$. If successful, to
+  $C_2$.  Now the difference is: if successful for $C_2$, \texttt{BFS} would
+  try applying the rule to $C_3$ while \texttt{DFS} would try $C_1$ again.  
+  Empirically, \texttt{DFS} (default) is better.\\
+\texttt{-o} & Controls the order on propositions, thus influencing the
+  behaviour of step resolution. For example, if the prover is supplied with
+  a file containing the following:
+\begin{verbatim}
+  order(P1,P3,P2).
+\end{verbatim}
+  propositions $P1$, $P2$, and $P3$ will be ordered as 
+  $P1>P3>P2$. Otherwise, propositions are ordered by their appearance
+  in the input problem in the descending order. 
+\end{tabular}
+\section{Availability}
+\TRPpp is available for download from \texttt{http://www.csc.liv.ac.uk/$\sim$konev/trp++}.
+\end{document}

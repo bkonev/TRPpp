@@ -1,0 +1,31 @@
+and([
+  always(or([not x1, sometime(a1)])),
+  always(or([not a1, next(a1)])),
+
+  always(or([not a1 , sometime(a2)])),
+  always(or([not a2, next(a2)])),
+
+  always(or([not a1 , not a2, sometime(a3)])),
+  always(or([not a3, next(a3)])),
+
+  always(or([not a1 , not a2, not a3, sometime(a4)])),
+  always(or([not a4, next(a4)])),
+
+  always(or([not a1 , not a2, not a3, not a4, sometime(a5)])),
+  always(or([not a5, next(a5)])),
+
+  always(or([not a1 , not a2, not a3, not a4, not a5, sometime(a6)])),
+  always(or([not a6, next(a6)])),
+
+  always(or([not a1 , not a2, not a3, not a4, not a5, not a6, sometime(a7)])),
+  always(or([not a7, next(a7)])),
+
+  always(or([not a1 , not a2, not a3, not a4, not a5, not a6, not a7, sometime(a8)])),
+  always(or([not a8, next(a8)])),
+  
+  always(or([not a1 , not a2, not a3, not a4, not a5, not a6, not a7, not a8, sometime(a9)])),
+
+  or([x1]),
+
+  always(or([not a9]))
+]).

@@ -1,0 +1,8 @@
+not(
+(always(A & B | A & C | B & C) &
+always(sometime (A)) &
+always(sometime (B)) &
+always(sometime (C))
+) ->
+sometime(A & next B & next next next C)
+)

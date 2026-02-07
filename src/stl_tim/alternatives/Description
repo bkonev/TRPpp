@@ -1,0 +1,8 @@
+Experiments on better implementing of active/passive
+
+1) both sets are represented as multiset; lead to speed-down (aparently,
+   because of the fact that it is harder to work with this data structure
+2) both sets are represented as in Active. Implements better; however, 
+   it seems that the fact that passive is ordered by the leading literal
+   is more essential as lead to less number of resolvents
+3) fair (but inefficient) subsumption algorithm

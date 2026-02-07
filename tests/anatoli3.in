@@ -1,0 +1,17 @@
+and([
+
+ or([start]),
+
+ always(or([not start, sometime(l1)])),
+ always(or([not start, sometime(l2)])),
+
+ always(or([not l1, sometime(not b)])),
+ always(or([not l1, a1])),
+ always(or([not a1, next(a1)])),
+ always(or([not a1, a])),
+
+ always(or([not l2, sometime(not a)])),
+ always(or([not l2, b1])),
+ always(or([not b1, next(b1)])),
+ always(or([not b1, b]))
+]).

@@ -1,0 +1,23 @@
+not(
+(always(
+A & B & C & D & E & F & G    | 
+    B & C & D & E & F & G & H| 
+A &     C & D & E & F & G & H| 
+A & B &     D & E & F & G & H| 
+A & B & C &     E & F & G & H|
+A & B & C & D &     F & G & H|
+A & B & C & D & E &     G & H|
+A & B & C & D & E & F &     H
+) 
+&
+always(sometime (A & B & C & D & E & F & G   ))&
+always(sometime (    B & C & D & E & F & G & H))&
+always(B)&
+always(sometime (A & B &     D & E & F & G & H))&
+always(sometime (A & B & C &     E & F & G & H))&
+always(sometime (A & B & C & D &     F & G & H))&
+always(sometime (A & B & C & D & E     & G & H))&
+always(sometime (A & B & C & D & E & F     & H))
+) ->
+sometime(A & next (B &  next (C & next (D & next (E & next (F & next (G & next H)))))))
+)

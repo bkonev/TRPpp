@@ -1,0 +1,49 @@
+and([
+or([a]),
+or([not l1]),
+or([not l2]),
+or([l]),
+or([not s1]),
+or([not s2]),
+
+always(or([not a, next(not a)])),
+always(or([not a, next(l1), next(l2)])),
+always(or([not a, next(not l1), next(not l2)])),
+
+always(or([a, not l1, l2, next(not a)])),
+always(or([a, not l1, l2, next(l1)])),
+always(or([a, not l1, l2, next(not l2)])),
+
+always(or([a, l1, not l2, next(not a)])),
+always(or([a, l1, not l2, next(not l1)])),
+always(or([a, l1, not l2, next(l2)])),
+
+always(or([not wl1, next(l1), next(wl1)])),
+always(or([not wl2, next(l2), next(wl2)])),
+
+always(or([not Q, next(Q1)])),
+always(or([not Q, next(Q2)])),
+always(or([not Q, next(l)])),
+
+always(or([wl1, next(s1)])), 
+always(or([l, not s1, next(s1)])), 
+
+always(or([not wl1, not l, next(not s1)])),
+always(or([not wl1, s1, next(not s1)])),
+
+always(or([wl2, next(s2)])), 
+always(or([l, not s2, next(s2)])), 
+
+always(or([not wl2, not l, next(not s2)])),
+always(or([not wl2, s2, next(not s2)])),
+
+always(or([not wQ,  next(Q), next(wQ)])),
+
+always(or([not a, l1, wl1])),
+always(or([not a, l2, wl2])),
+always(or([not Q1, s1])),
+always(or([not Q2, s2])),
+always(or([not l, Q, wQ])),
+
+always(or([sometime(not wQ)]))
+]).

@@ -1,0 +1,10 @@
+package "trp++"
+
+purpose "This program is a temporal logic prover."
+option "show-input"    i "Prints the given set of clauses" flag off
+option "show-result"   r "Prints the resulting set of clauses\n                                   " flag off
+option "quiet"         q "Suppresses all the output but\n                                    Satisfiable/Unsatisfiable" flag off
+option "select-by" s "Controls the way how the next eventuality\n                                    rule to apply the eventuality resolution \n                                    is selected:\n                                    DFS -- depth first search (default)\n                                    BFS -- breadth first search" string no
+option "pretest"       p "Use pre-test for the sometime resolution\n                                    rule" flag off
+option "FSR"       - "Use simplifications by Forward\n                                    Subsumption Resolution" flag off
+option "order"         o  "Name of the file with literal ordering" string no

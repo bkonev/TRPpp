@@ -1,0 +1,131 @@
+
+# Before including this Makefile.inc the following vars can be set:
+#    sources   - *.c, *.cc, *.y, *.l
+#    subdirs   - subdirs to enter 
+#    prog      - an executable that will be compiled
+#    yyprefix  - prefix to functions in *.y  and *.fl
+#    cflags    - additional CFLAGS
+# The following MUST be set:
+#    root      - directory where this Makefile.inc lies
+
+############################################################################
+
+#CC=g++3
+CC=/opt/intel/compiler60/ia32/bin/icc
+
+VERSION=v0.9
+VERSION_STR="\"$(VERSION)\""
+
+# hints:
+# i686: CFLAGS=-O9 -funroll-loops -ffast-math -malign-double -mcpu=pentiumpro -march=pentiumpro -fomit-frame-pointer -fno-exceptions
+# i586: CFLAGS=-O3 -march=pentium -mcpu=pentium -ffast-math -funroll-loops -fomit-frame-pointer -fforce-mem -fforce-addr -malign-double -fno-exceptions 
+# i486: FLAGS=-O3 -funroll-all-loops -malign-double -mcpu=i486 -march=i486 -fomit-frame-pointer -fno-exceptions 
+
+
+# STATIC_RELEASE # CFLAGS=-Wall -I$(root) --static $(cflags) -O9 
+# DEBUG          # CFLAGS=-Wall -I$(root) $(cflags) -g -O9 -DDEBUG
+# PROFILE        #CFLAGS=-Wall -I$(root) $(cflags) --static -pg -g -O9
+#CFLAGS=-Wall -I$(root) $(cflags) --static -O9 -DVERSION=$(VERSION_STR) -funroll-loops -ffast-math -malign-double -mcpu=pentiumpro -march=athlon  $(ADDCFLAGS)
+#CFLAGS=-I$(root) -g -Kc++ -w2 -wd981,444,193,141  $(cflags) -DVERSION=$(VERSION_STR) $(ADDCFLAGS) 
+CFLAGS=-I$(root) -O3 -Kc++ -unroll -ip -xM -Zp16 -align $(cflags) -DVERSION=$(VERSION_STR) $(ADDCFLAGS) 
+
+
+DEPS=.depend
+CDEPSFLAGS=-MM
+BISON=bison
+BISONFLAGS=--defines -p $(yyprefix)
+FLEX=flex
+FLEXFLAGS=-P$(yyprefix)
+AR=ar qc
+LD=/opt/intel/compiler60/ia32/bin/xild -r 
+LIBNAME=lib.o
+
+
+##############################################################################
+
+.PHONY: $(subdirs)
+
+ifndef prog
+lib:=$(LIBNAME)
+endif
+
+# We will remake *.c, *.cc, *.y, *.l
+objects:=$(sources:%.c=%.o)
+objects:=$(objects:%.cc=%.o)
+objects:=$(objects:%.y=%.o)
+objects:=$(objects:%.fl=%.o)
+objects:=$(objects:%.ggo=%.o)
+
+# Libraries are taken from the subdirs
+subdirlibs:=$(subdirs:%=%/$(LIBNAME))
+
+# C/C++ sources
+csources=$(filter %.c %.cc,$(sources))
+
+# YACC/FLEX sources and intermediate files
+ysources=$(filter %.y,$(sources))
+flsources=$(filter %.fl,$(sources))
+ggosources=$(filter %.ggo,$(sources))
+ytrash=$(ysources:%.y=%.c) $(ysources:%.y=%.h)
+fltrash=$(flsources:%.fl=%.c)
+ggotrash=$(ggosources:%.ggo=%.c)
+
+
+default: 
+	echo "Please do not run make without giving flavor {debug, release, profile}"
+
+debug:
+	$(MAKE) all ADDCFLAGS="-DDEBUG -g"
+
+profile:
+	$(MAKE) all ADDCFLAGS="-pg -g "
+	
+release:
+	$(MAKE) all ADDCFLAGS=""
+
+all: depend $(subdirs) $(lib) $(prog)
+
+$(lib): $(objects) $(subdirlibs)
+	$(LD) -o$(lib) $(objects) $(subdirlibs)
+
+$(prog): $(objects) $(subdirlibs) 
+	$(CC) $(CFLAGS) $+ -o $@
+
+$(subdirlibs): 
+
+$(subdirs):
+	$(MAKE) -C $@ all
+
+%.o: %.cc
+	$(CC) $(CFLAGS) -c $< -o $@
+
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+%.c %.h: %.y
+	$(BISON) $(BISONFLAGS) -o $@ $<
+
+%.c: %.fl
+	$(FLEX) $(FLEXFLAGS) -o$@ $<
+
+clean:
+	rm -f $(objects) $(lib) $(prog) $(DEPS) $(ytrash) $(fltrash) $(ggotrash)
+	for i in $(subdirs); do $(MAKE) -C $$i clean; done
+
+
+ifneq "$(csources)" ""
+
+ifneq ("$(wildcard .depend)", "")
+  include $(DEPS)
+endif
+
+depend: $(DEPS)
+$(DEPS): $(csources) $(HEADERS)
+	@echo "Building dependencies..."
+	@$(CC) $(CFLAGS) $(csources) $(CDEPSFLAGS) >$(DEPS)
+
+else
+
+depend:
+
+endif

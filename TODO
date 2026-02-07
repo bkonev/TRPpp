@@ -1,0 +1,55 @@
+Needed Features:
+---------------
+
+Efficiency:
+----------
+- Propositional Prover:
+  3) orphants murder
+  4) subsumption resolution
+    
+- Loop search
+  1) tmpClauseSet (how costy is?)
+  2) same loops generate same resolvents (that are subsumed then). Keep old
+     loops and compare (by subsumesOrEqual))
+
+
+Programming style:
+-----------------
+- make somewhat better input (?)
+
+- It seems that the Subsumption algorithm needs to be _completely_ rewritten. 
+  Current workaround: subsumption index
+  Problems: 
+  1) Unfixed bug C = Universal, D = Initial
+  2) A LOT of problems in the loop-search mode (in fact, it's behaviour is VERY
+     wrong, the program works ONLY because of rewriting Universal clauses into
+     true => Next(..) - clauses!!!)
+  Still there: fair implementation made the program two(!!) times slower.
+  Possibility: write a very nusty but efficient code, by considering all
+  possible cases
+
+- operation mode must not be static!
+
+Unfixed bugs:
+------------
+- subsumption does not work for the case when C is universal and D
+  is initial
+
+
+Havy operations:
+---------------
+
+To test:
+-------
+- make a testsuit for 
+   -- subsumption
+   -- resolution
+   -- byggy input (e.g. of the type q, not(q))
+- good tests for the overall performence
+
+
+Priority list:
+-------------
+- next releases:
+ . clean code in the propositional part! (a lot of unneeded things to 
+   eliminate!)

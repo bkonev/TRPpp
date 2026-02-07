@@ -1,0 +1,7 @@
+and([
+ always(or([not a1, next(x1)])),
+ always(or([not a1, not y4])),
+ always(or([a1, not x1, wa1])),
+ always(or([not y4, not wa1])),
+ always(or([not a1, sometime(y4)]))
+]).

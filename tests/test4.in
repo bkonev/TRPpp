@@ -1,0 +1,9 @@
+and([
+  always(or([not p , not q, next(p)])),
+  always(or([not q, next(q)])),
+  or([p]),
+  or([q]),
+  or([x1]),
+  always(or([not x1, sometime(x2)])),
+  always(or([not x2, not p]))
+]).

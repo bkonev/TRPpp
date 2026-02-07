@@ -1,0 +1,4 @@
+This directory contains code of a Tiny Inference Machine (TIM)
+built upon STL. Thus, all data structures, indexes etc. are taken
+directly from the library.
+

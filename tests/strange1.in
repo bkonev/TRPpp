@@ -1,0 +1,16 @@
+and([
+always(or([not a1, next(x1)])),
+or([a1]),
+always(or([not a1, not y4])),
+always(or([not y4, next(y4)])),
+always(or([not y4, next(not a1)])),
+always(or([not wa1, next(a1), next(wa1)])),
+always(or([not wa4, next(a4), next(wa4)])),
+always(or([a1, not x1, wa1])),
+always(or([not a1, y4, wa4])),
+always(or([not wa1, next(a1), next(not y4)])),
+always(or([a1, not x1, not y4])),
+always(or([not y4, next(a1), next(not x1)])),
+always(or([not y4, not wa1])),
+always(or([not a1, sometime(y4)]))
+]).

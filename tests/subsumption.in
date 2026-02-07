@@ -1,0 +1,8 @@
+and([
+ always(or([not l])),
+ always(or([p, next(l)])),
+ always(or([next(p), next(q), next(r)])),
+ always(or([p, w])),
+ or([p, w]),
+ always(or([p, next(q), next(r)]))
+]).

@@ -1,0 +1,294 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/darren@hiebert.com/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	4.0.3	//
+Active	clauseset.h	/^    class Active : private ActiveBase$/;"	c	namespace:PropositionalProver	inherits:ActiveBase
+ActiveBase	clauseset.h	/^    typedef std::list<PClause> ActiveBase;$/;"	t	namespace:PropositionalProver
+Attribute	attribute.h	/^        Attribute(const AttributeType& type)$/;"	f	class:PropositionalProver::Attribute
+Attribute	attribute.h	/^    class Attribute$/;"	c	namespace:PropositionalProver
+Attribute	dummy_attribute.h	/^    class Attribute$/;"	c	namespace:PropositionalProver
+AttributeCompatibilitiser	attribute.h	/^            AttributeCompatibilitiser(const bool* compatibilityTable)$/;"	f	class:PropositionalProver::Attribute::AttributeCompatibilitiser
+AttributeCompatibilitiser	attribute.h	/^        class AttributeCompatibilitiser$/;"	c	class:PropositionalProver::Attribute
+AttributeEqualizer	attribute.h	/^            AttributeEqualizer(const bool* equalityTable)$/;"	f	class:PropositionalProver::Attribute::AttributeEqualizer
+AttributeEqualizer	attribute.h	/^        class AttributeEqualizer$/;"	c	class:PropositionalProver::Attribute
+AttributeException	attribute.h	/^    AttributeException(const std::string& info)$/;"	f	class:AttributeException
+AttributeException	attribute.h	/^class AttributeException : public Exception$/;"	c	inherits:Exception
+AttributeTransformer	attribute.cc	/^    AttributeTransformer::AttributeTransformer$/;"	f	class:PropositionalProver::AttributeTransformer
+AttributeTransformer	attribute.h	/^    class AttributeTransformer$/;"	c	namespace:PropositionalProver
+AttributeType	attribute.h	/^        enum AttributeType {initial, universal, step_now, step_next};$/;"	g	class:PropositionalProver::Attribute
+Clause	clause.h	/^        Clause(const SortedLiteralList& sortedLiteralList, $/;"	f	class:PropositionalProver::Clause
+Clause	clause.h	/^    class Clause: public ClauseBase$/;"	c	namespace:PropositionalProver	inherits:ClauseBase
+ClauseBase	clause.h	/^    typedef std::vector< Literal > ClauseBase;$/;"	t	namespace:PropositionalProver
+ClauseSet	stl_tim.h	/^    class ClauseSet : public compound_container<Active, Passive>$/;"	c	namespace:PropositionalProver	inherits:compound_container
+ClauseSetException	clauseset.h	/^    class ClauseSetException : public Exception$/;"	c	namespace:Exceptions	inherits:Exception
+CommutativeInitInitState	attribute.cc	/^    class CommutativeInitInitState : public AttributeTransformer::TransformerState$/;"	c	file:	namespace:PropositionalProver	inherits:AttributeTransformer::TransformerState
+CommutativeInitStepNowState	attribute.cc	/^    class CommutativeInitStepNowState : public AttributeTransformer::TransformerState$/;"	c	file:	namespace:PropositionalProver	inherits:AttributeTransformer::TransformerState
+CommutativeInitUniversalState	attribute.cc	/^    class CommutativeInitUniversalState : public AttributeTransformer::TransformerState$/;"	c	file:	namespace:PropositionalProver	inherits:AttributeTransformer::TransformerState
+CommutativeStepNextStepNextState	attribute.cc	/^    class CommutativeStepNextStepNextState : public AttributeTransformer::TransformerState$/;"	c	file:	namespace:PropositionalProver	inherits:AttributeTransformer::TransformerState
+CommutativeStepNowStepNowState	attribute.cc	/^    class CommutativeStepNowStepNowState : public AttributeTransformer::TransformerState$/;"	c	file:	namespace:PropositionalProver	inherits:AttributeTransformer::TransformerState
+CommutativeUniversalStepNextState	attribute.cc	/^    class CommutativeUniversalStepNextState : public AttributeTransformer::TransformerState$/;"	c	file:	namespace:PropositionalProver	inherits:AttributeTransformer::TransformerState
+CommutativeUniversalStepNowState	attribute.cc	/^    class CommutativeUniversalStepNowState : public AttributeTransformer::TransformerState$/;"	c	file:	namespace:PropositionalProver	inherits:AttributeTransformer::TransformerState
+CommutativeUniversalUniversalState	attribute.cc	/^    class CommutativeUniversalUniversalState : public AttributeTransformer::TransformerState$/;"	c	file:	namespace:PropositionalProver	inherits:AttributeTransformer::TransformerState
+Exceptions	clauseset.h	/^namespace  Exceptions$/;"	n
+Flags	stl_tim.h	/^        struct Flags$/;"	s	class:PropositionalProver::ClauseSet
+ForwardSubsumption	clauseset.h	/^    Passive::ForwardSubsumption(const PClause& clause) const$/;"	f	class:PropositionalProver::Passive
+GenericSymbol	symbol.h	/^        GenericSymbol (const name_t& name)$/;"	f	class:PropositionalProver::GenericSymbol
+GenericSymbol	symbol.h	/^        GenericSymbol (const symid_t id = id_none) $/;"	f	class:PropositionalProver::GenericSymbol
+GenericSymbol	symbol.h	/^    class GenericSymbol $/;"	c	namespace:PropositionalProver
+IndexCarier	clauseset.h	/^    typedef std::vector<PClause> IndexCarier;$/;"	t	namespace:PropositionalProver
+IndexInconsistent	clauseset.h	/^        IndexInconsistent(const PropositionalProver::Literal& l)$/;"	f	class:Exceptions::IndexInconsistent
+IndexInconsistent	clauseset.h	/^    class IndexInconsistent : public ClauseSetException$/;"	c	namespace:Exceptions	inherits:ClauseSetException
+Literal	literal.h	/^        Literal (const Proposition& proposition, const bool sign = true, $/;"	f	class:PropositionalProver::Literal
+Literal	literal.h	/^    class Literal$/;"	c	namespace:PropositionalProver
+LiteralList	literallist.h	/^        LiteralList()$/;"	f	class:PropositionalProver::LiteralList
+LiteralList	literallist.h	/^        LiteralList(const LiteralList& l)$/;"	f	class:PropositionalProver::LiteralList
+LiteralList	literallist.h	/^        LiteralList(const _InputIterator __first, const _InputIterator __last)$/;"	f	class:PropositionalProver::LiteralList
+LiteralList	literallist.h	/^    class LiteralList : public std::list<Literal>$/;"	c	namespace:PropositionalProver	inherits:std::list
+Next	subsumptionindex.h	/^            typedef std::map<Literal, PNode, index_key_comparator> Next;$/;"	t	struct:PropositionalProver::SubsumptionIndex::Node
+Node	subsumptionindex.h	/^        struct Node$/;"	s	class:PropositionalProver::SubsumptionIndex
+NonCommutativeStepNextStepNowState	attribute.cc	/^    class NonCommutativeStepNextStepNowState : public AttributeTransformer::TransformerState$/;"	c	file:	namespace:PropositionalProver	inherits:AttributeTransformer::TransformerState
+NonCommutativeStepNowStepNextState	attribute.cc	/^    class NonCommutativeStepNowStepNextState : public AttributeTransformer::TransformerState$/;"	c	file:	namespace:PropositionalProver	inherits:AttributeTransformer::TransformerState
+PClause	clauseset.h	/^    typedef boost::shared_ptr<Clause> PClause;$/;"	t	namespace:PropositionalProver
+PNode	subsumptionindex.h	/^        typedef std::auto_ptr<Node> PNode;$/;"	t	class:PropositionalProver::SubsumptionIndex
+PairGen	clauseset.h	/^          PassiveBase::iterator, PassiveBase::const_iterator> PairGen;$/;"	t	class:PropositionalProver::Passive
+Passive	clauseset.h	/^    class Passive: public PassiveBase$/;"	c	namespace:PropositionalProver	inherits:PassiveBase
+PassiveBase	clauseset.h	/^    typedef std::multimap<Literal, PClause, index_key_comparator> PassiveBase;$/;"	t	namespace:PropositionalProver
+Proposition	proposition.h	/^       Proposition(const GenericSymbol& s)  \/\/construct from a symbol$/;"	f	class:PropositionalProver::Proposition
+Proposition	proposition.h	/^       Proposition(name_t name)$/;"	f	class:PropositionalProver::Proposition
+Proposition	proposition.h	/^   class Proposition: public GenericSymbol$/;"	c	namespace:PropositionalProver	inherits:GenericSymbol
+PropositionalProver	attribute.cc	/^namespace PropositionalProver$/;"	n	file:
+PropositionalProver	attribute.h	/^namespace PropositionalProver$/;"	n
+PropositionalProver	clause.cc	/^namespace PropositionalProver$/;"	n	file:
+PropositionalProver	clause.h	/^namespace PropositionalProver$/;"	n
+PropositionalProver	clauseset.h	/^namespace PropositionalProver$/;"	n
+PropositionalProver	dummy_attribute.h	/^namespace PropositionalProver$/;"	n
+PropositionalProver	infer.cc	/^namespace PropositionalProver$/;"	n	file:
+PropositionalProver	infer.h	/^namespace PropositionalProver$/;"	n
+PropositionalProver	keycomparator.h	/^namespace PropositionalProver$/;"	n
+PropositionalProver	literal.h	/^namespace PropositionalProver$/;"	n
+PropositionalProver	literallist.h	/^namespace PropositionalProver$/;"	n
+PropositionalProver	proposition.h	/^namespace PropositionalProver$/;"	n
+PropositionalProver	stl_tim.cc	/^namespace PropositionalProver$/;"	n	file:
+PropositionalProver	stl_tim.h	/^namespace PropositionalProver$/;"	n
+PropositionalProver	subsumptionindex.h	/^namespace PropositionalProver$/;"	n
+PropositionalProver	symbol.cc	/^namespace PropositionalProver$/;"	n	file:
+PropositionalProver	symbol.h	/^namespace PropositionalProver$/;"	n
+PropositionalProver	timstat.h	/^namespace PropositionalProver$/;"	n
+SortedLiteralList	literallist.h	/^        SortedLiteralList()$/;"	f	class:PropositionalProver::SortedLiteralList
+SortedLiteralList	literallist.h	/^        SortedLiteralList(const LiteralList& l)$/;"	f	class:PropositionalProver::SortedLiteralList
+SortedLiteralList	literallist.h	/^        SortedLiteralList(const _InputIterator __first, const _InputIterator __last)$/;"	f	class:PropositionalProver::SortedLiteralList
+SortedLiteralList	literallist.h	/^    class SortedLiteralList : private LiteralList$/;"	c	namespace:PropositionalProver	inherits:LiteralList
+Statistics	timstat.h	/^        Statistics()$/;"	f	class:PropositionalProver::Statistics
+Statistics	timstat.h	/^    class Statistics$/;"	c	namespace:PropositionalProver
+Subsumes	clauseset.h	/^    Active::Subsumes(const PClause& clause)$/;"	f	class:PropositionalProver::Active
+SubsumptionIndex	subsumptionindex.h	/^        SubsumptionIndex()$/;"	f	class:PropositionalProver::SubsumptionIndex
+SubsumptionIndex	subsumptionindex.h	/^    class SubsumptionIndex $/;"	c	namespace:PropositionalProver
+TransformerState	attribute.h	/^        class TransformerState$/;"	c	class:PropositionalProver::AttributeTransformer
+__ATTRIBUTE_H__	attribute.h	2;"	d
+__CLAUSESET_H__	clauseset.h	2;"	d
+__CLAUSE_H	clause.h	2;"	d
+__DUMMY_ATTRIBUTE_H__	dummy_attribute.h	2;"	d
+__KEYCOMPARATOR_H__	keycomparator.h	2;"	d
+__LITERALLIST_H__	literallist.h	2;"	d
+__LITERAL_H__	literal.h	2;"	d
+__PROPOSITIONAL_H	proposition.h	2;"	d
+__STL_TIM_H__	stl_tim.h	2;"	d
+__SUBSUMPTIONINDEX_H__	subsumptionindex.h	2;"	d
+__SYMBOL_H__	symbol.h	2;"	d
+__TIMSTAT_H__	timstat.h	2;"	d
+addResolvents	timstat.h	/^        addResolvents(int number)$/;"	f	class:PropositionalProver::Statistics
+addSubsumptions	timstat.h	/^        addSubsumptions(int number)$/;"	f	class:PropositionalProver::Statistics
+areCompatible	attribute.h	/^    areCompatible(const Attribute& attribute1, const Attribute& attribute2) $/;"	f	namespace:PropositionalProver
+areCompatibleTypes	attribute.h	/^            areCompatibleTypes(const AttributeType aType1, const AttributeType aType2) const$/;"	f	class:PropositionalProver::Attribute::AttributeCompatibilitiser
+areComplementary	literal.h	/^    areComplementary(const Literal& l, const Literal&m)$/;"	f	namespace:PropositionalProver
+areEqual	attribute.h	/^            areEqual(const AttributeType aType1, const AttributeType aType2) const$/;"	f	class:PropositionalProver::Attribute::AttributeEqualizer
+argument_type	clauseset.h	/^            typedef PassiveBase::value_type argument_type;$/;"	t	struct:PropositionalProver::Passive::selectPClause
+attributeTypeSize	attribute.h	/^        static const int attributeTypeSize = 4;$/;"	m	class:PropositionalProver::Attribute
+back	clauseset.h	/^        const_reference back() const { return ActiveBase::back(); }$/;"	f	class:PropositionalProver::Active
+back	clauseset.h	/^        reference back() { return ActiveBase::back(); }$/;"	f	class:PropositionalProver::Active
+backwardSubsumption	clauseset.h	/^    Active::backwardSubsumption(const PClause& clause, Statistics& stat)$/;"	f	class:PropositionalProver::Active
+begin	clauseset.h	/^        begin() const { return const_iterator(PassiveBase::begin()); }$/;"	f	class:PropositionalProver::Passive
+begin	clauseset.h	/^        begin() { return iterator(PassiveBase::begin()); }$/;"	f	class:PropositionalProver::Passive
+begin	clauseset.h	/^        const_iterator begin() const { return ActiveBase::begin(); }$/;"	f	class:PropositionalProver::Active
+begin	clauseset.h	/^        iterator begin() { return ActiveBase::begin(); }$/;"	f	class:PropositionalProver::Active
+begin	literallist.h	/^        begin() const$/;"	f	class:PropositionalProver::SortedLiteralList
+begin	symbol.h	/^        begin() $/;"	f	class:PropositionalProver::GenericSymbol
+checkConditions	infer.cc	/^    checkConditions(const Literal& l, const Literal& m)$/;"	f	namespace:PropositionalProver
+clauseSubsumes	infer.cc	/^    clauseSubsumes(const PClause& c, const PClause& d)$/;"	f	namespace:PropositionalProver
+clauseSubsumesHelper	infer.cc	/^    clauseSubsumesHelper(const PClause& c, const PClause& d)$/;"	f	namespace:PropositionalProver
+clauseSubsumesOrEqual	infer.cc	/^    clauseSubsumesOrEqual(const PClause& c, const PClause& d)$/;"	f	namespace:PropositionalProver
+clear	clauseset.h	/^    Active::clear()$/;"	f	class:PropositionalProver::Active
+compatible	dummy_attribute.h	/^    compatible(const Attribute& a1, const Attribute& a2) $/;"	f	namespace:PropositionalProver
+const_iterator	clause.h	/^        typedef ClauseBase::const_iterator const_iterator;$/;"	t	class:PropositionalProver::Clause
+const_iterator	clauseset.h	/^        typedef ActiveBase::const_iterator const_iterator;$/;"	t	class:PropositionalProver::Active
+const_iterator	clauseset.h	/^        typedef PairGen::const_iterator const_iterator;$/;"	t	class:PropositionalProver::Passive
+const_iterator	literallist.h	/^        typedef LiteralList::const_iterator const_iterator;$/;"	t	class:PropositionalProver::SortedLiteralList
+const_iterator	literallist.h	/^        typedef std::list<Literal>::const_iterator const_iterator;$/;"	t	class:PropositionalProver::LiteralList
+const_iterator	symbol.h	/^        typedef id2name_t::const_iterator const_iterator;$/;"	t	class:PropositionalProver::GenericSymbol
+data	subsumptionindex.h	/^            std::list<PClause> data;$/;"	m	struct:PropositionalProver::SubsumptionIndex::Node
+default_attr	attribute.cc	/^    const Attribute& default_attr  = initial_attr;$/;"	m	namespace:PropositionalProver
+default_attr	dummy_attribute.h	/^    const Attribute default_attr = Attribute();$/;"	m	namespace:PropositionalProver
+dump	clause.h	/^        ostream& dump(std::ostream& os) const$/;"	f	class:PropositionalProver::Clause
+dump	clauseset.h	/^    Active::dump(std::ostream& os) const$/;"	f	class:PropositionalProver::Active
+dump	clauseset.h	/^    Passive::dump(std::ostream& os) const$/;"	f	class:PropositionalProver::Passive
+dump	literal.h	/^        dump(std::ostream& os) const$/;"	f	class:PropositionalProver::Literal
+dump	literallist.h	/^        std::ostream& dump(std::ostream& os) const$/;"	f	class:PropositionalProver::LiteralList
+dump	proposition.h	/^       std::ostream&  dump(std::ostream& os) const$/;"	f	class:PropositionalProver::Proposition
+dump	stl_tim.cc	/^    std::ostream& ClauseSet::dump(std::ostream& os) const    $/;"	f	class:PropositionalProver::ClauseSet
+dump	symbol.h	/^        dump(std::ostream& os)$/;"	f	class:PropositionalProver::GenericSymbol
+empty	clauseset.h	/^        bool empty() { return ActiveBase::empty(); }$/;"	f	class:PropositionalProver::Active
+end	clauseset.h	/^        const_iterator end() const { return ActiveBase::end(); }$/;"	f	class:PropositionalProver::Active
+end	clauseset.h	/^        end() const { return const_iterator(PassiveBase::end()); }$/;"	f	class:PropositionalProver::Passive
+end	clauseset.h	/^        end() { return iterator(PassiveBase::end()); }$/;"	f	class:PropositionalProver::Passive
+end	clauseset.h	/^        iterator end() { return ActiveBase::end(); }$/;"	f	class:PropositionalProver::Active
+end	literallist.h	/^        end() const$/;"	f	class:PropositionalProver::SortedLiteralList
+end	symbol.h	/^        end()$/;"	f	class:PropositionalProver::GenericSymbol
+erase	clauseset.h	/^    Active::erase(iterator __position)$/;"	f	class:PropositionalProver::Active
+exists	symbol.h	/^        exists (const name_t name) $/;"	f	class:PropositionalProver::GenericSymbol
+fakeLiteral	clauseset.h	/^        fakeLiteral() { return Literal(Proposition("")); };$/;"	f	class:PropositionalProver::Passive
+forwarSubsumes	subsumptionindex.h	/^    SubsumptionIndex::forwarSubsumes(const PClause& pclause) const$/;"	f	class:PropositionalProver::SubsumptionIndex
+forwardSubsumes	subsumptionindex.h	/^    SubsumptionIndex::forwardSubsumes(Clause::const_iterator startPosition,$/;"	f	class:PropositionalProver::SubsumptionIndex
+front	clauseset.h	/^        const_reference front() const { return ActiveBase::front(); }$/;"	f	class:PropositionalProver::Active
+front	clauseset.h	/^        reference front() { return ActiveBase::front(); }$/;"	f	class:PropositionalProver::Active
+getAttribute	literal.h	/^        getAttribute() const$/;"	f	class:PropositionalProver::Literal
+getComplementary	clauseset.h	/^    Active::getComplementary(Literal l)  const$/;"	f	class:PropositionalProver::Active
+getId	clause.h	/^        getId() const$/;"	f	class:PropositionalProver::Clause
+getId	symbol.h	/^        symid_t getId() const $/;"	f	class:PropositionalProver::GenericSymbol
+getInfo	clause.h	/^        getInfo() const$/;"	f	class:PropositionalProver::Clause
+getLeadingLiteral	clause.h	/^        getLeadingLiteral() const$/;"	f	class:PropositionalProver::Clause
+getName	symbol.h	/^        const name_t& getName() const$/;"	f	class:PropositionalProver::GenericSymbol
+getNumberOfResolvents	timstat.h	/^        getNumberOfResolvents() const$/;"	f	class:PropositionalProver::Statistics
+getNumberOfSubsumptions	timstat.h	/^        getNumberOfSubsumptions() const$/;"	f	class:PropositionalProver::Statistics
+getProposition	literal.h	/^        getProposition() const$/;"	f	class:PropositionalProver::Literal
+getSign	literal.h	/^        getSign() const$/;"	f	class:PropositionalProver::Literal
+getStartingWith	clauseset.h	/^    Active::getStartingWith(const Literal& l)  const$/;"	f	class:PropositionalProver::Active
+getStartingWith	clauseset.h	/^    Passive::getStartingWith(const Literal& l)  const$/;"	f	class:PropositionalProver::Passive
+getStatistics	stl_tim.h	/^        getStatistics() const$/;"	f	class:PropositionalProver::ClauseSet
+getType	attribute.h	/^        getType() const$/;"	f	class:PropositionalProver::Attribute
+get_unused_id	clause.h	/^        static clauseid_t get_unused_id()$/;"	f	class:PropositionalProver::Clause
+get_unused_id	symbol.h	/^        static symid_t get_unused_id() $/;"	f	class:PropositionalProver::GenericSymbol
+id2name	symbol.cc	/^    std::map<symid_t,name_t> GenericSymbol::id2name;$/;"	m	class:PropositionalProver::GenericSymbol
+id2name	symbol.h	/^        static id2name_t id2name;  \/\/ Map id to name $/;"	m	class:PropositionalProver::GenericSymbol
+id2name_t	symbol.h	/^        typedef std::map<symid_t, name_t> id2name_t;$/;"	t	class:PropositionalProver::GenericSymbol
+id_last	clause.h	/^        static const clauseid_t id_last = static_cast<clauseid_t>(-1); \/\/ Max possible id$/;"	m	class:PropositionalProver::Clause
+id_last	symbol.h	/^        static const symid_t id_last = static_cast<symid_t>(-1); \/\/ Max possible id $/;"	m	class:PropositionalProver::GenericSymbol
+id_none	clause.h	/^        static const clauseid_t id_none = 0;    \/\/ Non-existent symbol    $/;"	m	class:PropositionalProver::Clause
+id_none	symbol.h	/^        static const symid_t id_none = 0;    \/\/ Non-existing symbol  $/;"	m	class:PropositionalProver::GenericSymbol
+id_unused	clause.cc	/^    clauseid_t Clause::id_unused = Clause::init_unused;$/;"	m	class:PropositionalProver::Clause
+id_unused	clause.h	/^        static clauseid_t id_unused;            \/\/ First currently not used id  $/;"	m	class:PropositionalProver::Clause
+id_unused	symbol.cc	/^    symid_t GenericSymbol::id_unused = GenericSymbol::init_unused;$/;"	m	class:PropositionalProver::GenericSymbol
+id_unused	symbol.h	/^        static symid_t id_unused;            \/\/ First currently not used id $/;"	m	class:PropositionalProver::GenericSymbol
+implementationDependentSubsumes	infer.cc	/^    implementationDependentSubsumes(const PClause& c, const PClause& d)$/;"	f	namespace:PropositionalProver
+implementationDependentSubsumesHelper	infer.cc	/^    implementationDependentSubsumesHelper(const PClause& c, const PClause& d)$/;"	f	namespace:PropositionalProver
+index	clauseset.h	/^        index_t index;$/;"	m	class:PropositionalProver::Active
+index_key_comparator	keycomparator.h	/^    struct index_key_comparator$/;"	s	namespace:PropositionalProver
+index_t	clauseset.h	/^        typedef std::map<Literal, IndexCarier, index_key_comparator> index_t;$/;"	t	class:PropositionalProver::Active
+init_unused	clause.h	/^        static const clauseid_t init_unused = 1;\/\/ First not used id on startup $/;"	m	class:PropositionalProver::Clause
+init_unused	symbol.h	/^        static const symid_t init_unused = 1;\/\/ First not used id on startup  $/;"	m	class:PropositionalProver::GenericSymbol
+initial	attribute.h	/^        enum AttributeType {initial, universal, step_now, step_next};$/;"	e	enum:PropositionalProver::Attribute::AttributeType
+initial_attr	attribute.cc	/^    const Attribute initial_attr   = Attribute(Attribute::initial);$/;"	m	namespace:PropositionalProver
+insert	clauseset.h	/^    Active::insert(iterator __position, const PClause& __x) $/;"	f	class:PropositionalProver::Active
+insert	subsumptionindex.h	/^    SubsumptionIndex:: insert(const PClause& pclause)$/;"	f	class:PropositionalProver::SubsumptionIndex
+insert	subsumptionindex.h	/^    SubsumptionIndex::insert(Clause::const_iterator startPosition, const$/;"	f	class:PropositionalProver::SubsumptionIndex
+isCorrect	clause.h	/^        isCorrect() const$/;"	f	class:PropositionalProver::Clause
+isNegative	literal.h	/^        isNegative() const$/;"	f	class:PropositionalProver::Literal
+isPositive	literal.h	/^        isPositive() const$/;"	f	class:PropositionalProver::Literal
+isdummy	symbol.h	/^        bool isdummy() const$/;"	f	class:PropositionalProver::GenericSymbol
+iterator	clause.h	/^        typedef ClauseBase::iterator iterator;$/;"	t	class:PropositionalProver::Clause
+iterator	clauseset.h	/^        typedef ActiveBase::iterator iterator;$/;"	t	class:PropositionalProver::Active
+iterator	clauseset.h	/^        typedef PairGen::iterator iterator;$/;"	t	class:PropositionalProver::Passive
+lit	clauseset.h	/^        const PropositionalProver::Literal lit;$/;"	m	class:Exceptions::IndexInconsistent
+loopSearchCompatibilityTable	attribute.cc	/^    const bool loopSearchCompatibilityTable[]=$/;"	m	namespace:PropositionalProver
+loopSearchEqualityTable	attribute.cc	/^    const bool loopSearchEqualityTable[]=$/;"	m	namespace:PropositionalProver
+maintainStructure	literallist.h	/^        maintainStructure()$/;"	f	class:PropositionalProver::SortedLiteralList
+make_clause	stl_tim.h	/^        make_clause(const LiteralList& ll, const std::string& str)$/;"	f	class:PropositionalProver::ClauseSet
+make_info	infer.cc	/^    make_info(const clauseid_t id1, const clauseid_t id2)$/;"	f	namespace:PropositionalProver
+max_size	clauseset.h	/^    Active::max_size ()$/;"	f	class:PropositionalProver::Active
+module	clauseset.h	/^        module(std::ostream& os) const$/;"	f	class:Exceptions::ClauseSetException	implementation:virtual
+myAttribute	literal.h	/^        Attribute myAttribute;$/;"	m	class:PropositionalProver::Literal
+myCompatibilityTable	attribute.h	/^            bool myCompatibilityTable[attributeTypeSize*attributeTypeSize];$/;"	m	class:PropositionalProver::Attribute::AttributeCompatibilitiser
+myEqualityTable	attribute.h	/^            bool myEqualityTable[attributeTypeSize*attributeTypeSize];$/;"	m	class:PropositionalProver::Attribute::AttributeEqualizer
+myId	clause.h	/^        clauseid_t myId;$/;"	m	class:PropositionalProver::Clause
+myId	symbol.h	/^        symid_t       myId;    \/\/ Symbol id  $/;"	m	class:PropositionalProver::GenericSymbol
+myInfo	clause.h	/^        std::string myInfo; \/\/$/;"	m	class:PropositionalProver::Clause
+myNumberOfResolvents	timstat.h	/^        int myNumberOfResolvents;$/;"	m	class:PropositionalProver::Statistics
+myNumberOfSubsumptions	timstat.h	/^        int myNumberOfSubsumptions;$/;"	m	class:PropositionalProver::Statistics
+myProposition	literal.h	/^        Proposition myProposition;$/;"	m	class:PropositionalProver::Literal
+myRoot	subsumptionindex.h	/^        PNode myRoot;$/;"	m	class:PropositionalProver::SubsumptionIndex
+mySign	literal.h	/^        bool mySign;$/;"	m	class:PropositionalProver::Literal
+myState	attribute.h	/^        TransformerState* myState;$/;"	m	class:PropositionalProver::AttributeTransformer
+myType	attribute.h	/^        AttributeType myType;$/;"	m	class:PropositionalProver::Attribute
+name2id	symbol.cc	/^    std::map<name_t,symid_t> GenericSymbol::name2id;$/;"	m	class:PropositionalProver::GenericSymbol
+name2id	symbol.h	/^        static name2id_t name2id; \/\/Map name to id$/;"	m	class:PropositionalProver::GenericSymbol
+name2id_t	symbol.h	/^        typedef std::map< name_t, symid_t > name2id_t;$/;"	t	class:PropositionalProver::GenericSymbol
+negate	literal.h	/^        void negate()$/;"	f	class:PropositionalProver::Literal
+next	subsumptionindex.h	/^            Next next;$/;"	m	struct:PropositionalProver::SubsumptionIndex::Node
+nextEnd	subsumptionindex.h	/^    nextEnd(PClause& pclause) const$/;"	f	namespace:PropositionalProver
+normalCompatibilityTable	attribute.cc	/^    const bool normalCompatibilityTable[]=$/;"	m	namespace:PropositionalProver
+normalEqualityTable	attribute.cc	/^    const bool normalEqualityTable[]=$/;"	m	namespace:PropositionalProver
+operator !=	attribute.h	/^        operator!= (const Attribute& attribute) const$/;"	f	class:PropositionalProver::Attribute
+operator ()	attribute.h	/^        const Attribute& operator() (const Attribute& attribute)$/;"	f	class:PropositionalProver::AttributeTransformer
+operator ()	clauseset.h	/^            operator() (argument_type& arg) const$/;"	f	struct:PropositionalProver::Passive::selectPClause
+operator ()	clauseset.h	/^            operator() (const argument_type& arg) const$/;"	f	struct:PropositionalProver::Passive::selectPClause
+operator ()	keycomparator.h	/^        operator() (const Literal& l, const Literal& m) const$/;"	f	struct:PropositionalProver::index_key_comparator
+operator +	timstat.h	/^        operator+ (const Statistics& stat)$/;"	f	class:PropositionalProver::Statistics
+operator +=	timstat.h	/^        operator+= (const Statistics& stat)$/;"	f	class:PropositionalProver::Statistics
+operator <	attribute.h	/^        operator< (const Attribute& attribute) const$/;"	f	class:PropositionalProver::Attribute
+operator <	dummy_attribute.h	/^        bool operator< (const Attribute& a) const$/;"	f	class:PropositionalProver::Attribute
+operator <	literal.h	/^        operator< (const Literal& literal) const$/;"	f	class:PropositionalProver::Literal
+operator <	proposition.h	/^       bool operator< (const Proposition &p) const$/;"	f	class:PropositionalProver::Proposition
+operator <<	attribute.cc	/^    std::ostream& operator<< (std::ostream& os, const Attribute& attribute)$/;"	f	namespace:PropositionalProver
+operator <<	symbol.cc	/^    std::ostream& operator<< (std::ostream& os, GenericSymbol symbol)$/;"	f	namespace:PropositionalProver
+operator <<	timstat.cc	/^operator<< (std::ostream& os, const PropositionalProver::Statistics& stat)$/;"	f
+operator ==	attribute.h	/^        operator== (const Attribute& attribute) const$/;"	f	class:PropositionalProver::Attribute
+operator ==	dummy_attribute.h	/^        bool operator== (const Attribute& a) const$/;"	f	class:PropositionalProver::Attribute
+operator ==	literal.h	/^        operator== (const Literal& literal) const$/;"	f	class:PropositionalProver::Literal
+operator ==	proposition.h	/^       bool operator== (const Proposition& p) const$/;"	f	class:PropositionalProver::Proposition
+ourCompatibilitiser	attribute.cc	/^    const Attribute::AttributeCompatibilitiser* Attribute::ourCompatibilitiser;$/;"	m	class:PropositionalProver::Attribute
+ourCompatibilitiser	attribute.h	/^        static const AttributeCompatibilitiser* ourCompatibilitiser;$/;"	m	class:PropositionalProver::Attribute
+ourEqualizer	attribute.cc	/^    const Attribute::AttributeEqualizer*        Attribute::ourEqualizer;$/;"	m	class:PropositionalProver::Attribute
+ourEqualizer	attribute.h	/^        static const AttributeEqualizer*        ourEqualizer;$/;"	m	class:PropositionalProver::Attribute
+ourStatistics	stl_tim.cc	/^    Statistics ClauseSet::ourStatistics;$/;"	m	class:PropositionalProver::ClauseSet
+ourStatistics	stl_tim.h	/^        static Statistics ourStatistics;$/;"	m	class:PropositionalProver::ClauseSet
+pop_back	clauseset.h	/^        pop_back() { erase(end()); }$/;"	f	class:PropositionalProver::Active
+pop_front	clauseset.h	/^        pop_front() { erase(begin()); }$/;"	f	class:PropositionalProver::Active
+push_back	clauseset.h	/^        push_back(const PClause& __x) { insert(end(), __x); }$/;"	f	class:PropositionalProver::Active
+push_back	clauseset.h	/^    Passive::push_back(const PClause& pc)$/;"	f	class:PropositionalProver::Passive
+push_back	literallist.h	/^        push_back(const Literal& literal)$/;"	f	class:PropositionalProver::SortedLiteralList
+push_front	clauseset.h	/^        push_front(const PClause& __x) { insert(begin(), __x); }$/;"	f	class:PropositionalProver::Active
+rangeSubsumes	infer.cc	/^    rangeSubsumes (Iterator __begin, Iterator __end, const PClause& d)$/;"	f	namespace:PropositionalProver
+rangeSubsumesOrEqual	infer.h	/^    rangeSubsumesOrEqual (Iterator __begin, Iterator __end, const PClause& d)$/;"	f	namespace:PropositionalProver
+remove	subsumptionindex.h	/^    SubsumptionIndex::remove(Clause::const_iterator startPosition, $/;"	f	class:PropositionalProver::SubsumptionIndex
+remove	subsumptionindex.h	/^    SubsumptionIndex::remove(const PClause& pclause)$/;"	f	class:PropositionalProver::SubsumptionIndex
+resolve	infer.cc	/^    resolve(const Active &active, const PClause& c, std::list<PClause>& result)$/;"	f	namespace:PropositionalProver
+resolveMaximals	infer.cc	/^    resolveMaximals(const PClause& c, const PClause& d)$/;"	f	namespace:PropositionalProver
+result_type	clauseset.h	/^            typedef argument_type::second_type result_type;$/;"	t	struct:PropositionalProver::Passive::selectPClause
+saturate	stl_tim.cc	/^    ClauseSet::saturate(const ClauseSet::Flags& f = ClauseSet::Flags())$/;"	f	class:PropositionalProver::ClauseSet
+select	clauseset.h	/^    Passive::select()$/;"	f	class:PropositionalProver::Passive
+selectPClause	clauseset.h	/^        struct selectPClause$/;"	s	class:PropositionalProver::Passive
+setAttribute	literal.h	/^        setAttribute(const Attribute& attribute)$/;"	f	class:PropositionalProver::Literal
+setCompatibilitiser	attribute.h	/^    Attribute::setCompatibilitiser($/;"	f	class:PropositionalProver::Attribute
+setEqualizer	attribute.h	/^    Attribute::setEqualizer($/;"	f	class:PropositionalProver::Attribute
+size	literallist.h	/^        size() const$/;"	f	class:PropositionalProver::SortedLiteralList
+step_next	attribute.h	/^        enum AttributeType {initial, universal, step_now, step_next};$/;"	e	enum:PropositionalProver::Attribute::AttributeType
+step_next_attr	attribute.cc	/^    const Attribute step_next_attr = Attribute(Attribute::step_next);$/;"	m	namespace:PropositionalProver
+step_now	attribute.h	/^        enum AttributeType {initial, universal, step_now, step_next};$/;"	e	enum:PropositionalProver::Attribute::AttributeType
+step_now_attr	attribute.cc	/^    const Attribute step_now_attr  = Attribute(Attribute::step_now);$/;"	m	namespace:PropositionalProver
+transform	attribute.cc	/^        transform(const Attribute& attribute)$/;"	f	class:PropositionalProver::CommutativeInitInitState	implementation:virtual
+transform	attribute.cc	/^        transform(const Attribute& attribute)$/;"	f	class:PropositionalProver::CommutativeInitStepNowState	implementation:virtual
+transform	attribute.cc	/^        transform(const Attribute& attribute)$/;"	f	class:PropositionalProver::CommutativeInitUniversalState	implementation:virtual
+transform	attribute.cc	/^        transform(const Attribute& attribute)$/;"	f	class:PropositionalProver::CommutativeStepNextStepNextState	implementation:virtual
+transform	attribute.cc	/^        transform(const Attribute& attribute)$/;"	f	class:PropositionalProver::CommutativeStepNowStepNowState	implementation:virtual
+transform	attribute.cc	/^        transform(const Attribute& attribute)$/;"	f	class:PropositionalProver::CommutativeUniversalStepNextState	implementation:virtual
+transform	attribute.cc	/^        transform(const Attribute& attribute)$/;"	f	class:PropositionalProver::CommutativeUniversalStepNowState	implementation:virtual
+transform	attribute.cc	/^        transform(const Attribute& attribute)$/;"	f	class:PropositionalProver::CommutativeUniversalUniversalState	implementation:virtual
+transform	attribute.cc	/^        transform(const Attribute& attribute)$/;"	f	class:PropositionalProver::NonCommutativeStepNextStepNowState	implementation:virtual
+transform	attribute.cc	/^        transform(const Attribute& attribute)$/;"	f	class:PropositionalProver::NonCommutativeStepNowStepNextState	implementation:virtual
+universal	attribute.h	/^        enum AttributeType {initial, universal, step_now, step_next};$/;"	e	enum:PropositionalProver::Attribute::AttributeType
+universal_attr	attribute.cc	/^    const Attribute universal_attr = Attribute(Attribute::universal);$/;"	m	namespace:PropositionalProver
+weight	clause.h	/^        weight() const$/;"	f	class:PropositionalProver::Clause
+what	clauseset.h	/^        what (std::ostream& os) const$/;"	f	class:Exceptions::IndexInconsistent	implementation:virtual
+~AttributeTransformer	attribute.h	/^        ~AttributeTransformer()$/;"	f	class:PropositionalProver::AttributeTransformer
+~TransformerState	attribute.h	/^            virtual ~TransformerState() {} \/\/ suppress warnings$/;"	f	class:PropositionalProver::AttributeTransformer::TransformerState	implementation:virtual

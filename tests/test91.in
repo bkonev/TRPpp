@@ -1,0 +1,48 @@
+and([
+  or([not p0]),
+  or([not p1]),
+  or([not p2]),
+  or([not p3]),
+
+  always(or([q0])),
+
+  always(or([not p0, not q0, q1])),
+  always(or([not q1, p0])),
+  always(or([not q1, q0])),
+
+  always(or([not p1, not q1, q2])),
+  always(or([not q2, p1])),
+  always(or([not q2, q1])),
+
+  always(or([not p2, not q2, q3])),
+  always(or([not q3, p2])),
+  always(or([not q3, q2])),
+
+
+  always(or([not x0, p0, q0])),
+  always(or([not x0, not p0, not q0])),
+  always(or([not p0, q0, x0])),
+  always(or([not q0, p0, x0])),
+
+  always(or([not x1, p1, q1])),
+  always(or([not x1, not p1, not q1])),
+  always(or([not p1, q1, x1])),
+  always(or([not q1, p1, x1])),
+
+  always(or([not x2, p2, q2])),
+  always(or([not x2, not p2, not q2])),
+  always(or([not p2, q2, x2])),
+  always(or([not q2, p2, x2])),
+  
+  always(or([not x3, p3, q3])),
+  always(or([not x3, not p3, not q3])),
+  always(or([not p3, q3, x3])),
+  always(or([not q3, p3, x3])),
+  
+  always(or([not x0, next(p0)])),
+  always(or([not x1, next(p1)])),
+  always(or([not x2, next(p2)])),
+  always(or([not x3, next(p3)])),
+
+always(or([not p0, not p1, not p2, not p3]))
+]).

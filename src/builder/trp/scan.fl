@@ -1,0 +1,61 @@
+%{
+#include <iostream>
+#include "builder/generic_builder.h"   
+#include "misc/scalar.h"
+#include "misc/exception.h"
+using Builders::pbuilding_obj;
+
+#include "builder/trp/parse.h"
+
+   
+int trp_errlineno = -1;
+
+
+
+%}
+
+%option yylineno
+
+%x failure
+
+DIGIT    [0-9]
+NATURAL  {DIGIT}+
+IDENT    [[:alpha:]][[:alnum:]]*
+
+%%
+
+"("             return TOK_LPAR;
+")"             return TOK_RPAR;
+"["             return TOK_LBRACKET;
+"]"             return TOK_RBRACKET;
+not             return TOK_NOT;
+and             return TOK_CONJ;
+or              return TOK_DISJ;
+"."             return TOK_DOT;
+","             return TOK_COMMA;
+always          return TOK_ALWAYS;
+sometime        return TOK_SOMETIME;
+next            return TOK_NEXT;
+order           return TOK_ORDER;
+{IDENT}         trp_yylval.string = strdup(yytext); return TOK_IDENT;
+[[:space:]\n]+    /* Eat up spaces/endlines */
+
+
+.               BEGIN(failure); unput(yytext[0]);
+
+<failure>.{1,10}$  { 
+                         std::cerr << "Unrecognized sequence '" << yytext
+                              << "' on line " << yylineno - 1 << '\n'; 
+                         trp_errlineno = yylineno - 1;
+                         return -1;
+                   }    
+
+<failure>.{11}     { 
+                         yytext[10] = 0;
+                         std::cerr << "Unrecognized sequence '" << yytext
+                              << "...' on line " << yylineno << '\n'; 
+                         trp_errlineno = yylineno;
+                         return -1;
+                   }    
+
+%%

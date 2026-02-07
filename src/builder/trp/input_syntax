@@ -1,0 +1,18 @@
+Symplified syntax for TRP. Extracted from TRP Version 1.1
+by Ullrich Hustadt
+
+INPUT SYNTAX:
+FORMULA             ::= and(LIST_OF_SNFCLAUSES).
+LIST_OF_SNFCLAUSES  ::= [] | [SNFCLAUSE,...,SNFCLAUSE]
+SNFCLAUSE           ::= always(TEMPORALCLAUSE) | PROPOSITIONALCLAUSE
+TEMPORALCLAUSE      ::= PROPOSITIONALCLAUSE | GLOBALCLAUSE | SOMETIMECLAUSE
+PROPOSITIONALCLAUSE ::= or([LITERAL,...,LITERAL])
+GLOBALCLAUSE        ::= or([LITERAL,...,LITERAL,next(LITERAL),...,next(LITERAL)])
+SOMETIMECLAUSE      ::= or([LITERAL,...,LITERAL,sometime(LITERAL)])
+LITERAL             ::= not(IDENTIFIER) | IDENTIFIER
+IDENTIFIER          ::= [a-z0-0]+
+EXAMPLE OF A FORMULA:
+and([or([p0,not(p1)]),
+     always(or([p1,not(p0)])),
+     always(or([not(p0), next(not p4), next(p1)])),
+     always(or([not(p1), sometime(p2)]))]).

@@ -1,0 +1,986 @@
+
+and([
+     always(or([i1,x11,x12,not(f1),not(c),not(v1),next(not(x11))])), 
+     always(or([i1,x11,x12,not(f1),not(c),not(v1),next(not(x12))])),
+
+     always(or([i1,x11,not(x12),not(f1),not(c),not(v1),next(not(x11))])), 
+     always(or([i1,x11,not(x12),not(f1),not(c),not(v1),next(x12)])),
+
+     always(or([i1,not(x11),x12,not(f1),not(c),not(v1),next(x11)])), 
+     always(or([i1,not(x11),x12,not(f1),not(c),not(v1),next(not(x12))])),
+
+     always(or([i1,not(x11),not(x12),not(f1),not(c),not(v1),next(x11)])),
+     always(or([i1,not(x11),not(x12),not(f1),not(c),not(v1),next(x12)])),
+
+    always(or([i1,x11,x12,not(f1),not(c),v1,not(u1),next(not(x11))])),
+    always(or([i1,x11,x12,not(f1),not(c),v1,not(u1),next(x12)])),
+
+    always(or([i1,x11,not(x12),not(f1),not(c),v1,not(u1),next(x11)])), 
+    always(or([i1,x11,not(x12),not(f1),not(c),v1,not(u1),next(not(x12))])),
+
+    always(or([i1,not(x11),x12,not(f1),not(c),v1,not(u1),next(x11)])),
+    always(or([i1,not(x11),x12,not(f1),not(c),v1,not(u1),next(x12)])),
+
+    always(or([i1,not(x11),not(x12),not(f1),not(c),v1,not(u1),next(not(x11))])),
+    always(or([i1,not(x11),not(x12),not(f1),not(c),v1,not(u1),next(not(x12))])), 
+
+    always(or([i1,x11,x12,not(f1),not(c),v1,u1,next(x11)])),
+    always(or([i1,x11,x12,not(f1),not(c),v1,u1,next(x12)])),
+
+    always(or([i1,x11,not(x12),not(f1),not(c),v1,u1,next(not(x11))])),
+    always(or([i1,x11,not(x12),not(f1),not(c),v1,u1,next(not(x12))])),
+
+    always(or([i1,not(x11),x12,not(f1),not(c),v1,u1,next(not(x11))])),
+    always(or([i1,not(x11),x12,not(f1),not(c),v1,u1,next(x12)])),
+
+    always(or([i1,not(x11),not(x12),not(f1),not(c),v1,u1,next(x11)])), 
+    always(or([i1,not(x11),not(x12),not(f1),not(c),v1,u1,next(not(x12))])),
+
+
+
+    always(or([i1,x11,x12,f1,c,not(v1),next(not(x11))])),
+    always(or([i1,x11,x12,f1,c,not(v1),next(not(x12))])),
+
+    always(or([i1,x11,not(x12),f1,c,not(v1),next(not(x11))])),
+    always(or([i1,x11,not(x12),f1,c,not(v1),next(x12)])),
+
+    always(or([i1,not(x11),x12,f1,c,not(v1),next(x11)])),
+    always(or([i1,not(x11),x12,f1,c,not(v1),next(not(x12))])),
+
+    always(or([i1,not(x11),not(x12),f1,c,not(v1),next(x11)])), 
+    always(or([i1,not(x11),not(x12),f1,c,not(v1),next(x12)])),
+
+
+    always(or([i1,x11,x12,f1,c,v1,not(u1),next(not(x11))])),
+    always(or([i1,x11,x12,f1,c,v1,not(u1),next(x12)])),
+
+    always(or([i1,x11,not(x12),f1,c,v1,not(u1),next(x11)])),
+    always(or([i1,x11,not(x12),f1,c,v1,not(u1),next(not(x12))])), 
+
+    always(or([i1,not(x11),x12,f1,c,v1,not(u1),next(x11)])),
+    always(or([i1,not(x11),x12,f1,c,v1,not(u1),next(x12)])),
+
+    always(or([i1,not(x11),not(x12),f1,c,v1,not(u1),next(not(x11))])),
+    always(or([i1,not(x11),not(x12),f1,c,v1,not(u1),next(not(x12))])),
+
+    always(or([i1,x11,x12,f1,c,v1,u1,next(x11)])),
+    always(or([i1,x11,x12,f1,c,v1,u1,next(x12)])),
+
+    always(or([i1,x11,not(x12),f1,c,v1,u1,next(not(x11))])),
+    always(or([i1,x11,not(x12),f1,c,v1,u1,next(not(x12))])),
+
+    always(or([i1,not(x11),x12,f1,c,v1,u1,next(not(x11))])), 
+    always(or([i1,not(x11),x12,f1,c,v1,u1,next(x12)])),
+
+    always(or([i1,not(x11),not(x12),f1,c,v1,u1,next(x11)])), 
+    always(or([i1,not(x11),not(x12),f1,c,v1,u1,next(not(x12))])),
+
+
+
+    always(or([i1,x11,x12,not(f1),c,not(v1),next(not(x11))])),
+    always(or([i1,x11,x12,not(f1),c,not(v1),next(not(x12))])),
+
+    always(or([i1,x11,not(x12),not(f1),c,not(v1),next(not(x11))])),
+    always(or([i1,x11,not(x12),not(f1),c,not(v1),next(x12)])),
+
+    always(or([i1,not(x11),x12,not(f1),c,not(v1),next(x11)])),
+    always(or([i1,not(x11),x12,not(f1),c,not(v1),next(not(x12))])),
+
+    always(or([i1,not(x11),not(x12),not(f1),c,not(v1),next(x11)])),
+    always(or([i1,not(x11),not(x12),not(f1),c,not(v1),next(x12)])),
+
+
+    always(or([i1,x11,x12,not(f1),c,v1,not(u1),next(x11)])),
+    always(or([i1,x11,x12,not(f1),c,v1,not(u1),next(x12)])),
+
+    always(or([i1,x11,not(x12),not(f1),c,v1,not(u1),next(not(x11))])),
+    always(or([i1,x11,not(x12),not(f1),c,v1,not(u1),next(not(x12))])),
+
+    always(or([i1,not(x11),x12,not(f1),c,v1,not(u1),next(not(x11))])),
+    always(or([i1,not(x11),x12,not(f1),c,v1,not(u1),next(x12)])),
+
+    always(or([i1,not(x11),not(x12),not(f1),c,v1,not(u1),next(x11)])),
+    always(or([i1,not(x11),not(x12),not(f1),c,v1,not(u1),next(not(x12))])),
+
+    always(or([i1,x11,x12,not(f1),c,v1,u1,next(not(x11))])),
+    always(or([i1,x11,x12,not(f1),c,v1,u1,next(x12)])),
+
+    always(or([i1,x11,not(x12),not(f1),c,v1,u1,next(x11)])),
+    always(or([i1,x11,not(x12),not(f1),c,v1,u1,next(not(x12))])),
+
+    always(or([i1,not(x11),x12,not(f1),c,v1,u1,next(x11)])),
+    always(or([i1,not(x11),x12,not(f1),c,v1,u1,next(x12)])),
+
+    always(or([i1,not(x11),not(x12),not(f1),c,v1,u1,next(not(x11))])),
+    always(or([i1,not(x11),not(x12),not(f1),c,v1,u1,next(not(x12))])),
+
+
+
+    always(or([i1,x11,x12,f1,not(c),not(v1),not(u1), next(not(v1))])), 
+    always(or([i1,x11,x12,f1,not(c),not(v1),not(u1), next(x12)])),
+    always(or([i1,x11,x12,f1,not(c),not(v1),not(u1), next(u1),next(x11)])),
+    always(or([i1,x11,x12,f1,not(c),not(v1),not(u1), next(not(x11)),next(not(u1))])),
+
+    always(or([i1,x11,not(x12),f1,not(c),not(v1),not(u1), next(not(v1))])), 
+    always(or([i1,x11,not(x12),f1,not(c),not(v1),not(u1), next(not(x12))])),
+    always(or([i1,x11,not(x12),f1,not(c),not(v1),not(u1), next(u1),next(not(x11))])),
+    always(or([i1,x11,not(x12),f1,not(c),not(v1),not(u1), next(x11),next(not(u1))])),
+
+    always(or([i1,not(x11),x12,f1,not(c),not(v1),not(u1), next(not(v1))])), 
+    always(or([i1,not(x11),x12,f1,not(c),not(v1),not(u1), next(x12)])),
+    always(or([i1,not(x11),x12,f1,not(c),not(v1),not(u1), next(u1),next(not(x11))])),
+    always(or([i1,not(x11),x12,f1,not(c),not(v1),not(u1), next(x11),next(not(u1))])),
+
+    always(or([i1,not(x11),not(x12),f1,not(c),not(v1),not(u1), next(not(v1))])),
+    always(or([i1,not(x11),not(x12),f1,not(c),not(v1),not(u1), next(not(x12))])),
+    always(or([i1,not(x11),not(x12),f1,not(c),not(v1),not(u1), next(u1),next(x11)])),
+    always(or([i1,not(x11),not(x12),f1,not(c),not(v1),not(u1), next(not(x11)),next(not(u1))])),
+
+
+
+
+
+    always(or([i1,x11,x12,f1,not(c),not(v1),u1,next(not(v1))])),
+   always(or([i1,x11,x12,f1,not(c),not(v1),u1,next(x12)])),
+   always(or([i1,x11,x12,f1,not(c),not(v1),u1,next(u1),next(x11)])),
+    always(or([i1,x11,x12,f1,not(c),not(v1),u1,next(not(x11)),next(not(u1))])), 
+
+    always(or([i1,x11,not(x12),f1,not(c),not(v1),u1,next(not(v1))])),
+   always(or([i1,x11,not(x12),f1,not(c),not(v1),u1,next(not(x12))])),
+   always(or([i1,x11,not(x12),f1,not(c),not(v1),u1,next(u1),next(not(x11))])),
+    always(or([i1,x11,not(x12),f1,not(c),not(v1),u1,next(x11),next(not(u1))])),
+
+    always(or([i1,not(x11),x12,f1,not(c),not(v1),u1,next(not(v1))])), 
+   always(or([i1,not(x11),x12,f1,not(c),not(v1),u1,next(x12)])),
+   always(or([i1,not(x11),x12,f1,not(c),not(v1),u1,next(u1),next(not(x11))])),
+    always(or([i1,not(x11),x12,f1,not(c),not(v1),u1,next(x11),next(not(u1))])),
+
+    always(or([i1,not(x11),not(x12),f1,not(c),not(v1),u1,next(not(v1))])),
+   always(or([i1,not(x11),not(x12),f1,not(c),not(v1),u1,next(not(x12))])),
+   always(or([i1,not(x11),not(x12),f1,not(c),not(v1),u1,next(u1),next(x11)])),
+    always(or([i1,not(x11),not(x12),f1,not(c),not(v1),u1,next(not(x11)),next(not(u1))])),
+
+
+
+    always(or([i1,x11,x12,f1,not(c),v1,next(not(x11))])),
+    always(or([i1,x11,x12,f1,not(c),v1,next(not(x12))])),
+
+    always(or([i1,x11,not(x12),f1,not(c),v1,next(not(x11))])),
+    always(or([i1,x11,not(x12),f1,not(c),v1,next(x12)])),
+
+    always(or([i1,not(x11),x12,f1,not(c),v1,next(x11)])), 
+    always(or([i1,not(x11),x12,f1,not(c),v1,next(not(x12))])),
+
+    always(or([i1,not(x11),not(x12),f1,not(c),v1,next(x11)])),
+    always(or([i1,not(x11),not(x12),f1,not(c),v1,next(x12)])),
+
+
+
+
+    always(or([i1,y11,y12,not(f1),not(c),v1,next(not(y11))])),
+    always(or([i1,y11,y12,not(f1),not(c),v1,next(not(y12))])),
+
+    always(or([i1,y11,not(y12),not(f1),not(c),v1,next(not(y11))])),
+    always(or([i1,y11,not(y12),not(f1),not(c),v1,next(y12)])),
+
+    always(or([i1,not(y11),y12,not(f1),not(c),v1,next(y11)])),
+    always(or([i1,not(y11),y12,not(f1),not(c),v1,next(not(y12))])),
+
+    always(or([i1,not(y11),not(y12),not(f1),not(c),v1,next(y11)])),
+    always(or([i1,not(y11),not(y12),not(f1),not(c),v1,next(y12)])),
+
+
+    always(or([i1,y11,y12,not(f1),not(c),not(v1),not(u1),next(not(y11))])),
+    always(or([i1,y11,y12,not(f1),not(c),not(v1),not(u1),next(y12)])),
+
+    always(or([i1,y11,not(y12),not(f1),not(c),not(v1),not(u1),next(y11)])),
+    always(or([i1,y11,not(y12),not(f1),not(c),not(v1),not(u1),next(not(y12))])),
+
+    always(or([i1,not(y11),y12,not(f1),not(c),not(v1),not(u1),next(y11)])),
+    always(or([i1,not(y11),y12,not(f1),not(c),not(v1),not(u1),next(y12)])),
+
+    always(or([i1,not(y11),not(y12),not(f1),not(c),not(v1),not(u1),next(not(y11))])),
+    always(or([i1,not(y11),not(y12),not(f1),not(c),not(v1),not(u1),next(not(y12))])),
+
+
+    always(or([i1,y11,y12,not(f1),not(c),not(v1),u1,next(y11)])),
+    always(or([i1,y11,y12,not(f1),not(c),not(v1),u1,next(y12)])),
+
+    always(or([i1,y11,not(y12),not(f1),not(c),not(v1),u1,next(not(y11))])),
+    always(or([i1,y11,not(y12),not(f1),not(c),not(v1),u1,next(not(y12))])),
+
+    always(or([i1,not(y11),y12,not(f1),not(c),not(v1),u1,next(not(y11))])),
+    always(or([i1,not(y11),y12,not(f1),not(c),not(v1),u1,next(y12)])),
+
+    always(or([i1,not(y11),not(y12),not(f1),not(c),not(v1),u1,next(y11)])),
+    always(or([i1,not(y11),not(y12),not(f1),not(c),not(v1),u1,next(not(y12))])),
+
+
+
+    always(or([i1,y11,y12,f1,c,v1,next(not(y11))])),
+    always(or([i1,y11,y12,f1,c,v1,next(not(y12))])),
+
+    always(or([i1,y11,not(y12),f1,c,v1,next(not(y11))])),
+    always(or([i1,y11,not(y12),f1,c,v1,next(y12)])),
+
+    always(or([i1,not(y11),y12,f1,c,v1,next(y11)])),
+    always(or([i1,not(y11),y12,f1,c,v1,next(not(y12))])),
+
+    always(or([i1,not(y11),not(y12),f1,c,v1,next(y11)])),
+    always(or([i1,not(y11),not(y12),f1,c,v1,next(y12)])),
+
+
+
+
+    always(or([i1,y11,y12,f1,c,not(v1),not(u1),next(not(y11))])),
+    always(or([i1,y11,y12,f1,c,not(v1),not(u1),next(y12)])),
+
+    always(or([i1,y11,not(y12),f1,c,not(v1),not(u1),next(y11)])),
+    always(or([i1,y11,not(y12),f1,c,not(v1),not(u1),next(not(y12))])),
+
+    always(or([i1,not(y11),y12,f1,c,not(v1),not(u1),next(y11)])),
+    always(or([i1,not(y11),y12,f1,c,not(v1),not(u1),next(y12)])),
+
+    always(or([i1,not(y11),not(y12),f1,c,not(v1),not(u1),next(not(y11))])),
+    always(or([i1,not(y11),not(y12),f1,c,not(v1),not(u1),next(not(y12))])),
+
+    always(or([i1,y11,y12,f1,c,not(v1),u1,next(y11)])),
+    always(or([i1,y11,y12,f1,c,not(v1),u1,next(y12)])),
+
+    always(or([i1,y11,not(y12),f1,c,not(v1),u1,next(not(y11))])),
+    always(or([i1,y11,not(y12),f1,c,not(v1),u1,next(not(y12))])),
+
+    always(or([i1,not(y11),y12,f1,c,not(v1),u1,next(not(y11))])),
+    always(or([i1,not(y11),y12,f1,c,not(v1),u1,next(y12)])),
+
+    always(or([i1,not(y11),not(y12),f1,c,not(v1),u1,next(y11)])), 
+    always(or([i1,not(y11),not(y12),f1,c,not(v1),u1,next(not(y12))])),
+
+
+    always(or([i1,y11,y12,not(f1),c,v1,next(not(y11))])),
+    always(or([i1,y11,y12,not(f1),c,v1,next(not(y12))])),
+
+    always(or([i1,y11,not(y12),not(f1),c,v1,next(not(y11))])),
+    always(or([i1,y11,not(y12),not(f1),c,v1,next(y12)])),
+
+    always(or([i1,not(y11),y12,not(f1),c,v1,next(y11)])),
+    always(or([i1,not(y11),y12,not(f1),c,v1,next(not(y12))])),
+
+    always(or([i1,not(y11),not(y12),not(f1),c,v1,next(y11)])),
+    always(or([i1,not(y11),not(y12),not(f1),c,v1,next(y12)])),
+
+
+    always(or([i1,y11,y12,not(f1),c,not(v1),not(u1),next(y11)])),
+    always(or([i1,y11,y12,not(f1),c,not(v1),not(u1),next(y12)])),
+
+    always(or([i1,y11,not(y12),not(f1),c,not(v1),not(u1),next(not(y11))])),
+    always(or([i1,y11,not(y12),not(f1),c,not(v1),not(u1),next(not(y12))])),
+
+    always(or([i1,not(y11),y12,not(f1),c,not(v1),not(u1),next(not(y11))])),
+    always(or([i1,not(y11),y12,not(f1),c,not(v1),not(u1),next(y12)])),
+
+    always(or([i1,not(y11),not(y12),not(f1),c,not(v1),not(u1),next(y11)])),
+    always(or([i1,not(y11),not(y12),not(f1),c,not(v1),not(u1),next(not(y12))])),
+
+
+    always(or([i1,y11,y12,not(f1),c,not(v1),u1,next(not(y11))])),
+    always(or([i1,y11,y12,not(f1),c,not(v1),u1,next(y12)])),
+
+    always(or([i1,y11,not(y12),not(f1),c,not(v1),u1,next(y11)])),
+    always(or([i1,y11,not(y12),not(f1),c,not(v1),u1,next(not(y12))])),
+
+    always(or([i1,not(y11),y12,not(f1),c,not(v1),u1,next(y11)])),
+    always(or([i1,not(y11),y12,not(f1),c,not(v1),u1,next(y12)])),
+
+    always(or([i1,not(y11),not(y12),not(f1),c,not(v1),u1,next(not(y11))])),
+    always(or([i1,not(y11),not(y12),not(f1),c,not(v1),u1,next(not(y12))])),
+
+
+
+    always(or([i1,y11,y12,f1,not(c),v1,not(u1),next(v1)])),
+   always(or([i1,y11,y12,f1,not(c),v1,not(u1),next(y12)])),
+   always(or([i1,y11,y12,f1,not(c),v1,not(u1),next(u1),next(y11)])),
+    always(or([i1,y11,y12,f1,not(c),v1,not(u1),next(not(y11)),next(not(u1))])),
+
+   always(or([i1,y11,not(y12),f1,not(c),v1,not(u1),next(v1)])),
+  always(or([i1,y11,not(y12),f1,not(c),v1,not(u1),next(not(y12))])),
+  always(or([i1,y11,not(y12),f1,not(c),v1,not(u1),next(u1),next(not(y11))])),
+   always(or([i1,y11,not(y12),f1,not(c),v1,not(u1),next(y11),next(not(u1))])),
+
+    always(or([i1,not(y11),y12,f1,not(c),v1,not(u1),next(v1)])),
+   always(or([i1,not(y11),y12,f1,not(c),v1,not(u1),next(y12)])),
+   always(or([i1,not(y11),y12,f1,not(c),v1,not(u1),next(u1),next(not(y11))])),
+    always(or([i1,not(y11),y12,f1,not(c),v1,not(u1),next(y11),next(not(u1))])),
+
+
+
+    always(or([i1,not(y11),not(y12),f1,not(c),v1,not(u1),next(v1)])),
+   always(or([i1,not(y11),not(y12),f1,not(c),v1,not(u1),next(not(y12))])),
+   always(or([i1,not(y11),not(y12),f1,not(c),v1,not(u1),next(u1),next(y11)])),
+    always(or([i1,not(y11),not(y12),f1,not(c),v1,not(u1),next(not(y11)),next(not(u1))])),
+
+
+
+    always(or([i1,y11,y12,f1,not(c),v1,u1,next(v1)])),
+   always(or([i1,y11,y12,f1,not(c),v1,u1,next(y12)])),
+   always(or([i1,y11,y12,f1,not(c),v1,u1,next(u1),next(y11)])),
+    always(or([i1,y11,y12,f1,not(c),v1,u1,next(not(y11)),next(not(u1))])),
+
+    always(or([i1,y11,not(y12),f1,not(c),v1,u1,next(v1)])),
+   always(or([i1,y11,not(y12),f1,not(c),v1,u1,next(not(y12))])),
+   always(or([i1,y11,not(y12),f1,not(c),v1,u1,next(u1),next(not(y11))])),
+    always(or([i1,y11,not(y12),f1,not(c),v1,u1,next(y11),next(not(u1))])),
+
+    always(or([i1,not(y11),y12,f1,not(c),v1,u1,next(v1)])),
+   always(or([i1,not(y11),y12,f1,not(c),v1,u1,next(y12)])),
+   always(or([i1,not(y11),y12,f1,not(c),v1,u1,next(u1),next(not(y11))])),
+    always(or([i1,not(y11),y12,f1,not(c),v1,u1,next(y11),next(not(u1))])),
+
+    always(or([i1,not(y11),not(y12),f1,not(c),v1,u1,next(v1)])),
+   always(or([i1,not(y11),not(y12),f1,not(c),v1,u1,next(not(y12))])),
+   always(or([i1,not(y11),not(y12),f1,not(c),v1,u1,next(u1),next(y11)])),
+    always(or([i1,not(y11),not(y12),f1,not(c),v1,u1,next(not(y11)),next(not(u1))])),
+
+   always(or([i1,y11,y12,f1,not(c),not(v1),next(not(y11))])),
+    always(or([i1,y11,y12,f1,not(c),not(v1),next(not(y12))])),
+
+    always(or([i1,y11,not(y12),f1,not(c),not(v1),next(not(y11))])),
+    always(or([i1,y11,not(y12),f1,not(c),not(v1),next(y12)])),
+
+    always(or([i1,not(y11),y12,f1,not(c),not(v1),next(y11)])),
+    always(or([i1,not(y11),y12,f1,not(c),not(v1),next(not(y12))])),
+
+    always(or([i1,not(y11),not(y12),f1,not(c),not(v1),next(y11)])),
+    always(or([i1,not(y11),not(y12),f1,not(c),not(v1),next(y12)])),
+
+
+
+
+
+
+    always(or([i1,not(f1),not(c),next(f1)])),
+    always(or([i1,not(f1),c,next(not(f1))])),
+    always(or([i1,f1,c,next(not(f1))])),
+    always(or([i1,f1,not(c),next(f1)])),
+
+
+
+
+    always(or([i1,not(f1),not(c),not(v1),not(u1),next(v1)])),
+    always(or([i1,not(f1),not(c),not(v1),not(u1),next(u1)])),
+
+    always(or([i1,not(f1),not(c),v1,not(u1),next(not(v1))])),
+    always(or([i1,not(f1),not(c),v1,not(u1),next(u1)])),
+
+    always(or([i1,not(f1),not(c),not(v1),u1,next(v1)])), 
+    always(or([i1,not(f1),not(c),not(v1),u1,next(not(u1))])),
+
+    always(or([i1,not(f1),not(c),v1,u1,next(not(v1))])), 
+    always(or([i1,not(f1),not(c),v1,u1,next(not(u1))])),
+
+
+    always(or([i1,not(f1),c,not(v1),not(u1),next(v1)])), 
+    always(or([i1,not(f1),c,not(v1),not(u1),next(not(u1))])),
+    always(or([i1,not(f1),c,v1,not(u1),next(not(v1))])),
+    always(or([i1,not(f1),c,v1,not(u1),next(not(u1))])),
+    always(or([i1,not(f1),c,not(v1),u1,next(v1)])), 
+    always(or([i1,not(f1),c,not(v1),u1,next(u1)])),
+    always(or([i1,not(f1),c,v1,u1,next(not(v1))])), 
+    always(or([i1,not(f1),c,v1,u1,next(u1)])),
+    
+    always(or([i1,f1,c,not(v1),not(u1),next(v1)])), 
+    always(or([i1,f1,c,not(v1),not(u1),next(u1)])),
+
+    always(or([i1,f1,c,v1,not(u1),next(not(v1))])), 
+    always(or([i1,f1,c,v1,not(u1),next(u1)])),
+
+    always(or([i1,f1,c,not(v1),u1,next(v1)])), 
+    always(or([i1,f1,c,not(v1),u1,next(not(u1))])),
+
+    always(or([i1,f1,c,v1,u1,next(not(v1))])),
+    always(or([i1,f1,c,v1,u1,next(not(u1))])),
+
+    always(or([i1,f1,not(c),not(v1),not(u1),next(not(v1))])), 
+    always(or([i1,f1,not(c),not(v1),u1,next(not(v1))])), 
+    always(or([i1,f1,not(c),v1,not(u1),next(v1)])),
+    always(or([i1,f1,not(c),v1,u1,next(v1)])),
+
+
+ always(or([not(i1),not(x11),next(x11)])),
+always(or([not(i1),x11,next(not(x11))])),
+ always(or([not(i1),not(x12),next(x12)])),
+ always(or([not(i1),x12,next(not(x12))])),
+
+ always(or([not(i1),not(y11),next(y11)])),
+always(or([not(i1),y11,next(not(y11))])),
+ always(or([not(i1),not(y12),next(y12)])),
+ always(or([not(i1),y12,next(not(y12))])),
+
+
+ always(or([not(i1),not(v1),next(v1)])),
+ always(or([not(i1),v1,next(not(v1))])),
+ always(or([not(i1),not(u1),next(u1)])),
+ always(or([not(i1),u1,next(not(u1))])),
+ always(or([not(i1),not(f1),next(f1)])),
+ always(or([not(i1),f1,next(not(f1))])),
+
+or([not(x11)]),
+or([not(x12)]),
+or([not(y11)]),
+or([not(y12)]),
+
+or([f1]),
+or([v1]),
+or([u1]),
+
+
+     always(or([not(i1),x21,x22,not(f2),not(c),not(v2),next(not(x21))])), 
+     always(or([not(i1),x21,x22,not(f2),not(c),not(v2),next(not(x22))])),
+
+     always(or([not(i1),x21,not(x22),not(f2),not(c),not(v2),next(not(x21))])), 
+     always(or([not(i1),x21,not(x22),not(f2),not(c),not(v2),next(x22)])),
+
+     always(or([not(i1),not(x21),x22,not(f2),not(c),not(v2),next(x21)])), 
+     always(or([not(i1),not(x21),x22,not(f2),not(c),not(v2),next(not(x22))])),
+
+     always(or([not(i1),not(x21),not(x22),not(f2),not(c),not(v2),next(x21)])),
+     always(or([not(i1),not(x21),not(x22),not(f2),not(c),not(v2),next(x22)])),
+
+    always(or([not(i1),x21,x22,not(f2),not(c),v2,not(u2),next(not(x21))])),
+    always(or([not(i1),x21,x22,not(f2),not(c),v2,not(u2),next(x22)])),
+
+    always(or([not(i1),x21,not(x22),not(f2),not(c),v2,not(u2),next(x21)])), 
+    always(or([not(i1),x21,not(x22),not(f2),not(c),v2,not(u2),next(not(x22))])),
+
+    always(or([not(i1),not(x21),x22,not(f2),not(c),v2,not(u2),next(x21)])),
+    always(or([not(i1),not(x21),x22,not(f2),not(c),v2,not(u2),next(x22)])),
+
+    always(or([not(i1),not(x21),not(x22),not(f2),not(c),v2,not(u2),next(not(x21))])),
+    always(or([not(i1),not(x21),not(x22),not(f2),not(c),v2,not(u2),next(not(x22))])), 
+
+    always(or([not(i1),x21,x22,not(f2),not(c),v2,u2,next(x21)])),
+    always(or([not(i1),x21,x22,not(f2),not(c),v2,u2,next(x22)])),
+
+    always(or([not(i1),x21,not(x22),not(f2),not(c),v2,u2,next(not(x21))])),
+    always(or([not(i1),x21,not(x22),not(f2),not(c),v2,u2,next(not(x22))])),
+
+    always(or([not(i1),not(x21),x22,not(f2),not(c),v2,u2,next(not(x21))])),
+    always(or([not(i1),not(x21),x22,not(f2),not(c),v2,u2,next(x22)])),
+
+    always(or([not(i1),not(x21),not(x22),not(f2),not(c),v2,u2,next(x21)])), 
+    always(or([not(i1),not(x21),not(x22),not(f2),not(c),v2,u2,next(not(x22))])),
+
+
+
+    always(or([not(i1),x21,x22,f2,c,not(v2),next(not(x21))])),
+    always(or([not(i1),x21,x22,f2,c,not(v2),next(not(x22))])),
+
+    always(or([not(i1),x21,not(x22),f2,c,not(v2),next(not(x21))])),
+    always(or([not(i1),x21,not(x22),f2,c,not(v2),next(x22)])),
+
+    always(or([not(i1),not(x21),x22,f2,c,not(v2),next(x21)])),
+    always(or([not(i1),not(x21),x22,f2,c,not(v2),next(not(x22))])),
+
+    always(or([not(i1),not(x21),not(x22),f2,c,not(v2),next(x21)])), 
+    always(or([not(i1),not(x21),not(x22),f2,c,not(v2),next(x22)])),
+
+
+    always(or([not(i1),x21,x22,f2,c,v2,not(u2),next(not(x21))])),
+    always(or([not(i1),x21,x22,f2,c,v2,not(u2),next(x22)])),
+
+    always(or([not(i1),x21,not(x22),f2,c,v2,not(u2),next(x21)])),
+    always(or([not(i1),x21,not(x22),f2,c,v2,not(u2),next(not(x22))])), 
+
+    always(or([not(i1),not(x21),x22,f2,c,v2,not(u2),next(x21)])),
+    always(or([not(i1),not(x21),x22,f2,c,v2,not(u2),next(x22)])),
+
+    always(or([not(i1),not(x21),not(x22),f2,c,v2,not(u2),next(not(x21))])),
+    always(or([not(i1),not(x21),not(x22),f2,c,v2,not(u2),next(not(x22))])),
+
+    always(or([not(i1),x21,x22,f2,c,v2,u2,next(x21)])),
+    always(or([not(i1),x21,x22,f2,c,v2,u2,next(x22)])),
+
+    always(or([not(i1),x21,not(x22),f2,c,v2,u2,next(not(x21))])),
+    always(or([not(i1),x21,not(x22),f2,c,v2,u2,next(not(x22))])),
+
+    always(or([not(i1),not(x21),x22,f2,c,v2,u2,next(not(x21))])), 
+    always(or([not(i1),not(x21),x22,f2,c,v2,u2,next(x22)])),
+
+    always(or([not(i1),not(x21),not(x22),f2,c,v2,u2,next(x21)])), 
+    always(or([not(i1),not(x21),not(x22),f2,c,v2,u2,next(not(x22))])),
+
+
+
+    always(or([not(i1),x21,x22,not(f2),c,not(v2),next(not(x21))])),
+    always(or([not(i1),x21,x22,not(f2),c,not(v2),next(not(x22))])),
+
+    always(or([not(i1),x21,not(x22),not(f2),c,not(v2),next(not(x21))])),
+    always(or([not(i1),x21,not(x22),not(f2),c,not(v2),next(x22)])),
+
+    always(or([not(i1),not(x21),x22,not(f2),c,not(v2),next(x21)])),
+    always(or([not(i1),not(x21),x22,not(f2),c,not(v2),next(not(x22))])),
+
+    always(or([not(i1),not(x21),not(x22),not(f2),c,not(v2),next(x21)])),
+    always(or([not(i1),not(x21),not(x22),not(f2),c,not(v2),next(x22)])),
+
+
+    always(or([not(i1),x21,x22,not(f2),c,v2,not(u2),next(x21)])),
+    always(or([not(i1),x21,x22,not(f2),c,v2,not(u2),next(x22)])),
+
+    always(or([not(i1),x21,not(x22),not(f2),c,v2,not(u2),next(not(x21))])),
+    always(or([not(i1),x21,not(x22),not(f2),c,v2,not(u2),next(not(x22))])),
+
+    always(or([not(i1),not(x21),x22,not(f2),c,v2,not(u2),next(not(x21))])),
+    always(or([not(i1),not(x21),x22,not(f2),c,v2,not(u2),next(x22)])),
+
+    always(or([not(i1),not(x21),not(x22),not(f2),c,v2,not(u2),next(x21)])),
+    always(or([not(i1),not(x21),not(x22),not(f2),c,v2,not(u2),next(not(x22))])),
+
+    always(or([not(i1),x21,x22,not(f2),c,v2,u2,next(not(x21))])),
+    always(or([not(i1),x21,x22,not(f2),c,v2,u2,next(x22)])),
+
+    always(or([not(i1),x21,not(x22),not(f2),c,v2,u2,next(x21)])),
+    always(or([not(i1),x21,not(x22),not(f2),c,v2,u2,next(not(x22))])),
+
+    always(or([not(i1),not(x21),x22,not(f2),c,v2,u2,next(x21)])),
+    always(or([not(i1),not(x21),x22,not(f2),c,v2,u2,next(x22)])),
+
+    always(or([not(i1),not(x21),not(x22),not(f2),c,v2,u2,next(not(x21))])),
+    always(or([not(i1),not(x21),not(x22),not(f2),c,v2,u2,next(not(x22))])),
+
+
+
+    always(or([not(i1),x21,x22,f2,not(c),not(v2),not(u2), next(not(v2))])), 
+    always(or([not(i1),x21,x22,f2,not(c),not(v2),not(u2), next(x22)])),
+    always(or([not(i1),x21,x22,f2,not(c),not(v2),not(u2), next(u2),next(x21)])),
+    always(or([not(i1),x21,x22,f2,not(c),not(v2),not(u2), next(not(x21)),next(not(u2))])),
+
+    always(or([not(i1),x21,not(x22),f2,not(c),not(v2),not(u2), next(not(v2))])), 
+    always(or([not(i1),x21,not(x22),f2,not(c),not(v2),not(u2), next(not(x22))])),
+    always(or([not(i1),x21,not(x22),f2,not(c),not(v2),not(u2), next(u2),next(not(x21))])),
+    always(or([not(i1),x21,not(x22),f2,not(c),not(v2),not(u2), next(x21),next(not(u2))])),
+
+    always(or([not(i1),not(x21),x22,f2,not(c),not(v2),not(u2), next(not(v2))])), 
+    always(or([not(i1),not(x21),x22,f2,not(c),not(v2),not(u2), next(x22)])),
+    always(or([not(i1),not(x21),x22,f2,not(c),not(v2),not(u2), next(u2),next(not(x21))])),
+    always(or([not(i1),not(x21),x22,f2,not(c),not(v2),not(u2), next(x21),next(not(u2))])),
+
+    always(or([not(i1),not(x21),not(x22),f2,not(c),not(v2),not(u2), next(not(v2))])),
+    always(or([not(i1),not(x21),not(x22),f2,not(c),not(v2),not(u2), next(not(x22))])),
+    always(or([not(i1),not(x21),not(x22),f2,not(c),not(v2),not(u2), next(u2),next(x21)])),
+    always(or([not(i1),not(x21),not(x22),f2,not(c),not(v2),not(u2), next(not(x21)),next(not(u2))])),
+
+
+
+
+
+    always(or([not(i1),x21,x22,f2,not(c),not(v2),u2,next(not(v2))])),
+   always(or([not(i1),x21,x22,f2,not(c),not(v2),u2,next(x22)])),
+   always(or([not(i1),x21,x22,f2,not(c),not(v2),u2,next(u2),next(x21)])),
+    always(or([not(i1),x21,x22,f2,not(c),not(v2),u2,next(not(x21)),next(not(u2))])), 
+
+    always(or([not(i1),x21,not(x22),f2,not(c),not(v2),u2,next(not(v2))])),
+   always(or([not(i1),x21,not(x22),f2,not(c),not(v2),u2,next(not(x22))])),
+   always(or([not(i1),x21,not(x22),f2,not(c),not(v2),u2,next(u2),next(not(x21))])),
+    always(or([not(i1),x21,not(x22),f2,not(c),not(v2),u2,next(x21),next(not(u2))])),
+
+    always(or([not(i1),not(x21),x22,f2,not(c),not(v2),u2,next(not(v2))])), 
+   always(or([not(i1),not(x21),x22,f2,not(c),not(v2),u2,next(x22)])),
+   always(or([not(i1),not(x21),x22,f2,not(c),not(v2),u2,next(u2),next(not(x21))])),
+    always(or([not(i1),not(x21),x22,f2,not(c),not(v2),u2,next(x21),next(not(u2))])),
+
+    always(or([not(i1),not(x21),not(x22),f2,not(c),not(v2),u2,next(not(v2))])),
+   always(or([not(i1),not(x21),not(x22),f2,not(c),not(v2),u2,next(not(x22))])),
+   always(or([not(i1),not(x21),not(x22),f2,not(c),not(v2),u2,next(u2),next(x21)])),
+    always(or([not(i1),not(x21),not(x22),f2,not(c),not(v2),u2,next(not(x21)),next(not(u2))])),
+
+
+
+    always(or([not(i1),x21,x22,f2,not(c),v2,next(not(x21))])),
+    always(or([not(i1),x21,x22,f2,not(c),v2,next(not(x22))])),
+
+    always(or([not(i1),x21,not(x22),f2,not(c),v2,next(not(x21))])),
+    always(or([not(i1),x21,not(x22),f2,not(c),v2,next(x22)])),
+
+    always(or([not(i1),not(x21),x22,f2,not(c),v2,next(x21)])), 
+    always(or([not(i1),not(x21),x22,f2,not(c),v2,next(not(x22))])),
+
+    always(or([not(i1),not(x21),not(x22),f2,not(c),v2,next(x21)])),
+    always(or([not(i1),not(x21),not(x22),f2,not(c),v2,next(x22)])),
+
+
+
+
+    always(or([not(i1),y21,y22,not(f2),not(c),v2,next(not(y21))])),
+    always(or([not(i1),y21,y22,not(f2),not(c),v2,next(not(y22))])),
+
+    always(or([not(i1),y21,not(y22),not(f2),not(c),v2,next(not(y21))])),
+    always(or([not(i1),y21,not(y22),not(f2),not(c),v2,next(y22)])),
+
+    always(or([not(i1),not(y21),y22,not(f2),not(c),v2,next(y21)])),
+    always(or([not(i1),not(y21),y22,not(f2),not(c),v2,next(not(y22))])),
+
+    always(or([not(i1),not(y21),not(y22),not(f2),not(c),v2,next(y21)])),
+    always(or([not(i1),not(y21),not(y22),not(f2),not(c),v2,next(y22)])),
+
+
+    always(or([not(i1),y21,y22,not(f2),not(c),not(v2),not(u2),next(not(y21))])),
+    always(or([not(i1),y21,y22,not(f2),not(c),not(v2),not(u2),next(y22)])),
+
+    always(or([not(i1),y21,not(y22),not(f2),not(c),not(v2),not(u2),next(y21)])),
+    always(or([not(i1),y21,not(y22),not(f2),not(c),not(v2),not(u2),next(not(y22))])),
+
+    always(or([not(i1),not(y21),y22,not(f2),not(c),not(v2),not(u2),next(y21)])),
+    always(or([not(i1),not(y21),y22,not(f2),not(c),not(v2),not(u2),next(y22)])),
+
+    always(or([not(i1),not(y21),not(y22),not(f2),not(c),not(v2),not(u2),next(not(y21))])),
+    always(or([not(i1),not(y21),not(y22),not(f2),not(c),not(v2),not(u2),next(not(y22))])),
+
+
+    always(or([not(i1),y21,y22,not(f2),not(c),not(v2),u2,next(y21)])),
+    always(or([not(i1),y21,y22,not(f2),not(c),not(v2),u2,next(y22)])),
+
+    always(or([not(i1),y21,not(y22),not(f2),not(c),not(v2),u2,next(not(y21))])),
+    always(or([not(i1),y21,not(y22),not(f2),not(c),not(v2),u2,next(not(y22))])),
+
+    always(or([not(i1),not(y21),y22,not(f2),not(c),not(v2),u2,next(not(y21))])),
+    always(or([not(i1),not(y21),y22,not(f2),not(c),not(v2),u2,next(y22)])),
+
+    always(or([not(i1),not(y21),not(y22),not(f2),not(c),not(v2),u2,next(y21)])),
+    always(or([not(i1),not(y21),not(y22),not(f2),not(c),not(v2),u2,next(not(y22))])),
+
+
+
+    always(or([not(i1),y21,y22,f2,c,v2,next(not(y21))])),
+    always(or([not(i1),y21,y22,f2,c,v2,next(not(y22))])),
+
+    always(or([not(i1),y21,not(y22),f2,c,v2,next(not(y21))])),
+    always(or([not(i1),y21,not(y22),f2,c,v2,next(y22)])),
+
+    always(or([not(i1),not(y21),y22,f2,c,v2,next(y21)])),
+    always(or([not(i1),not(y21),y22,f2,c,v2,next(not(y22))])),
+
+    always(or([not(i1),not(y21),not(y22),f2,c,v2,next(y21)])),
+    always(or([not(i1),not(y21),not(y22),f2,c,v2,next(y22)])),
+
+
+
+
+    always(or([not(i1),y21,y22,f2,c,not(v2),not(u2),next(not(y21))])),
+    always(or([not(i1),y21,y22,f2,c,not(v2),not(u2),next(y22)])),
+
+    always(or([not(i1),y21,not(y22),f2,c,not(v2),not(u2),next(y21)])),
+    always(or([not(i1),y21,not(y22),f2,c,not(v2),not(u2),next(not(y22))])),
+
+    always(or([not(i1),not(y21),y22,f2,c,not(v2),not(u2),next(y21)])),
+    always(or([not(i1),not(y21),y22,f2,c,not(v2),not(u2),next(y22)])),
+
+    always(or([not(i1),not(y21),not(y22),f2,c,not(v2),not(u2),next(not(y21))])),
+    always(or([not(i1),not(y21),not(y22),f2,c,not(v2),not(u2),next(not(y22))])),
+
+    always(or([not(i1),y21,y22,f2,c,not(v2),u2,next(y21)])),
+    always(or([not(i1),y21,y22,f2,c,not(v2),u2,next(y22)])),
+
+    always(or([not(i1),y21,not(y22),f2,c,not(v2),u2,next(not(y21))])),
+    always(or([not(i1),y21,not(y22),f2,c,not(v2),u2,next(not(y22))])),
+
+    always(or([not(i1),not(y21),y22,f2,c,not(v2),u2,next(not(y21))])),
+    always(or([not(i1),not(y21),y22,f2,c,not(v2),u2,next(y22)])),
+
+    always(or([not(i1),not(y21),not(y22),f2,c,not(v2),u2,next(y21)])), 
+    always(or([not(i1),not(y21),not(y22),f2,c,not(v2),u2,next(not(y22))])),
+
+
+    always(or([not(i1),y21,y22,not(f2),c,v2,next(not(y21))])),
+    always(or([not(i1),y21,y22,not(f2),c,v2,next(not(y22))])),
+
+    always(or([not(i1),y21,not(y22),not(f2),c,v2,next(not(y21))])),
+    always(or([not(i1),y21,not(y22),not(f2),c,v2,next(y22)])),
+
+    always(or([not(i1),not(y21),y22,not(f2),c,v2,next(y21)])),
+    always(or([not(i1),not(y21),y22,not(f2),c,v2,next(not(y22))])),
+
+    always(or([not(i1),not(y21),not(y22),not(f2),c,v2,next(y21)])),
+    always(or([not(i1),not(y21),not(y22),not(f2),c,v2,next(y22)])),
+
+
+    always(or([not(i1),y21,y22,not(f2),c,not(v2),not(u2),next(y21)])),
+    always(or([not(i1),y21,y22,not(f2),c,not(v2),not(u2),next(y22)])),
+
+    always(or([not(i1),y21,not(y22),not(f2),c,not(v2),not(u2),next(not(y21))])),
+    always(or([not(i1),y21,not(y22),not(f2),c,not(v2),not(u2),next(not(y22))])),
+
+    always(or([not(i1),not(y21),y22,not(f2),c,not(v2),not(u2),next(not(y21))])),
+    always(or([not(i1),not(y21),y22,not(f2),c,not(v2),not(u2),next(y22)])),
+
+    always(or([not(i1),not(y21),not(y22),not(f2),c,not(v2),not(u2),next(y21)])),
+    always(or([not(i1),not(y21),not(y22),not(f2),c,not(v2),not(u2),next(not(y22))])),
+
+
+    always(or([not(i1),y21,y22,not(f2),c,not(v2),u2,next(not(y21))])),
+    always(or([not(i1),y21,y22,not(f2),c,not(v2),u2,next(y22)])),
+
+    always(or([not(i1),y21,not(y22),not(f2),c,not(v2),u2,next(y21)])),
+    always(or([not(i1),y21,not(y22),not(f2),c,not(v2),u2,next(not(y22))])),
+
+    always(or([not(i1),not(y21),y22,not(f2),c,not(v2),u2,next(y21)])),
+    always(or([not(i1),not(y21),y22,not(f2),c,not(v2),u2,next(y22)])),
+
+    always(or([not(i1),not(y21),not(y22),not(f2),c,not(v2),u2,next(not(y21))])),
+    always(or([not(i1),not(y21),not(y22),not(f2),c,not(v2),u2,next(not(y22))])),
+
+
+
+    always(or([not(i1),y21,y22,f2,not(c),v2,not(u2),next(v2)])),
+   always(or([not(i1),y21,y22,f2,not(c),v2,not(u2),next(y22)])),
+   always(or([not(i1),y21,y22,f2,not(c),v2,not(u2),next(u2),next(y21)])),
+    always(or([not(i1),y21,y22,f2,not(c),v2,not(u2),next(not(y21)),next(not(u2))])),
+
+   always(or([not(i1),y21,not(y22),f2,not(c),v2,not(u2),next(v2)])),
+  always(or([not(i1),y21,not(y22),f2,not(c),v2,not(u2),next(not(y22))])),
+  always(or([not(i1),y21,not(y22),f2,not(c),v2,not(u2),next(u2),next(not(y21))])),
+   always(or([not(i1),y21,not(y22),f2,not(c),v2,not(u2),next(y21),next(not(u2))])),
+
+    always(or([not(i1),not(y21),y22,f2,not(c),v2,not(u2),next(v2)])),
+   always(or([not(i1),not(y21),y22,f2,not(c),v2,not(u2),next(y22)])),
+   always(or([not(i1),not(y21),y22,f2,not(c),v2,not(u2),next(u2),next(not(y21))])),
+    always(or([not(i1),not(y21),y22,f2,not(c),v2,not(u2),next(y21),next(not(u2))])),
+
+
+
+    always(or([not(i1),not(y21),not(y22),f2,not(c),v2,not(u2),next(v2)])),
+   always(or([not(i1),not(y21),not(y22),f2,not(c),v2,not(u2),next(not(y22))])),
+   always(or([not(i1),not(y21),not(y22),f2,not(c),v2,not(u2),next(u2),next(y21)])),
+    always(or([not(i1),not(y21),not(y22),f2,not(c),v2,not(u2),next(not(y21)),next(not(u2))])),
+
+
+
+    always(or([not(i1),y21,y22,f2,not(c),v2,u2,next(v2)])),
+   always(or([not(i1),y21,y22,f2,not(c),v2,u2,next(y22)])),
+   always(or([not(i1),y21,y22,f2,not(c),v2,u2,next(u2),next(y21)])),
+    always(or([not(i1),y21,y22,f2,not(c),v2,u2,next(not(y21)),next(not(u2))])),
+
+    always(or([not(i1),y21,not(y22),f2,not(c),v2,u2,next(v2)])),
+   always(or([not(i1),y21,not(y22),f2,not(c),v2,u2,next(not(y22))])),
+   always(or([not(i1),y21,not(y22),f2,not(c),v2,u2,next(u2),next(not(y21))])),
+    always(or([not(i1),y21,not(y22),f2,not(c),v2,u2,next(y21),next(not(u2))])),
+
+    always(or([not(i1),not(y21),y22,f2,not(c),v2,u2,next(v2)])),
+   always(or([not(i1),not(y21),y22,f2,not(c),v2,u2,next(y22)])),
+   always(or([not(i1),not(y21),y22,f2,not(c),v2,u2,next(u2),next(not(y21))])),
+    always(or([not(i1),not(y21),y22,f2,not(c),v2,u2,next(y21),next(not(u2))])),
+
+    always(or([not(i1),not(y21),not(y22),f2,not(c),v2,u2,next(v2)])),
+   always(or([not(i1),not(y21),not(y22),f2,not(c),v2,u2,next(not(y22))])),
+   always(or([not(i1),not(y21),not(y22),f2,not(c),v2,u2,next(u2),next(y21)])),
+    always(or([not(i1),not(y21),not(y22),f2,not(c),v2,u2,next(not(y21)),next(not(u2))])),
+
+   always(or([not(i1),y21,y22,f2,not(c),not(v2),next(not(y21))])),
+    always(or([not(i1),y21,y22,f2,not(c),not(v2),next(not(y22))])),
+
+    always(or([not(i1),y21,not(y22),f2,not(c),not(v2),next(not(y21))])),
+    always(or([not(i1),y21,not(y22),f2,not(c),not(v2),next(y22)])),
+
+    always(or([not(i1),not(y21),y22,f2,not(c),not(v2),next(y21)])),
+    always(or([not(i1),not(y21),y22,f2,not(c),not(v2),next(not(y22))])),
+
+    always(or([not(i1),not(y21),not(y22),f2,not(c),not(v2),next(y21)])),
+    always(or([not(i1),not(y21),not(y22),f2,not(c),not(v2),next(y22)])),
+
+
+
+
+
+
+    always(or([not(i1),not(f2),not(c),next(f2)])),
+    always(or([not(i1),not(f2),c,next(not(f2))])),
+    always(or([not(i1),f2,c,next(not(f2))])),
+    always(or([not(i1),f2,not(c),next(f2)])),
+
+
+
+
+    always(or([not(i1),not(f2),not(c),not(v2),not(u2),next(v2)])),
+    always(or([not(i1),not(f2),not(c),not(v2),not(u2),next(u2)])),
+
+    always(or([not(i1),not(f2),not(c),v2,not(u2),next(not(v2))])),
+    always(or([not(i1),not(f2),not(c),v2,not(u2),next(u2)])),
+
+    always(or([not(i1),not(f2),not(c),not(v2),u2,next(v2)])), 
+    always(or([not(i1),not(f2),not(c),not(v2),u2,next(not(u2))])),
+
+    always(or([not(i1),not(f2),not(c),v2,u2,next(not(v2))])), 
+    always(or([not(i1),not(f2),not(c),v2,u2,next(not(u2))])),
+
+
+    always(or([not(i1),not(f2),c,not(v2),not(u2),next(v2)])), 
+    always(or([not(i1),not(f2),c,not(v2),not(u2),next(not(u2))])),
+    always(or([not(i1),not(f2),c,v2,not(u2),next(not(v2))])),
+    always(or([not(i1),not(f2),c,v2,not(u2),next(not(u2))])),
+    always(or([not(i1),not(f2),c,not(v2),u2,next(v2)])), 
+    always(or([not(i1),not(f2),c,not(v2),u2,next(u2)])),
+    always(or([not(i1),not(f2),c,v2,u2,next(not(v2))])), 
+    always(or([not(i1),not(f2),c,v2,u2,next(u2)])),
+    
+    always(or([not(i1),f2,c,not(v2),not(u2),next(v2)])), 
+    always(or([not(i1),f2,c,not(v2),not(u2),next(u2)])),
+
+    always(or([not(i1),f2,c,v2,not(u2),next(not(v2))])), 
+    always(or([not(i1),f2,c,v2,not(u2),next(u2)])),
+
+    always(or([not(i1),f2,c,not(v2),u2,next(v2)])), 
+    always(or([not(i1),f2,c,not(v2),u2,next(not(u2))])),
+
+    always(or([not(i1),f2,c,v2,u2,next(not(v2))])),
+    always(or([not(i1),f2,c,v2,u2,next(not(u2))])),
+
+    always(or([not(i1),f2,not(c),not(v2),not(u2),next(not(v2))])), 
+    always(or([not(i1),f2,not(c),not(v2),u2,next(not(v2))])), 
+    always(or([not(i1),f2,not(c),v2,not(u2),next(v2)])),
+    always(or([not(i1),f2,not(c),v2,u2,next(v2)])),
+
+
+ always(or([i1,not(x21),next(x21)])),
+ always(or([i1,x21,next(not(x21))])),
+ always(or([i1,not(x22),next(x22)])),
+ always(or([i1,x22,next(not(x22))])),
+
+ always(or([i1,not(y21),next(y21)])),
+ always(or([i1,y21,next(not(y21))])),
+ always(or([i1,not(y22),next(y22)])),
+ always(or([i1,y22,next(not(y22))])),
+
+ always(or([i1,not(v2),next(v2)])),
+ always(or([i1,v2,next(not(v2))])),
+ always(or([i1,not(u2),next(u2)])),
+ always(or([i1,u2,next(not(u2))])),
+ always(or([i1,not(f2),next(f2)])),
+ always(or([i1,f2,next(not(f2))])),
+
+or([not(x21)]),
+or([not(x22)]),
+or([not(y21)]),
+or([not(y22)]),
+
+or([f2]),
+or([v2]),
+or([u2]),
+
+
+ always(or([not(r11),not(h11),not(c),not(h23),not(r23)])),
+ always(or([not(r11),not(h11),c,h23])),
+ always(or([not(r11),not(h11),c,r23])),
+ always(or([not(r11),not(h12),not(c),not(h24),not(r23)])),
+ always(or([not(r11),not(h12),c,h24])),
+ always(or([not(r11),not(h12),c,r23])),
+ always(or([not(r11),not(h13),not(c),not(h21),not(r23)])),
+ always(or([not(r11),not(h13),c,h21])),
+ always(or([not(r11),not(h13),c,r23])),
+ always(or([not(r11),not(h14),not(c),not(h22),not(r23)])),
+ always(or([not(r11),not(h14),c,h22])),
+ always(or([not(r11),not(h14),c,r23])),
+
+ always(or([not(r12),not(h11),not(c),not(h23),not(r24)])),
+ always(or([not(r12),not(h11),c,h23])),
+ always(or([not(r12),not(h11),c,r24])),
+ always(or([not(r12),not(h12),not(c),not(h24),not(r24)])),
+ always(or([not(r12),not(h12),c,h24])),
+ always(or([not(r12),not(h12),c,r24])),
+ always(or([not(r12),not(h13),not(c),not(h21),not(r24)])),
+ always(or([not(r12),not(h13),c,h21])),
+ always(or([not(r12),not(h13),c,r24])),
+ always(or([not(r12),not(h14),not(c),not(h22),not(r24)])),
+ always(or([not(r12),not(h14),c,h22])),
+ always(or([not(r12),not(h14),c,r24])),
+
+ always(or([not(r13),not(h11),not(c),not(h23),not(r21)])),
+ always(or([not(r13),not(h11),c,h23])),
+ always(or([not(r13),not(h11),c,r21])),
+ always(or([not(r13),not(h12),not(c),not(h24),not(r21)])),
+ always(or([not(r13),not(h12),c,h24])),
+ always(or([not(r13),not(h12),c,r21])),
+ always(or([not(r13),not(h13),not(c),not(h21),not(r21)])),
+ always(or([not(r13),not(h13),c,h21])),
+ always(or([not(r13),not(h13),c,r21])),
+ always(or([not(r13),not(h14),not(c),not(h22),not(r21)])),
+ always(or([not(r13),not(h14),c,h22])),
+ always(or([not(r13),not(h14),c,r21])),
+
+ always(or([not(r14),not(h11),not(c),not(h23),not(r22)])),
+ always(or([not(r14),not(h11),c,h23])),
+ always(or([not(r14),not(h11),c,r22])),
+ always(or([not(r14),not(h12),not(c),not(h24),not(r22)])),
+ always(or([not(r14),not(h12),c,h24])),
+ always(or([not(r14),not(h12),c,r22])),
+ always(or([not(r14),not(h13),not(c),not(h21),not(r22)])),
+ always(or([not(r14),not(h13),c,h21])),
+ always(or([not(r14),not(h13),c,r22])),
+ always(or([not(r14),not(h14),not(c),not(h22),not(r22)])),
+ always(or([not(r14),not(h14),c,h22])),
+ always(or([not(r14),not(h14),c,r22])),
+
+
+ always(or([not(h11),not(x11)])),
+ always(or([not(h11),not(x12)])),
+ always(or([not(h12),not(x11)])),
+ always(or([not(h12),x12])),
+ always(or([not(h13),x11])),
+ always(or([not(h13),not(x12)])),
+ always(or([not(h14),x11])),
+ always(or([not(h14),x12])),
+
+ always(or([h11,x11,x12])),
+ always(or([h12,x11,not(x12)])),
+ always(or([h13,not(x11),x12])),
+ always(or([h14,not(x11),not(x12)])),
+
+ always(or([not(r11),not(y11)])),
+ always(or([not(r11),not(y12)])),
+ always(or([not(r12),not(y11)])),
+ always(or([not(r12),y12])),
+ always(or([not(r13),y11])),
+ always(or([not(r13),not(y12)])),
+ always(or([not(r14),y11])),
+ always(or([not(r14),y12])),
+
+ always(or([r11,y11,y12])),
+ always(or([r12,y11,not(y12)])),
+ always(or([r13,not(y11),y12])),
+ always(or([r14,not(y11),not(y12)])),
+
+ always(or([not(h21),not(x21)])),
+ always(or([not(h21),not(x22)])),
+ always(or([not(h22),not(x21)])),
+ always(or([not(h22),x22])),
+ always(or([not(h23),x21])),
+ always(or([not(h23),not(x22)])),
+ always(or([not(h24),x21])),
+ always(or([not(h24),x22])),
+
+ always(or([h21,x21,x22])),
+ always(or([h22,x21,not(x22)])),
+ always(or([h23,not(x21),x22])),
+ always(or([h24,not(x21),not(x22)])),
+
+ always(or([not(r21),not(y21)])),
+ always(or([not(r21),not(y22)])),
+ always(or([not(r22),not(y21)])),
+ always(or([not(r22),y22])),
+ always(or([not(r23),y21])),
+ always(or([not(r23),not(y22)])),
+ always(or([not(r24),y21])),
+ always(or([not(r24),y22])),
+
+ always(or([r21,y21,y22])),
+ always(or([r22,y21,not(y22)])),
+ always(or([r23,not(y21),y22])),
+ always(or([r24,not(y21),not(y22)])),
+
+or([t0]),
+ always(or([not(t0),sometime(t1)])),
+ always(or([not(t1),not(i1)])),
+ always(or([not(t1),not(y12)])),
+ always(or([not(t1),next(y12)]))
+
+
+]).

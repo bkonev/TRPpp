@@ -1,0 +1,318 @@
+\documentclass[a4paper]{article}
+%packages
+\usepackage{latexsym}
+\usepackage{program}
+\usepackage{mysemantic}
+%definitions
+\newcommand*{\memph}{\textbf}
+\newcommand*{\next}{\bigcirc}
+\newcommand*{\always}{\Box}
+\newcommand*{\sometime}{\diamondsuit}
+\newcommand*{\statement}{\textit}
+\newcommand*{\emptyclause}{\ensuremath{\perp}}
+\newcommand*{\Itag}{\textbf{I:}}
+\newcommand*{\Utag}{\textbf{U:}}
+\newcommand*{\Stag}{\textbf{S:}}
+\newcommand*{\Etag}{\textbf{E:}}
+\newcommand*{\RETURN}{\keyword{return}\ }
+%
+\renewcommand*{\predicate}[1]{$ #1 $}
+%
+\newtheorem{algorithm}{Algorithm}[section]
+%
+\makeatletter
+\def\REPEAT{\keyword{repeat}\ \tab}
+\def\UNTIL{\@marginspace\untab\tab\keyword{until}} 
+\def\ENDWHILE{\@marginspace\untab\keyword{end while}} 
+\makeatother
+%
+\begin{document}
+\title{Design decisions}
+\author{Boris Konev}
+\maketitle
+\section{Goal}
+\begin{itemize}
+\item to develop a framework for testing different strategies, approaches,
+and algorithms for Temporal Resolution
+\item in general, the current implementation is considered as an approach
+to the on-going First Order project. Then, the whole thing will probably 
+need to be re-designed and re-implemented.
+\end{itemize}
+Thus, the design goals are:
+\begin{itemize}
+\item to impose as few restrictions, connections between parts, etc. as possible
+\item allow as much re-use as possible
+\item not to select \memph{the} strategy, data structure or inference machine
+\item leave it possible to change almost everything
+\end{itemize}
+Therefore,
+\begin{itemize}
+\item if flexibility conflicts with efficiency, choose flexibility (but not
+exaggerate!)
+\end{itemize}
+\section{Normal form and inference rules}
+We consider temporal problems in Divided Separated Normal Form; namely, a
+temporal problem consists of\footnote{We describe a logical view on the 
+problem here; we do not make any suggestions about the way the data is
+represented in the program.}
+\begin{description}
+\item{Initial clauses} of the form\footnote{Clauses are marked by \Itag{}, 
+\Utag{}, \Stag{}, \Etag{} as in this representation it's not always easy to
+distinguish between them}
+  $$
+    \Itag(L_1\lor  L_2,\lor\dots\lor L_k)
+  $$
+\item{Universal clauses} of the form
+  $$
+    \Utag(L_1\lor  L_2,\lor\dots\lor L_k)
+  $$
+\item{Step clauses} of the form\footnote{Although, when $l=0$, a step clause
+  looks like universal, we do not want this to be explicit e.g. for
+  loop search by inference BFS.}
+  $$
+   \Stag(L_1\lor  L_2,\lor\dots\lor L_k \lor \next (M_1\lor\dots\lor M_l))
+  $$\item{Eventuality clauses} of the form
+  $$
+    \Etag(L_1\lor  L_2,\lor\dots\lor L_k \lor \sometime L)
+  $$
+\end{description}
+The semantics of the problem is: $(I\land\always U\land\always S\land\always E)$.
+\subsection{Inference rules}
+\begin{description}
+\item[\memph{Augmentation}]\label{rule:A} \mbox{}\\
+produces a universal and a step clause from an eventuality clause
+$$
+  \inference{\Etag(C\lor l)}%
+  {\begin{array}{c}
+  \Utag(C\lor l\lor w_l)\\
+  \Stag(\lnot w_l\lor\next(l\lor w_l))
+  \end{array}}
+$$
+\item[\memph{I + I $\to$ I}]\label{rule:II} \mbox{} \\
+produces an initial clause from two initial clauses: 
+$$
+  \inference{\Itag(C_1\lor L)\\\Itag(D_1\lor\lnot L)}%
+            {\Itag(C_1\lor D_1)}
+$$
+\item[\memph{I + U $\to$ I}]\label{rule:IU}  \mbox{} \\
+produces an initial clause from an initial clause and a universal
+clause:
+$$
+  \inference{\Itag(C_1\lor L)\\\Utag(D_1\lor\lnot L)}
+            {\Itag(C_1\lor D_1)}
+$$
+\item[\memph{U + U $\to$ U}]\label{rule:Utag} \mbox{} \\
+produces a universal clause from two universal clauses: 
+$$
+  \inference{\Utag(C_1\lor L)\\\Utag(D_1\lor\lnot L)}%
+            {\Utag(C_1\lor D_1)}
+$$
+\item[\memph{U + S $\to$ S}]\label{rule:US} \mbox{} \\
+produces a step clause from a universal and a step clause: 
+$$
+  \inference{\Utag(C_1\lor L)\\\Stag(D_1\lor\next(D_2\lor\lnot L))}%
+            {\Stag(C_1\lor D_1\lor\next(D_2))}
+$$
+\item[\memph{S + S $\to$ S}]\label{rule:Stag}\mbox{} \\
+produces a step clause from two step clauses: 
+$$
+  \inference{\Stag(C_1\lor\next(D_1\lor L))\\\Stag(D_1\lor\next(D_2\lor\lnot L))}%
+            {\Stag(C_1\lor D_1\lor\next(C_2\lor D_2))}
+$$
+\item[\memph{S $\to$ U}]\label{rule:StoU}\footnote{Note again that here we are
+talking about \emph{logic} rules, not implementation. In fact,
+this rule \emph{might} be done implicitly, but this is not a must.}\\
+this rule explicitly declares a step clauses as universal
+$$
+  \inference{\Stag(C\lor\next())}%
+            {\Utag(C)}
+$$
+\item[\memph{Temporal resolution}] \label{rule:TR} \mbox{} \\
+produces a set of universal and step clauses from an eventuality clause 
+together with a set of step and universal clauses:
+$$
+  \inference{
+            \Utag(D_{1,1}) & \Utag(D_{2,1}) & \dots & \Utag(D_{n,1})\\
+	    \dots & \dots & \mbox{} & \dots \\
+	    \Utag(D_{1,l_1}) & \Utag(D_{2,l_2}) & \dots & \Utag(D_{n,l_n})\\
+            \Stag(C_{1,1}\lor\next(D'_{1,1})) & \Stag(C_{2,1}\lor\next(D'_{2,1}))& \dots & \Stag(C_{n,1}\lor\next(D'_{n,1}))\\
+	    \dots & \dots & \mbox{}  & \dots \\
+            \Stag(C_{1,k_1}\lor\next(D'_{1,k_1})) & \Stag(C_{2,k_2}\lor\next(D'_{2,k_2})) & \dots & \Stag(C_{n,k_n}\lor\next(D'_{n,k_n})) \\
+	    \Etag(C\lor\sometime l)
+	   }
+	   {\begin{array}{c}
+	     \{\Utag(C\lor l\lor \mathcal{C}_i)\}_{i=1}^{n}\\
+	     \{\Stag(\lnot w_l\lor\next(l\lor\mathcal{C}_i))\}_{i=1}^{n}
+	    \end{array}},
+$$
+where $\mathcal{C}_i=\lor(C_{i,j})$, 
+$\mathcal{D}_i=\land(D_{i,j})\land\land(D'_{i,j})$, and the following side
+conditions hold: For all $i$, formulas
+$(\mathcal{D}_i\implies\lnot l)$ and
+$(\mathcal{D}_i\implies\lor\lnot\mathcal{C}_j)$ are valid.
+
+(Note that $(\mathcal{C}_i,\next\mathcal{D}_i)$ is simply a merged temporal
+clause.)
+\end{description}
+
+Let us call rules \memph{I + I $\to$ I}, \memph{I + U $\to$ I},
+\memph{U + U $\to$ U}, \memph{U + S $\to$ S}, and \memph{S + S $\to$ S} 
+\emph{step rules} and the rule \memph{S $\to$ U} \emph{conversion rule}.
+
+
+Note that from the logical point of view, we are only interested in
+transformation Step $\to$ Universal $\to$ Initial rules and the Temporal
+Resolution rule.  All the rest is a by-product needed for implementation.
+
+\subsection{Simplification rules}
+In addition to the inference rules, we use the following simplification
+rules:
+\begin{enumerate}
+\item \memph{factorization}
+\item \memph{complementary literals}
+\item \memph{simplification of truth constants}
+\item \memph{subsumption}
+\item \memph{deletion of redundant clauses}
+\end{enumerate}
+\section{Algorithm}
+\subsection{Framework}
+We notice that the  inference rules of temporal resolution are quite similar to
+the ordinary resolution rule, the different thing being Temporal Resolution
+only.  Our idea is to employ an external (resolution) program to simplify our
+program development and to do the machinery work for us. However, this imposes
+some restrictions on the design; namely, it does not seem reasonable to use an
+external thing to do individual rule applications; we are rather interested in
+saturating a specific set of clauses by inference rules.
+\subsection{Course description}
+As one of the project goals is to perform experiments, we do not want 
+to fix anything apart from things that the framework requires us to fix.
+
+%On the top level, we have two course-grained blocks to build the algorithm.
+Previous implementations of Temporal Resolution showed that two sub-problems
+require a lot of computations and need to be implemented carefully.
+\begin{itemize}
+\item \memph{Step Inferences up to saturation}
+\item \memph{Loop search}
+\end{itemize}
+The way how we combine these blocks depends on our heuristics, strategy, etc.
+Right now, one may consider two possible combinations:
+
+\NumberProgramstrue 
+\begin{algorithm}
+\begin{program}
+\BEGIN
+\IF(|Number of eventualities|>1)
+\THEN 
+\FOREACH (\statement{eventuality} |y|) 
+\DO
+\statement{Apply augmentation rule to }|y|
+\statement{Add the result to S}
+\END
+\FI
+\WHILE(\emptyclause\notin S) \DO
+\statement{Saturate $S$ by step inferences}
+\statement{Saturate $S$ by sometime resolution} \label{line:tsatur}
+\IF(\statement{Nothing new was generated})
+\THEN
+\statement{Stop with failure}
+\FI
+\ENDWHILE
+\END
+\end{program}
+\end{algorithm}
+Instead of saturating $S$ (line~\ref{line:tsatur}) by temporal resolution, we
+could have the following:
+\NumberProgramsfalse
+\begin{program}
+\REPEAT
+|Choose|\statement{ an eventuality clause }|C|
+\IF |loopSearch|(S,C)\statement{ succeeds}
+\THEN
+\statement{Add temporal resolvents to }|S|
+\FI
+\UNTIL (\statement{something new is generated})
+\end{program}
+
+\subsection{Loop search as Inference Breadth-First-Search}
+Let $S_0$ be the subset of universal and step rules of a clause set $S$, and
+$l$ an eventuality. If |inferenceBFS|$(S_0, 0, \false, l)$ returns non-false
+value, there is a loop for $l$. The result is in CNF; each clause is the 
+$\mathcal{C}_i$ used in the \memph{Temporal Resolution} rule.
+\begin{algorithm}
+\begin{program}
+\FUNCT |inferenceBFS| (S, i, G_i, l)
+\BEGIN
+  S_1 = \statement{Saturate $(S\union\{\Stag(\next(L\lor G_i))\})$ by rules ...}
+  \IF (\emptyclause\in S_1)
+     \THEN
+    \RETURN \true
+  \ELSE
+    G_{i+1}=\land\set{\Utag(C)|\Stag(C,\next())\in S_1}
+    \IF (G_{i+1}\equiv \false)
+      \THEN
+      \RETURN \false
+    \ELSIF (G_{i+1}\implies G_{i})
+      \THEN
+      \RETURN G_{i+1}
+    \ELSE
+      \RETURN |inferenceBFS|(S,i+1,G_{i+1},l)
+     \FI
+   \FI
+\END
+\end{program}
+\end{algorithm}
+\subsection{Architecture}
+All this suggests Step Resolution Inference Machine (SRIM) capable to apply 
+exhaustively step  rules and, depending on the option, apply also the
+conversion rule.
+
+We want to build SRIM on top of \memph{an} external system. We want our system
+to be flexible. We do not want our system to be inefficient. 
+
+We suggest the following 3-level scheme:\\
+
+\framebox{\begin{minipage}{3cm}
+SRIM
+\end{minipage}}
+\framebox{\begin{minipage}{3cm}
+Adapter
+\end{minipage}}
+\framebox{\begin{minipage}{3cm}
+External system
+\end{minipage}}\\
+
+SRIM is almost a pure client interface; our proof-search algorithm works in
+terms of SRIM. SRIM does not know anything about data representation, it does
+not know anything about algorithms used to perform inferences, it does not know
+anything about concrete programs. It performs actions that do not depend on
+data representation.
+
+External system does the real job. It does not know about temporal 
+logic at all. It knows about data representation and about concrete algorithms.
+
+Adapter connects these things together. An example adapter is a translator
+from temporal logic into first-order logic + ordering restrictions 
+proposed by Ullrich.
+
+Specific information about data structures and algorithms is presented by the
+pair Adapter and External system.  In order to use a different external system
+to do proof search, we need to write an adapter and possibly make minor changes
+to the external system itself (e.g. for the first-order conversion, we
+will need to block the conversion rule optionally).
+
+The advantage of the scheme is that it does not force us to use data structures
+and algorithms from a particular external system and, from the other hand,
+allows not to translate the whole clause set between internal and external
+representations to perform specific actions.  Indeed, we are usually interested
+in distinct clauses having particular properties. Search for such clauses is
+delegated to Adapter, which, probably can do it by means of the external system
+itself. Then, the needed clauses only are translated into the internal
+representation of the system. 
+
+Although SRIM adds a very little value (it delegates most of the job to the 
+external program via the adapter), it ensures type safety and also ensures that
+the adapter really provides all needed components. It also specifies functional
+requirements imposed on algorithms and data structures. Last but not least, it
+separates interfaces making it easier to change one not touching another, 
+providing less connections between parts. 
+\end{document}

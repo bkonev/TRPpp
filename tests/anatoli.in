@@ -1,0 +1,19 @@
+and([
+ always(or([f1, g1])),
+
+ always(or([not f1, f2])),
+ always(or([not f2, next(f2)])),
+ always(or([not f2, a1, b1])),
+ always(or([not a1, sometime(not a)])),
+ always(or([not b1, b3])),
+ always(or([not b3, next(b3)])),
+ always(or([not b3, b])),
+
+ always(or([not g1, g2])),
+ always(or([not g2, next(g2)])),
+ always(or([not g2, b2, a2])),
+ always(or([not b2, sometime(not b)])),
+ always(or([not a2, a3])),
+ always(or([not a3, next(a3)])),
+ always(or([not a3, a]))
+]).

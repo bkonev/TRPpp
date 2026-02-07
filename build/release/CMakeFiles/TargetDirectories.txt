@@ -1,0 +1,7 @@
+/Users/konev/Documents/TRP++/build/release/CMakeFiles/release.dir
+/Users/konev/Documents/TRP++/build/release/CMakeFiles/debug.dir
+/Users/konev/Documents/TRP++/build/release/CMakeFiles/profile.dir
+/Users/konev/Documents/TRP++/build/release/CMakeFiles/trp.dir
+/Users/konev/Documents/TRP++/build/release/CMakeFiles/realpath_tool.dir
+/Users/konev/Documents/TRP++/build/release/CMakeFiles/edit_cache.dir
+/Users/konev/Documents/TRP++/build/release/CMakeFiles/rebuild_cache.dir
