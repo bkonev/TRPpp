@@ -31,13 +31,11 @@
 #include <list>
 #include <string>
 #include <iostream>
-#include "boost/concept_check.hpp"
 #include "adaptor/adaptor_concept.h"
 #include "adaptor/stl_tim_adaptor.h"
 
 namespace TRIMs
 {
-    using namespace boost;
     using namespace Adaptors;
     template <typename _Adaptor>
         // this class extends functionality of _Adaptor with 

@@ -27,7 +27,7 @@
 /**************************************************************/
 #ifndef __ADAPTOR_CONCEPT_H__
 #define __ADAPTOR_CONCEPT_H__
-#include "boost/concept_check.hpp"
+// C++20 concepts can be added here if constraints are needed in the future.
 namespace Adaptors
 {
     template <typename _Adaptor>

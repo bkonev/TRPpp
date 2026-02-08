@@ -26,7 +26,7 @@
 /* ********************************************************** */
 /**************************************************************/
 #include "options.h"
-#include "boost/tokenizer.hpp"
+#include <sstream>
 #include "config.h"
 #include "modules.h"
 #include "misc/tracer.h"
@@ -99,57 +99,57 @@ TRPPPOptions::TRPPPOptions(int argc, char** argv)
     if(args_info.trace_given)
     {
         std::string argString(args_info.trace_arg);
-        boost::tokenizer<> tok(argString);
-
-        for(boost::tokenizer<>::iterator beg=tok.begin(); beg!=tok.end();++beg)
+        std::istringstream iss(argString);
+        std::string token;
+        while (iss >> token)
         {
-            if(*beg == "index")
+            if(token == "index")
             {
                 setTrace(indexModule);
             }
             else
-                if(*beg == "tempres")
+                if(token == "tempres")
                 {
                     setTrace(tempresModule);
                 }
                 else
-                    if(*beg == "loopsearch")
+                    if(token == "loopsearch")
                     {
                         setTrace(loopsearchModule);
                     }
                     else
-                        if(*beg == "resolution")
+                        if(token == "resolution")
                         {
                             setTrace(resolutionModule);
                         }
                         else
-                            if(*beg == "subsumption")
+                            if(token == "subsumption")
                             {
                                 setTrace(subsumptionModule);
                             }
                             else
-                                if(*beg == "forward")
+                                if(token == "forward")
                                 {
                                     setTrace(forwardsubsumptionModule);
                                 }
                                 else
-                                    if(*beg == "backward")
+                                    if(token == "backward")
                                     {
                                         setTrace(backwardsubsumptionModule);
                                     }
                                     else 
-                                        if(*beg == "pretest")
+                                        if(token == "pretest")
                                         {
                                             setTrace(pretestModule);
                                         }
                                         else
-                                            if(*beg == "FSR")
+                                            if(token == "FSR")
                                             {
                                                 setTrace(FSRModule);
                                             } 
                                             else 
                                             {
-                                                reportFailure(std::string("Tracing of ") + *beg + " unsupported");
+                                                reportFailure(std::string("Tracing of ") + token + " unsupported");
                                             }
         }
     }

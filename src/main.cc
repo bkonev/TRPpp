@@ -57,16 +57,16 @@
 using namespace TRIMs;
 using namespace Parsers;
 
-typedef TRIM<Adaptors::Adaptor> ClauseSet;
-typedef ClauseSet::Proposition Proposition;
-typedef ClauseSet::Literal Literal;
-typedef ClauseSet::LiteralList LiteralList;
-typedef ClauseSet::IClause IClause;
-typedef ClauseSet::UClause UClause;
-typedef ClauseSet::SClause SClause;
-typedef ClauseSet::EClause EClause;
+using ClauseSet = TRIM<Adaptors::Adaptor>;
+using Proposition = ClauseSet::Proposition;
+using Literal = ClauseSet::Literal;
+using LiteralList = ClauseSet::LiteralList;
+using IClause = ClauseSet::IClause;
+using UClause = ClauseSet::UClause;
+using SClause = ClauseSet::SClause;
+using EClause = ClauseSet::EClause;
 
-typedef Builders::Builder<ClauseSet> Builder;
+using Builder = Builders::Builder<ClauseSet>;
 
 using std::cout;
 
@@ -108,13 +108,12 @@ int main(int argc, char **argv)
         ClauseSet clauseSet = parser.getClauseSet();
         // construct the prover object (for convinience, first, I 
         // give a name to the type
-        typedef TemporalProver::Prover<ClauseSet,
+        using Prover = TemporalProver::Prover<ClauseSet,
           TemporalProver::LoopList<ClauseSet>,
-          TemporalProver::ClassicalRule<ClauseSet> > 
-            _Prover;
+          TemporalProver::ClassicalRule<ClauseSet>>;
     
         // then, make an instance)
-        _Prover prover(clauseSet);
+        Prover prover(clauseSet);
         // dumping ClauseSet (if required)
         if(cmdOptions.isShowInput())
         {
@@ -126,7 +125,7 @@ int main(int argc, char **argv)
         
         // this captures ^C if a user presses it. 
         // allows to see prover statistics on the fly
-        HandleSIGINT<Timer, _Prover> handleSIGINT(&timer, &prover);
+        HandleSIGINT<Timer, Prover> handleSIGINT(&timer, &prover);
         
         // call the prover
         timer.start();

@@ -31,8 +31,7 @@
 #include <queue>
 #include <vector>
 #include "misc/exception.h"
-#include "boost/smart_ptr.hpp"
-#include "boost/iterator_adaptors.hpp"
+#include <memory>
 #include "config.h"
 
 namespace  Exceptions
@@ -69,7 +68,7 @@ namespace PropositionalProver
     using namespace Exceptions;
     using std::endl;
 
-    typedef boost::shared_ptr<Clause> PClause;
+    typedef std::shared_ptr<Clause> PClause;
 
     // used for index construction
     class index_key_comparator{

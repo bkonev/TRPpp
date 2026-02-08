@@ -29,12 +29,12 @@
 #define __PCLAUSE_H__
 
 #include "clause.h"
-#include "boost/smart_ptr.hpp"
+#include <memory>
 
 // looks stupid, but i may use it in different places..
 namespace PropositionalProver
 {
-    typedef boost::shared_ptr<Clause> PClause;
+    typedef std::shared_ptr<Clause> PClause;
 
     struct FastCmp
     {

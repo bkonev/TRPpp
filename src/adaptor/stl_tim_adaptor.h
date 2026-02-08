@@ -30,7 +30,7 @@
 
 #include <string>
 #include <iostream>
-#include <boost/iterator_adaptors.hpp>
+#include "misc/iterators.h"
 #include <utility>
 #include <iterator>
 #include "stl_tim/stl_tim.h"
@@ -128,17 +128,17 @@ namespace Adaptors
         // to all object it iterates on; filtering iterator
         // checks whether objects satisfy a specific retrieval
         // condition, if yes, iterates on them, skips else
-        typedef boost::transform_iterator_generator<toInitial, boost::filter_iterator_generator<IsInitial, internal_clause_collection_rep::const_iterator>::type >::type
+        typedef Misc::transform_iterator<toInitial, Misc::filter_iterator<IsInitial, internal_clause_collection_rep::const_iterator> >
             const_i_iterator;
-        typedef boost::transform_iterator_generator< toUniversal, boost::filter_iterator_generator< IsUniversal, internal_clause_collection_rep::const_iterator>::type >::type 
+        typedef Misc::transform_iterator<toUniversal, Misc::filter_iterator<IsUniversal, internal_clause_collection_rep::const_iterator> >
             const_u_iterator;
-        typedef boost::transform_iterator_generator< toStep, boost::filter_iterator_generator< IsStep, internal_clause_collection_rep::const_iterator>::type >::type 
+        typedef Misc::transform_iterator<toStep, Misc::filter_iterator<IsStep, internal_clause_collection_rep::const_iterator> >
             const_s_iterator;
 
-        typedef boost::transform_iterator_generator< toUniversal, boost::filter_iterator_generator< IsStepNextFalse, internal_clause_collection_rep::const_iterator>::type >::type 
+        typedef Misc::transform_iterator<toUniversal, Misc::filter_iterator<IsStepNextFalse, internal_clause_collection_rep::const_iterator> >
             const_next_false_as_universal_iterator;
 
-        typedef boost::transform_iterator_generator< toStep, boost::filter_iterator_generator< IsStepNextFalse, internal_clause_collection_rep::const_iterator>::type >::type 
+        typedef Misc::transform_iterator<toStep, Misc::filter_iterator<IsStepNextFalse, internal_clause_collection_rep::const_iterator> >
             const_next_false_as_step_iterator;
 
         // Access to specific clauses in the clause set
@@ -479,61 +479,61 @@ namespace Adaptors
     inline Adaptor::const_i_iterator 
     Adaptor::initial_begin() const
     {
-        return const_i_iterator(boost::make_filter_iterator<IsInitial>(internal_clause_collection_rep::begin(), internal_clause_collection_rep::end()));
+        return const_i_iterator(Misc::make_filter_iterator<IsInitial>(internal_clause_collection_rep::begin(), internal_clause_collection_rep::end()));
     }
 
     inline Adaptor::const_i_iterator 
     Adaptor::initial_end() const
     {
-        return const_i_iterator(boost::make_filter_iterator<IsInitial>(internal_clause_collection_rep::end(), internal_clause_collection_rep::end()));
+        return const_i_iterator(Misc::make_filter_iterator<IsInitial>(internal_clause_collection_rep::end(), internal_clause_collection_rep::end()));
     }
 
     inline Adaptor::const_u_iterator 
     Adaptor::universal_begin() const
     {
-        return const_u_iterator(boost::make_filter_iterator<IsUniversal>(this->begin(), this->end()));
+        return const_u_iterator(Misc::make_filter_iterator<IsUniversal>(this->begin(), this->end()));
     }
 
     inline Adaptor::const_u_iterator 
     Adaptor::universal_end() const
     {
-        return const_u_iterator(boost::make_filter_iterator<IsUniversal>(this->end(), this->end()));
+        return const_u_iterator(Misc::make_filter_iterator<IsUniversal>(this->end(), this->end()));
     }
 
     inline Adaptor::const_s_iterator 
     Adaptor::step_begin() const
     {
-        return const_s_iterator(boost::make_filter_iterator<IsStep>(this->begin(), this->end()));
+        return const_s_iterator(Misc::make_filter_iterator<IsStep>(this->begin(), this->end()));
     }
 
     inline Adaptor::const_s_iterator 
     Adaptor::step_end() const
     {
-        return const_s_iterator(boost::make_filter_iterator<IsStep>(this->end(), this->end()));
+        return const_s_iterator(Misc::make_filter_iterator<IsStep>(this->end(), this->end()));
     }
     
     inline Adaptor::const_next_false_as_universal_iterator 
     Adaptor::next_false_as_universal_begin() const
     {
-        return const_next_false_as_universal_iterator(boost::make_filter_iterator<IsStepNextFalse>(this->begin(), this->end()));
+        return const_next_false_as_universal_iterator(Misc::make_filter_iterator<IsStepNextFalse>(this->begin(), this->end()));
     }
 
     inline Adaptor::const_next_false_as_universal_iterator 
     Adaptor::next_false_as_universal_end() const
     {
-        return const_next_false_as_universal_iterator(boost::make_filter_iterator<IsStepNextFalse>(this->end(), this->end()));
+        return const_next_false_as_universal_iterator(Misc::make_filter_iterator<IsStepNextFalse>(this->end(), this->end()));
     }
     
     inline Adaptor::const_next_false_as_step_iterator 
     Adaptor::next_false_as_step_begin() const
     {
-        return const_next_false_as_step_iterator(boost::make_filter_iterator<IsStepNextFalse>(this->begin(), this->end()));
+        return const_next_false_as_step_iterator(Misc::make_filter_iterator<IsStepNextFalse>(this->begin(), this->end()));
     }
 
     inline Adaptor::const_next_false_as_step_iterator 
     Adaptor::next_false_as_step_end() const
     {
-        return const_next_false_as_step_iterator(boost::make_filter_iterator<IsStepNextFalse>(this->end(), this->end()));
+        return const_next_false_as_step_iterator(Misc::make_filter_iterator<IsStepNextFalse>(this->end(), this->end()));
     }
         
     template<typename _Iterator>
@@ -541,7 +541,7 @@ namespace Adaptors
         Adaptor::subsumesOrEqual(const _Iterator firstBegin,  const _Iterator firstEnd, 
                             const _Iterator secondBegin, const _Iterator secondEnd)
         {
-            typedef typename boost::transform_iterator_generator<toInternalRepresentation<typename std::iterator_traits<_Iterator>::value_type>, _Iterator>::type transformIterator;
+            typedef typename Misc::transform_iterator<toInternalRepresentation<typename std::iterator_traits<_Iterator>::value_type>, _Iterator> transformIterator;
 
             transformIterator transformFirstBegin(firstBegin);
             transformIterator transformFirstEnd(firstEnd);

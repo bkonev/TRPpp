@@ -27,15 +27,16 @@
 /**************************************************************/
 #ifndef __MISC_SCALAR_H__ 
 #define __MISC_SCALAR_H__ 
+#include <cstdint>
 #include <string>
 // These definitions are for Linux on Intel.
-typedef unsigned char  uint8;
-typedef unsigned short uint16;
-typedef unsigned int   uint32;
+using uint8 = std::uint8_t;
+using uint16 = std::uint16_t;
+using uint32 = std::uint32_t;
 
-typedef uint8   arity_t;    // Arity of functional/predicate symbols
-typedef uint32  symid_t;    // Identifier of functional/predicate symbol
-typedef uint32  clauseid_t;    // Clause id
-typedef uint32  varid_t;    // Identifier of object variable/unknown for term 
-typedef std::string name_t;// name of identifiers
+using arity_t = uint8;    // Arity of functional/predicate symbols
+using symid_t = uint32;    // Identifier of functional/predicate symbol
+using clauseid_t = uint32;    // Clause id
+using varid_t = uint32;    // Identifier of object variable/unknown for term 
+using name_t = std::string; // name of identifiers
 #endif /* __MISC_SCALAR_H__ */ 

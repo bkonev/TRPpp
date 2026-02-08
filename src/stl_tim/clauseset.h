@@ -31,7 +31,6 @@
 #include <vector>
 #include <set>
 #include "misc/exception.h"
-#include "boost/iterator_adaptors.hpp"
 #include "config.h"
 #include "modules.h"
 #include "misc/tracer.h"
