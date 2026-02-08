@@ -1,0 +1,27 @@
+# macOS
+.DS_Store
+
+# Build outputs
+/build/
+/bin/
+
+# CMake
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+compile_commands.json
+
+# Ninja
+.ninja_deps
+.ninja_log
+
+# Generated test snapshots
+tests/snapshot-*.jsonl
+
+# Editor/IDE
+.vscode/
+.idea/
+
+# OS temp
+*.swp
+*~
