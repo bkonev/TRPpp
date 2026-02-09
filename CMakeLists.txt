@@ -77,14 +77,14 @@ file(MAKE_DIRECTORY "${GETOPT_DIR}")
 
 BISON_TARGET(trp_parser
   "${CMAKE_SOURCE_DIR}/src/builder/trp/parse.y"
-  "${PARSER_DIR}/parse.c"
+  "${PARSER_DIR}/parse.cc"
   DEFINES_FILE "${PARSER_DIR}/parse.h"
   COMPILE_FLAGS "-p trp_yy"
 )
 
 FLEX_TARGET(trp_scanner
   "${CMAKE_SOURCE_DIR}/src/builder/trp/scan.fl"
-  "${PARSER_DIR}/scan.c"
+  "${PARSER_DIR}/scan.cc"
   COMPILE_FLAGS "-Ptrp_yy"
 )
 
@@ -142,6 +142,13 @@ set_source_files_properties(
   ${BISON_trp_parser_OUTPUTS}
   ${FLEX_trp_scanner_OUTPUTS}
   PROPERTIES LANGUAGE CXX
+)
+
+# Silence warnings from generated parser/scanner sources.
+set_source_files_properties(
+  ${BISON_trp_parser_OUTPUTS}
+  ${FLEX_trp_scanner_OUTPUTS}
+  PROPERTIES COMPILE_OPTIONS "-Wno-writable-strings;-Wno-unused-function"
 )
 
 set_target_properties(trp PROPERTIES
