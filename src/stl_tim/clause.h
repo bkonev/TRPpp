@@ -34,7 +34,7 @@
 #include "literallist.h"
 #include "symbol.h"
 #include "config.h"
-#include "boost/pool/object_pool.hpp"
+#include <boost/pool/object_pool.hpp>
 #include "misc/assert.h"
 
 

@@ -57,16 +57,17 @@ endif()
 set(CMAKE_C_FLAGS_DEBUG "-g -O0" CACHE STRING "" FORCE)
 set(CMAKE_CXX_FLAGS_DEBUG "-g -O0" CACHE STRING "" FORCE)
 
-set(CMAKE_C_FLAGS_RELEASE "-O3 -fomit-frame-pointer -finline-limit=1400 -funroll-loops -ffast-math -mtune=generic" CACHE STRING "" FORCE)
-set(CMAKE_CXX_FLAGS_RELEASE "-O3 -fomit-frame-pointer -finline-limit=1400 -funroll-loops -ffast-math -mtune=generic" CACHE STRING "" FORCE)
+set(CMAKE_C_FLAGS_RELEASE "-O3 -fomit-frame-pointer -funroll-loops -ffast-math -mtune=generic" CACHE STRING "" FORCE)
+set(CMAKE_CXX_FLAGS_RELEASE "-O3 -fomit-frame-pointer -funroll-loops -ffast-math -mtune=generic" CACHE STRING "" FORCE)
 
-set(CMAKE_C_FLAGS_PROFILE "-pg -g -O3 -finline-limit=1400" CACHE STRING "" FORCE)
-set(CMAKE_CXX_FLAGS_PROFILE "-pg -g -O3 -finline-limit=1400" CACHE STRING "" FORCE)
+set(CMAKE_C_FLAGS_PROFILE "-pg -g -O3" CACHE STRING "" FORCE)
+set(CMAKE_CXX_FLAGS_PROFILE "-pg -g -O3" CACHE STRING "" FORCE)
 
 # Dependencies for generated sources.
 find_package(BISON REQUIRED)
 find_package(FLEX REQUIRED)
 find_program(GENGETOPT gengetopt REQUIRED)
+find_package(Boost 1.85 CONFIG REQUIRED)
 
 set(GEN_DIR "${CMAKE_CURRENT_BINARY_DIR}/generated")
 set(PARSER_DIR "${GEN_DIR}/builder/trp")
@@ -157,6 +158,7 @@ target_include_directories(trp PRIVATE
   "${CMAKE_SOURCE_DIR}/src"
   "${GEN_DIR}"
   "${GETOPT_DIR}"
+  ${Boost_INCLUDE_DIRS}
 )
 
 if(APPLE)

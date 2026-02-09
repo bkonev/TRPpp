@@ -10,6 +10,7 @@ Required tools:
 - `bison`
 - `flex`
 - `gengetopt`
+- Boost (>= 1.85, headers required; `boost::pool` used)
 - C/C++ compiler (AppleClang, GCC, or Clang)
 
 ## Build (CMake + Ninja)
