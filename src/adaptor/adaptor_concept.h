@@ -33,10 +33,6 @@ namespace Adaptors
     template <typename _Adaptor>
         struct Adaptor_concept
         {
-            void constraints()
-            {
-                // constraints go here
-            }
             // if needed, variables are declared here
         };
 } // namespace Adaptors

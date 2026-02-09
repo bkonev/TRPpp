@@ -78,15 +78,6 @@ namespace PropositionalProver
         GenericSymbol (const symid_t id = id_none) 
         : myId (id)
         { }
-        // Checks if the symbol with the given name existst
-        static bool
-        exists (const name_t name) 
-        {
-            if (name2id.count(name) == 0)
-                return false;
-            else 
-                return true;
-        }
         const name_t& getName() const
         {
             return id2name[myId];
@@ -96,11 +87,6 @@ namespace PropositionalProver
         {
             return myId;
         }
-        bool isdummy() const
-        {
-            return myId == id_none;
-        }
-
         static const_iterator 
         begin() 
         {

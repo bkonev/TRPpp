@@ -165,9 +165,6 @@ namespace PropositionalProver
         dump(std::ostream& os) const;
 
     private:
-        Literal 
-        fakeLiteral() { return Literal(Proposition("")); };
-
         SubsumptionIndex mySubsumptionIndex;
     }; //class Passive
 } //namespace PropositionalProver

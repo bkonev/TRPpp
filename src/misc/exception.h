@@ -82,17 +82,6 @@ namespace Exceptions {
 		    virtual void module (std::ostream& os) const {os << "system"; }
     };
     
-    class NotImplemented : public SystemException {
-        public:
-            virtual void what (std::ostream& os) const {os << "not implemented";}
-    };
-    
-    class OutOfMemory : public SystemException {
-        public:
-            virtual void what (std::ostream& os) const {os << "out of memory";}
-    };
-
-            
 } // namespace Exceptions
 
 #endif /* __MISC_EXCEPTION_H__ */ 

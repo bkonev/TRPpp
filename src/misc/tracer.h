@@ -49,22 +49,12 @@ setTrace(const std::string& str)
     if (!checkTrace(str))
         traceSet()->insert(str);
 }
-inline void
-clearTrace(const std::string& str)
-{
-    if (checkTrace(str))
-        traceSet()->erase(str);
-}
-
 #define TRACE(n,s) if(checkTrace(n)) { \
         s; \
      }
 #else
 inline void
 setTrace(const std::string&)
-{ }
-inline void
-clearTrace(const std::string&)
 { }
 #define TRACE(n,s)
 #endif
@@ -79,7 +69,7 @@ clearTrace(const std::string&)
 //            std::cout << "Here ";
 //            std::cout << " I am\n";
 //    });
-//    clearTrace(module);
+//    // clearTrace(module);
 //    TRACE(module,{
 //            std::cout << "And here \n";
 //    });

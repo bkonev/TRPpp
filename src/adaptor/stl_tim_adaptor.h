@@ -141,29 +141,6 @@ namespace Adaptors
         typedef Misc::transform_iterator<toStep, Misc::filter_iterator<IsStepNextFalse, internal_clause_collection_rep::const_iterator> >
             const_next_false_as_step_iterator;
 
-        // Access to specific clauses in the clause set
-        //
-        // start of initial clauses
-        const_i_iterator 
-        initial_begin() const;
-
-        // end of initial clauses
-        const_i_iterator 
-        initial_end() const;
-
-        // etc.
-        const_u_iterator 
-        universal_begin() const;
-
-        const_u_iterator 
-        universal_end() const;
-
-        const_s_iterator 
-        step_begin() const;
-
-        const_s_iterator 
-        step_end() const;
-        
         // tricki part: sometimes (in loop search) I need to find 
         // all "step" clauses with empty next part.
         // The resulting subset can be considered either as a 
@@ -173,13 +150,6 @@ namespace Adaptors
 
         const_next_false_as_universal_iterator 
         next_false_as_universal_end() const;
-        
-        // or step clauses
-        const_next_false_as_step_iterator 
-        next_false_as_step_begin() const;
-
-        const_next_false_as_step_iterator 
-        next_false_as_step_end() const;
         
         // saturate the set of clauses by step resolution.
         // returns a pair of booleans (to be replaced with something
@@ -476,42 +446,6 @@ namespace Adaptors
     // Since these functions form a time-critical part of the program,
     // they all are inlined.
     //
-    inline Adaptor::const_i_iterator 
-    Adaptor::initial_begin() const
-    {
-        return const_i_iterator(Misc::make_filter_iterator<IsInitial>(internal_clause_collection_rep::begin(), internal_clause_collection_rep::end()));
-    }
-
-    inline Adaptor::const_i_iterator 
-    Adaptor::initial_end() const
-    {
-        return const_i_iterator(Misc::make_filter_iterator<IsInitial>(internal_clause_collection_rep::end(), internal_clause_collection_rep::end()));
-    }
-
-    inline Adaptor::const_u_iterator 
-    Adaptor::universal_begin() const
-    {
-        return const_u_iterator(Misc::make_filter_iterator<IsUniversal>(this->begin(), this->end()));
-    }
-
-    inline Adaptor::const_u_iterator 
-    Adaptor::universal_end() const
-    {
-        return const_u_iterator(Misc::make_filter_iterator<IsUniversal>(this->end(), this->end()));
-    }
-
-    inline Adaptor::const_s_iterator 
-    Adaptor::step_begin() const
-    {
-        return const_s_iterator(Misc::make_filter_iterator<IsStep>(this->begin(), this->end()));
-    }
-
-    inline Adaptor::const_s_iterator 
-    Adaptor::step_end() const
-    {
-        return const_s_iterator(Misc::make_filter_iterator<IsStep>(this->end(), this->end()));
-    }
-    
     inline Adaptor::const_next_false_as_universal_iterator 
     Adaptor::next_false_as_universal_begin() const
     {
@@ -524,18 +458,6 @@ namespace Adaptors
         return const_next_false_as_universal_iterator(Misc::make_filter_iterator<IsStepNextFalse>(this->end(), this->end()));
     }
     
-    inline Adaptor::const_next_false_as_step_iterator 
-    Adaptor::next_false_as_step_begin() const
-    {
-        return const_next_false_as_step_iterator(Misc::make_filter_iterator<IsStepNextFalse>(this->begin(), this->end()));
-    }
-
-    inline Adaptor::const_next_false_as_step_iterator 
-    Adaptor::next_false_as_step_end() const
-    {
-        return const_next_false_as_step_iterator(Misc::make_filter_iterator<IsStepNextFalse>(this->end(), this->end()));
-    }
-        
     template<typename _Iterator>
         inline bool 
         Adaptor::subsumesOrEqual(const _Iterator firstBegin,  const _Iterator firstEnd, 

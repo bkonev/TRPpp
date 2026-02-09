@@ -69,16 +69,6 @@ namespace PropositionalProver
 
     template<typename Iterator>
     inline bool
-    rangeSubsumes2 (Iterator __begin, Iterator __end, const PClause& d) 
-    {
-        while (__begin != __end)
-            if (clauseSubsumes(*__begin++, d)) // passing pointers
-                return true;
-        return false;
-    }
-
-    template<typename Iterator>
-    inline bool
     rangeSubsumesOrEqual (Iterator __begin, Iterator __end, const PClause& d)
     {
         while (__begin != __end)

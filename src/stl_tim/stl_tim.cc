@@ -28,6 +28,7 @@
 #include "stl_tim.h"
 #include <sstream>
 #include "misc/i2s.h"
+#include "interrupthandler.h"
 
 namespace PropositionalProver
 {
@@ -41,6 +42,7 @@ namespace PropositionalProver
 
         while (passive.size())
         {
+            SignalHandling::processPending();
             // getting the next clause
 
 //                        TRACE(resolutionModule, {
@@ -88,6 +90,7 @@ namespace PropositionalProver
             for (std::list<PClause>::iterator p = newlist.begin();
                     p != newlist.end();)
             {
+                SignalHandling::processPending();
 #ifdef COLLECT_STAT
                 ourStatistics.addResolvents(1);
                 if(((*p)->size() !=0) && ((*p)->getLeadingLiteral().getAttribute() == PropositionalProver::universal_attr))
@@ -129,14 +132,13 @@ namespace PropositionalProver
 #ifdef COLLECT_STAT
                             ourStatistics.addForwardSubsumptions(1);
 #endif //COLLECT_STAT
-                            redundand = true;
-		                        TRACE(resolutionModule, {
-		                                std::cerr << "Clause ";
-		                                current->dump(std::cerr); 
-		                                std::cerr << " is subsumed by passive clause " <<
-		                                    tmpResult << std::endl;
-		                                });
-                            redundand = true;
+                        redundand = true;
+                        TRACE(resolutionModule, {
+                                std::cerr << "Clause ";
+                                current->dump(std::cerr); 
+                                std::cerr << " is subsumed by passive clause " <<
+                                    tmpResult << std::endl;
+                                });
                         }
                     }
                 }
@@ -159,6 +161,7 @@ namespace PropositionalProver
                     p != cpend;
                     ++p)
             {
+                SignalHandling::processPending();
                 // only if we put anything new into passive, 
                 // we consider that something new was generated
                 anythingNew = true;
@@ -179,6 +182,7 @@ namespace PropositionalProver
                     for(Clause::iterator tCi = (*p)->begin();
                             tCi != (*p)->end(); )
                     { 
+                        SignalHandling::processPending();
                         // if in loop search,
                         // do not allow resolutions in step_now part 
                         // (goes into next loop candidate)

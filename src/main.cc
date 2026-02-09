@@ -68,7 +68,6 @@ using EClause = ClauseSet::EClause;
 
 using Builder = Builders::Builder<ClauseSet>;
 
-using std::cout;
 
 // I use this function instead of main since I emply boost's mechanism
 // to catch "uncought" exceptions. If something bad happens, and I do

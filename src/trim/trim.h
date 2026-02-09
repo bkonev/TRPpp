@@ -112,16 +112,6 @@ namespace TRIMs
                 {
                     return c.end();
                 }
-                const_sometime_iterator
-                sometime_begin() const
-                {
-                    return &l;
-                }
-                const_sometime_iterator
-                sometime_end() const
-                {
-                    return ++(&l);
-                }
                 const Literal&
                 getEventuality() const
                 {
