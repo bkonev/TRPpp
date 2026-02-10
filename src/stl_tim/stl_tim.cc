@@ -26,6 +26,9 @@
 /* ********************************************************** */
 /**************************************************************/
 #include "stl_tim.h"
+#include "subsumptionindex.h"
+#include <unordered_map>
+#include <unordered_set>
 #include <sstream>
 #include "misc/i2s.h"
 #include "interrupthandler.h"
@@ -82,11 +85,61 @@ namespace PropositionalProver
             // returns a pointer on a list of generated clauses
             std::list<PClause> newlist;
             active.resolve(current, newlist);
+
+            bool hasEmptyClause = false;
+            for (std::list<PClause>::const_iterator it = newlist.begin();
+                    it != newlist.end();
+                    ++it)
+            {
+                if ((*it)->size() == 0)
+                {
+                    hasEmptyClause = true;
+                    break;
+                }
+            }
+
+            // Index new clauses once to avoid O(n^2) inner subsumption checks.
+            // Build candidate buckets by length for exact fallback.
+            // SubsumptionIndex cannot safely index empty clauses.
+            SubsumptionIndex innerIndex;
+            struct Candidate
+            {
+                Literal leading;
+                PClause clause;
+                Candidate(const Literal& l, const PClause& c)
+                : leading(l), clause(c)
+                { }
+            };
+            std::vector<std::vector<Candidate> > candidatesBySize;
+            std::unordered_map<clauseid_t, PClause> idToClause;
+            std::unordered_set<Clause*> removedCandidates;
+            const bool useInnerIndex = (newlist.size() > 1) && (!hasEmptyClause);
+            if (useInnerIndex)
+            {
+                for (std::list<PClause>::const_iterator it = newlist.begin();
+                        it != newlist.end();
+                        ++it)
+                {
+                    if ((*it)->size() != 0)
+                    {
+                        const size_t len = (*it)->size();
+                        innerIndex.insert(*it);
+                        if (candidatesBySize.size() <= len)
+                        {
+                            candidatesBySize.resize(len + 1);
+                        }
+                        candidatesBySize[len].push_back(
+                            Candidate((*it)->getLeadingLiteral(), *it));
+                        idToClause[(*it)->getId()] = *it;
+                    }
+                }
+            }
 //TRACE(resolutionModule, {
   //std::cerr << "newlist befoure simplifications:";
   //newlist.dump(std::cerr);
   //std::cerr << endl;
 //});
+            bool emptyKept = false;
             for (std::list<PClause>::iterator p = newlist.begin();
                     p != newlist.end();)
             {
@@ -99,15 +152,87 @@ namespace PropositionalProver
                 }
 #endif //COLLECT_STAT
                 bool redundand = false;
-                // innner simplification of new clauses...
-                if (rangeSubsumes(newlist.begin(),newlist.end(),*p))
+                bool innerSubsumed = false;
+                // inner simplification of new clauses...
+                if ((*p)->size() == 0)
+                {
+                    if (emptyKept)
+                    {
+#ifdef COLLECT_STAT
+                        ourStatistics.addIndividualSubsumptions(1);
+#endif //COLLECT_STAT
+                        innerSubsumed = true;
+                        redundand = true;
+                    }
+                    else
+                    {
+                        emptyKept = true;
+                    }
+                }
+                else if (hasEmptyClause)
                 {
 #ifdef COLLECT_STAT
                     ourStatistics.addIndividualSubsumptions(1);
 #endif //COLLECT_STAT
+                    innerSubsumed = true;
                     redundand = true;
                 }
-                else 
+                else if (useInnerIndex)
+                {
+                    innerIndex.remove(*p); // exclude self
+                    unsigned int indexId = innerIndex.forwardSubsumes(*p);
+                    if (indexId)
+                    {
+                        std::unordered_map<clauseid_t, PClause>::iterator cand =
+                            idToClause.find(indexId);
+                        if (cand != idToClause.end() &&
+                                (removedCandidates.find(cand->second.get()) == removedCandidates.end()) &&
+                                clauseSubsumes(cand->second, *p))
+                        {
+#ifdef COLLECT_STAT
+                            ourStatistics.addIndividualSubsumptions(1);
+#endif //COLLECT_STAT
+                            innerSubsumed = true;
+                            redundand = true;
+                        }
+                    }
+                    if (!innerSubsumed)
+                    {
+                        const size_t maxSize = (*p)->size();
+                        for (size_t len = 1; (len <= maxSize) && (!innerSubsumed); ++len)
+                        {
+                            if (len >= candidatesBySize.size())
+                            {
+                                continue;
+                            }
+                            const std::vector<Candidate>& bucket = candidatesBySize[len];
+                            for (std::vector<Candidate>::const_iterator candIt = bucket.begin();
+                                    candIt != bucket.end();
+                                    ++candIt)
+                            {
+                                if (candIt->clause.get() == (*p).get())
+                                {
+                                    continue;
+                                }
+                                if (removedCandidates.find(candIt->clause.get()) != removedCandidates.end())
+                                {
+                                    continue;
+                                }
+                                if (clauseSubsumes(candIt->clause, *p))
+                                {
+#ifdef COLLECT_STAT
+                                    ourStatistics.addIndividualSubsumptions(1);
+#endif //COLLECT_STAT
+                                    innerSubsumed = true;
+                                    redundand = true;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                if (!redundand)
                 {
                     // simplification of new clauses by active
                     tmpResult = active.forwardSubsumption(*p);
@@ -117,12 +242,12 @@ namespace PropositionalProver
                         ourStatistics.addForwardSubsumptions(1);
 #endif //COLLECT_STAT
                         redundand = true;
-		                        TRACE(resolutionModule, {
-		                                std::cerr << "Clause ";
-		                                current->dump(std::cerr); 
-		                                std::cerr << " is subsumed by active clause " <<
-		                                    tmpResult << std::endl;
-		                                });
+                        TRACE(resolutionModule, {
+                                std::cerr << "Clause ";
+                                current->dump(std::cerr); 
+                                std::cerr << " is subsumed by active clause " <<
+                                    tmpResult << std::endl;
+                                });
                     }
                     else
                     {
@@ -132,22 +257,33 @@ namespace PropositionalProver
 #ifdef COLLECT_STAT
                             ourStatistics.addForwardSubsumptions(1);
 #endif //COLLECT_STAT
-                        redundand = true;
-                        TRACE(resolutionModule, {
-                                std::cerr << "Clause ";
-                                current->dump(std::cerr); 
-                                std::cerr << " is subsumed by passive clause " <<
-                                    tmpResult << std::endl;
-                                });
+                            redundand = true;
+                            TRACE(resolutionModule, {
+                                    std::cerr << "Clause ";
+                                    current->dump(std::cerr); 
+                                    std::cerr << " is subsumed by passive clause " <<
+                                        tmpResult << std::endl;
+                                    });
                         }
                     }
                 }
+
                 if (redundand)
                 {
+                    if (useInnerIndex)
+                    {
+                        removedCandidates.insert((*p).get());
+                    }
                     p = newlist.erase(p);
                 }
                 else 
+                {
+                    if (useInnerIndex)
+                    {
+                        innerIndex.insert(*p);
+                    }
                     ++p;
+                }
             }
             // put what rests into passive
 //TRACE(resolutionModule, {            
@@ -208,7 +344,13 @@ TRACE(FSRModule, {
         (*p)->dump(std::cerr);
         std::cerr << std::endl;
 */
-                        SortedLiteralList tmpSL((*p)->begin(),(*p)->end());
+                        SortedLiteralList tmpSL;
+                        for(Clause::const_iterator litIt = (*p)->begin();
+                                litIt != (*p)->end();
+                                ++litIt)
+                        {
+                            tmpSL.push_back(*litIt);
+                        }
                         PClause tmpClause(new Clause(tmpSL));
 /*
 TRACE(FSRModule, {
