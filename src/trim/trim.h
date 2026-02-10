@@ -47,13 +47,13 @@ namespace TRIMs
             //BOOST_CLASS_REQUIRES(_Adaptor, Adaptor_concept);
             // directly goes from _Adaptor
         public:
-            TRIM<_Adaptor>()
+            TRIM()
             : _Adaptor(), elist()
             { 
                 InitiateStatic();
             }
 
-            TRIM<_Adaptor> (const TRIM<_Adaptor>& adaptor)
+            TRIM(const TRIM<_Adaptor>& adaptor)
             : _Adaptor(adaptor), elist(adaptor.elist)
             { }
 
