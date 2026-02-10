@@ -145,6 +145,10 @@ namespace PropositionalProver
             const Clause::const_iterator endPosition, const PNode root, 
             const PClause& pclause)
     {
+        if(root == 0)
+        {
+            return;
+        }
         if(startPosition == endPosition)
         {
             root->data.remove(pclause);
@@ -153,6 +157,10 @@ namespace PropositionalProver
         {
 
             Node::Next::iterator pos = root->next.find(*startPosition);
+            if(pos == root->next.end())
+            {
+                return;
+            }
             remove(startPosition+1, endPosition, pos->second, pclause);
 
             if((pos->second->myNumberOfSubBranches == 0) &&

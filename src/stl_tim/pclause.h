@@ -30,6 +30,7 @@
 
 #include "clause.h"
 #include <memory>
+#include <functional>
 
 // looks stupid, but i may use it in different places..
 namespace PropositionalProver
@@ -42,8 +43,7 @@ namespace PropositionalProver
         operator() (const PClause& pclause1, const PClause& pclause2)
         {
             // whatever order
-            return (reinterpret_cast<unsigned long int>(pclause1.get()) < 
-                    reinterpret_cast<unsigned long int>(pclause2.get()));
+            return std::less<Clause*>()(pclause1.get(), pclause2.get());
         }
     };
 }

@@ -52,6 +52,7 @@ TRPPPOptions::TRPPPOptions(int argc, char** argv)
     myQuiet      = args_info.quiet_flag;
 
     if(myQuiet)
+    {
         if (myShowInput || myShowResult)
         {
             reportFailure("Incompatible options\n");
@@ -61,6 +62,7 @@ TRPPPOptions::TRPPPOptions(int argc, char** argv)
             myShowInput = false;
             myShowResult = false;
         }
+    }
 
     if(args_info.select_by_given)
     {

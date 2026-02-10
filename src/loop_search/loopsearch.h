@@ -37,6 +37,7 @@
 #include "modules.h"
 #include "misc/tracer.h"
 #include "misc/assert.h"
+#include "interrupthandler.h"
 
 namespace TemporalProver
 {
@@ -170,6 +171,7 @@ namespace TemporalProver
         // main loop
         while(true)
         {
+            SignalHandling::processPending();
                         TRACE(loopsearchModule, {
                                     std::cerr << "Next LoopSearch iteration" << std::endl;
                                 });
@@ -187,6 +189,7 @@ namespace TemporalProver
                     i != iend;
                     i++)
             {
+                SignalHandling::processPending();
                 LiteralList literalList(i->begin(), i->end());
                 literalList.push_back(myLiteral);
                 // making the result a step clause and putting it into the

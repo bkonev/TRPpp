@@ -80,9 +80,9 @@ find_package(BISON REQUIRED)
 find_package(FLEX REQUIRED)
 find_program(GENGETOPT gengetopt REQUIRED)
 # Prefer config packages if available; fall back to the module-based finder.
-find_package(Boost 1.85 CONFIG QUIET)
+find_package(Boost 1.83 CONFIG QUIET)
 if(NOT Boost_FOUND)
-  find_package(Boost 1.85 REQUIRED)
+  find_package(Boost 1.83 REQUIRED)
 endif()
 
 set(GEN_DIR "${CMAKE_CURRENT_BINARY_DIR}/generated")

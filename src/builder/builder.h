@@ -29,6 +29,9 @@
 #define __BUILDER_H__
 #include <string>
 #include <iostream>
+#include <memory>
+#include <utility>
+#include <vector>
 #include "misc/exception.h"
 #include "generic_builder.h"
 
@@ -86,6 +89,18 @@ namespace Builders
             typedef typename ClauseSet::Proposition Proposition;
 
         private:
+            mutable std::vector<std::unique_ptr<building_obj>> arena_;
+
+            template <typename T, typename... Args>
+            pbuilding_obj
+            make_obj(Args&&... args) const
+            {
+                std::unique_ptr<T> ptr = std::make_unique<T>(std::forward<Args>(args)...);
+                pbuilding_obj raw = ptr.get();
+                arena_.push_back(std::move(ptr));
+                return raw;
+            }
+
             // replacement for building_obj
             struct clauselist_obj : public building_obj
             {
@@ -169,7 +184,7 @@ namespace Builders
             getClauseSet(const pbuilding_obj o) 
             {
                 clauselist_obj* pcl = dynamic_cast<clauselist_obj*>(o);
-                if(!o)
+                if(!pcl)
                     throw TypeMissmatch("getClauseSet: o is not a clause set");
                 else
                 {
@@ -180,13 +195,13 @@ namespace Builders
             virtual pbuilding_obj 
             create_clause_list() const
             {
-                return pbuilding_obj(new clauselist_obj);
+                return make_obj<clauselist_obj>();
             }
     
             virtual pbuilding_obj
             create_literal_list() const
             {
-                return pbuilding_obj(new literallist_obj);
+                return make_obj<literallist_obj>();
             }
 
             virtual pbuilding_obj
@@ -262,8 +277,7 @@ namespace Builders
                 // a dirty hack to check if the empty clause is in the input
                 if (pll->ll.begin() == pll->ll.end()) {throw EmptyClauseInInput();}
                 // do the job
-                initclause_obj* pio = new initclause_obj(ClauseSet::make_iclause(pll->ll, "I"));
-                return pbuilding_obj(pio);
+                return make_obj<initclause_obj>(ClauseSet::make_iclause(pll->ll, "I"));
             }
         
             virtual pbuilding_obj
@@ -273,8 +287,7 @@ namespace Builders
                 if (!pll)
                     throw TypeMissmatch("Universal clause: Literal List");
                 // do the job
-                univclause_obj* puo = new univclause_obj(ClauseSet::make_uclause(pll->ll, "U"));
-                return pbuilding_obj(puo);
+                return make_obj<univclause_obj>(ClauseSet::make_uclause(pll->ll, "U"));
             }
         
             virtual pbuilding_obj
@@ -287,8 +300,7 @@ namespace Builders
                 if (!pll2)
                     throw TypeMissmatch("Step clause: Second Literal List");
                 // do the job
-                stepclause_obj* pso = new stepclause_obj(ClauseSet::make_sclause(pll1->ll, pll2->ll, "S"));
-                return pbuilding_obj(pso);
+                return make_obj<stepclause_obj>(ClauseSet::make_sclause(pll1->ll, pll2->ll, "S"));
             }
 
             virtual pbuilding_obj
@@ -301,8 +313,7 @@ namespace Builders
                 if (!pl)
                     throw TypeMissmatch("Eventuality clause: Literal");
                 // do the job
-                eventclause_obj* peo = new eventclause_obj(ClauseSet::make_eclause(pll->ll, pl->l, "E"));
-                return pbuilding_obj(peo);
+                return make_obj<eventclause_obj>(ClauseSet::make_eclause(pll->ll, pl->l, "E"));
             }
 
             virtual pbuilding_obj 
@@ -313,16 +324,14 @@ namespace Builders
                     throw TypeMissmatch("build_literal: atom");
                 else
                 {
-                    literal_obj* plo = new literal_obj(Literal(pa->p));
-                    return pbuilding_obj(plo);
+                    return make_obj<literal_obj>(Literal(pa->p));
                 }
             }
 
             virtual pbuilding_obj
             build_atom(const char* s) const
             {
-                atom_obj* pa = new atom_obj(Proposition(s));
-                return pbuilding_obj(pa);
+                return make_obj<atom_obj>(Proposition(s));
             }
 
             virtual pbuilding_obj

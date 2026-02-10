@@ -10,7 +10,7 @@ Required tools:
 - `bison`
 - `flex`
 - `gengetopt`
-- Boost (>= 1.85, headers required; `boost::pool` used). CMake will try config
+- Boost (>= 1.83, headers required; `boost::pool` used). CMake will try config
   packages first and fall back to the built-in FindBoost module.
 - C/C++ compiler (AppleClang, GCC, or Clang)
 

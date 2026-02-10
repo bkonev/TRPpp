@@ -29,10 +29,18 @@
 #include <stdlib.h>
 #include <stdio.h>
 int main(int argc, char *argv[]) {
+    if (argc < 2)
+    {
+        fprintf(stderr, "Usage: %s <path>\n", argv[0]);
+        return 2;
+    }
     char *symlinkpath = argv[1];
     char actualpath [PATH_MAX];
-    char *ptr;
-    ptr = realpath(symlinkpath, actualpath);
+    char *ptr = realpath(symlinkpath, actualpath);
+    if (!ptr)
+    {
+        perror("realpath");
+        return 1;
+    }
     printf("%s\n", ptr);
 }
-

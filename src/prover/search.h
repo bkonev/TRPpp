@@ -36,6 +36,7 @@
 #include "temporalstat.h"
 #include "getopt/options.h"
 #include "modules.h"
+#include "interrupthandler.h"
 
 namespace TemporalProver
 {
@@ -130,6 +131,7 @@ namespace TemporalProver
         // main loop
         while(true)
         {
+            SignalHandling::processPending();
             bool somethingNew = false;
             bool pretestOk = true;
             // for each eventuality clause
@@ -181,6 +183,7 @@ namespace TemporalProver
                     i != iend;
                     ++i)
             {
+                SignalHandling::processPending();
                 // pre-test on whether we want to find this loop
                 // if any of the literals in the list are not maximal,
                 // we do not need to consider this eventuality fule

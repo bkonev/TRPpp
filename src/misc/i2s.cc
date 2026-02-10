@@ -29,30 +29,5 @@
 
 std::string itos(int number)
 {
-    /* 10 digits + 1 sign + 1 trailing nul */
-    static char buf[12];
-
-	unsigned int unsignedNumber;
-	int isNegative = 0;
-    char *pos = buf + sizeof(buf) - 1;
-
-	if (number < 0) {
-		isNegative = 1;
-		unsignedNumber = ((unsigned int)(-(1+number))) + 1;
-	} else {
-		unsignedNumber = number;
-	}
-
-	*pos = 0;
-
-	do {
-		*--pos = '0' + (unsignedNumber % 10);
-		unsignedNumber /= 10;
-	} while (unsignedNumber);
-
-	if (isNegative) {
-		*--pos = '-';
-	}
-
-	return std::string(pos);
+    return std::to_string(number);
 }

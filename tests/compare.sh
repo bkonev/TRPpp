@@ -16,6 +16,8 @@ fi
 
 STAMP=$(date +%Y%m%d-%H%M%S)
 NEW_SNAPSHOT="$ROOT_DIR/tests/snapshot-$STAMP.jsonl"
+export ROOT_DIR
+export NEW_SNAPSHOT
 
 python3 - <<'PY'
 import json, subprocess, pathlib, time, re, os, sys

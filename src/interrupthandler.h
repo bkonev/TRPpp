@@ -1,3 +1,5 @@
+#ifndef __INTERRUPTHANDLER_H__
+#define __INTERRUPTHANDLER_H__
 /**************************************************************/
 /* ********************************************************** */
 /* *                                                        * */
@@ -26,9 +28,53 @@
 /* ********************************************************** */
 /**************************************************************/
 #include <iostream>
+#include <iomanip>
 #include <csignal>
 #include <cstdlib>
 #include <unistd.h>
+
+namespace SignalHandling
+{
+    using ProcessFn = void (*)(int);
+
+    inline volatile sig_atomic_t& pendingSignal()
+    {
+        static volatile sig_atomic_t signal = 0;
+        return signal;
+    }
+
+    inline ProcessFn& processFn()
+    {
+        static ProcessFn fn = 0;
+        return fn;
+    }
+
+    inline void setProcessFn(ProcessFn fn)
+    {
+        processFn() = fn;
+    }
+
+    inline int takeSignal()
+    {
+        sig_atomic_t s = pendingSignal();
+        pendingSignal() = 0;
+        return static_cast<int>(s);
+    }
+
+    inline void processPending()
+    {
+        int s = takeSignal();
+        if (s == 0)
+        {
+            return;
+        }
+        ProcessFn fn = processFn();
+        if (fn)
+        {
+            fn(s);
+        }
+    }
+}
 
 template <typename Timer, typename Prover>
 class HandleSIGINT
@@ -37,6 +83,8 @@ public:
     HandleSIGINT (Timer* timer, Prover* prover);
     static void 
     handler (int);
+    static void
+    processSignal(int);
     ~HandleSIGINT();
 private:
     static Timer* ourPTimer;
@@ -49,6 +97,7 @@ HandleSIGINT<Timer, Prover>::HandleSIGINT(Timer* ptimer, Prover* pprover)
 {
     ourPTimer=ptimer;
     ourPProver=pprover;
+    SignalHandling::setProcessFn(&HandleSIGINT<Timer, Prover>::processSignal);
     initSIGINTHandler();
 }
 
@@ -65,6 +114,21 @@ template<typename Timer, typename Prover>
 void
 HandleSIGINT<Timer, Prover>::handler(int signal)
 {
+    // Async-signal-safe: record the signal and emit a short message.
+    SignalHandling::pendingSignal() = signal;
+    const char msg[] = "Signal received. Processing will continue.\n";
+    ssize_t ignored = write(STDERR_FILENO, msg, sizeof(msg) - 1);
+    (void)ignored;
+}
+
+template<typename Timer, typename Prover>
+void
+HandleSIGINT<Timer, Prover>::processSignal(int signal)
+{
+    if (!ourPTimer || !ourPProver)
+    {
+        return;
+    }
     ourPTimer->stop();
     std::cout << "Elaplsed time so far: " << std::fixed <<
         std::setprecision(3) << ourPTimer->elapsedSeconds() << "s" << std::endl;
@@ -75,7 +139,6 @@ HandleSIGINT<Timer, Prover>::handler(int signal)
 #endif
 
     ourPTimer->start();
-    initSIGINTHandler();
 
     if(signal == SIGINT){
         std::cout << "Continue? (y/n)\n";
@@ -89,7 +152,6 @@ HandleSIGINT<Timer, Prover>::handler(int signal)
         {
             std::cout << "\nContinuing proof search...\n";
             ourPTimer->start();
-            initSIGINTHandler();
         };
     };
 }
@@ -103,3 +165,4 @@ HandleSIGINT<Timer, Prover>::~HandleSIGINT()
 template<typename Timer, typename Prover> Timer* HandleSIGINT<Timer, Prover>::ourPTimer;
 template<typename Timer, typename Prover> Prover* HandleSIGINT<Timer, Prover>::ourPProver;
 
+#endif // __INTERRUPTHANDLER_H__

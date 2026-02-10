@@ -106,12 +106,12 @@ namespace Parsers
     private:
         bool myParseOk;
         Builders::pbuilding_obj myBuildingObj;
+        _ConcreteBuilder myBuilder;
     };
 
     template<typename _ConcreteBuilder> 
         TRPParser<_ConcreteBuilder>::TRPParser(const std::string& fileName, const std::string& orderFileName)
         {
-            _ConcreteBuilder builder;
             trp_yyinsave = fopen(fileName.c_str(),"r");
             if (!trp_yyinsave) 
             {
@@ -137,14 +137,21 @@ namespace Parsers
                 trp_yyin = trp_yyinsave;
             }
 
-            myParseOk = !(trp_yyparse(&builder));
+            myParseOk = !(trp_yyparse(&myBuilder));
             /*
             if (trp_errlineno != -1)
             {
                 std::cerr << "Error detected" << std::endl;
             }
             */
-            fclose(trp_yyin);
+            if (trp_yyin)
+            {
+                fclose(trp_yyin);
+            }
+            if (trp_yyinsave && trp_yyinsave != trp_yyin)
+            {
+                fclose(trp_yyinsave);
+            }
             myBuildingObj = trp_parse_result;
         }
 
