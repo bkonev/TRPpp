@@ -6,7 +6,7 @@ This folder contains a baseline snapshot and a script to re-run tests and compar
 
 The baseline snapshot is stored at:
 
-- `/Users/konev/Documents/TRP++/tests/snapshot.jsonl`
+- `tests/snapshot.jsonl`
 
 It contains one JSON record per `.in` test with stdout, stderr, exit code, and timeout info.
 
@@ -15,7 +15,7 @@ It contains one JSON record per `.in` test with stdout, stderr, exit code, and t
 From the repository root:
 
 ```sh
-/Users/konev/Documents/TRP++/tests/compare.sh
+./tests/compare.sh
 ```
 
 This will:
@@ -30,5 +30,5 @@ This will:
 - If the binary is missing, build it first:
 
 ```sh
-cmake --build /Users/konev/Documents/TRP++/build --target release
+cmake --build build --target release
 ```

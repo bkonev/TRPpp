@@ -5,10 +5,22 @@ project(TRPXX LANGUAGES C CXX)
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# Ensure an SDK is selected on macOS (helps locate standard library headers).
-if(APPLE AND NOT CMAKE_OSX_SYSROOT)
-  if(EXISTS "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk")
-    set(CMAKE_OSX_SYSROOT "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk" CACHE PATH "" FORCE)
+# Allow callers to point to a specific macOS SDK if needed.
+set(TRP_OSX_SYSROOT "" CACHE PATH "Optional macOS SDK root (leave empty to use system default)")
+if(APPLE)
+  if(TRP_OSX_SYSROOT)
+    set(CMAKE_OSX_SYSROOT "${TRP_OSX_SYSROOT}" CACHE PATH "" FORCE)
+  elseif(NOT CMAKE_OSX_SYSROOT)
+    # Auto-detect SDK via xcrun (common on macOS with Xcode/CLT).
+    execute_process(
+      COMMAND xcrun --sdk macosx --show-sdk-path
+      OUTPUT_VARIABLE _TRP_XCRUN_SDK
+      OUTPUT_STRIP_TRAILING_WHITESPACE
+      ERROR_QUIET
+    )
+    if(_TRP_XCRUN_SDK AND EXISTS "${_TRP_XCRUN_SDK}")
+      set(CMAKE_OSX_SYSROOT "${_TRP_XCRUN_SDK}" CACHE PATH "" FORCE)
+    endif()
   endif()
 endif()
 
@@ -67,7 +79,11 @@ set(CMAKE_CXX_FLAGS_PROFILE "-pg -g -O3" CACHE STRING "" FORCE)
 find_package(BISON REQUIRED)
 find_package(FLEX REQUIRED)
 find_program(GENGETOPT gengetopt REQUIRED)
-find_package(Boost 1.85 CONFIG REQUIRED)
+# Prefer config packages if available; fall back to the module-based finder.
+find_package(Boost 1.85 CONFIG QUIET)
+if(NOT Boost_FOUND)
+  find_package(Boost 1.85 REQUIRED)
+endif()
 
 set(GEN_DIR "${CMAKE_CURRENT_BINARY_DIR}/generated")
 set(PARSER_DIR "${GEN_DIR}/builder/trp")
@@ -169,10 +185,13 @@ target_include_directories(trp PRIVATE
 )
 
 if(APPLE)
-  # Work around missing libc++ includes in some CLT setups.
-  target_include_directories(trp SYSTEM PRIVATE
-    "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1"
-  )
+  # Work around missing libc++ includes in some CLT setups if an SDK is defined.
+  if(CMAKE_OSX_SYSROOT)
+    set(_TRP_LIBCXX_DIR "${CMAKE_OSX_SYSROOT}/usr/include/c++/v1")
+    if(EXISTS "${_TRP_LIBCXX_DIR}")
+      target_include_directories(trp SYSTEM PRIVATE "${_TRP_LIBCXX_DIR}")
+    endif()
+  endif()
 endif()
 
 set(TRP_EXTRA_INCLUDE_DIR "" CACHE PATH "Extra include directory")

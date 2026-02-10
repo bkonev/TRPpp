@@ -10,34 +10,35 @@ Required tools:
 - `bison`
 - `flex`
 - `gengetopt`
-- Boost (>= 1.85, headers required; `boost::pool` used)
+- Boost (>= 1.85, headers required; `boost::pool` used). CMake will try config
+  packages first and fall back to the built-in FindBoost module.
 - C/C++ compiler (AppleClang, GCC, or Clang)
 
 ## Build (CMake + Ninja)
 
 Configure once:
 ```sh
-cmake -S /Users/konev/Documents/TRP++ -B /Users/konev/Documents/TRP++/build -G Ninja
+cmake -S . -B build -G Ninja
 ```
 
 Build Release:
 ```sh
-cmake --build /Users/konev/Documents/TRP++/build --target release
+cmake --build build --target release
 ```
 
 Build Debug:
 ```sh
-cmake --build /Users/konev/Documents/TRP++/build --target debug
+cmake --build build --target debug
 ```
 
 Build Profile:
 ```sh
-cmake --build /Users/konev/Documents/TRP++/build --target profile
+cmake --build build --target profile
 ```
 
 The binary is written to:
 ```
-/Users/konev/Documents/TRP++/bin
+bin
 ```
 
 ## Notes
@@ -53,5 +54,13 @@ The binary is written to:
 
 If you need an extra include directory (legacy build used `/users/loco/konev/include`), configure with:
 ```sh
-cmake -S /Users/konev/Documents/TRP++ -B /Users/konev/Documents/TRP++/build -G Ninja -DTRP_EXTRA_INCLUDE_DIR=/path/to/include
+cmake -S . -B build -G Ninja -DTRP_EXTRA_INCLUDE_DIR=/path/to/include
 ```
+
+On macOS, you can optionally point CMake at a specific SDK:
+```sh
+cmake -S . -B build -G Ninja -DTRP_OSX_SYSROOT=/path/to/MacOSX.sdk
+```
+
+If you leave `TRP_OSX_SYSROOT` empty on macOS, CMake will auto-detect the SDK
+via `xcrun` when available.
